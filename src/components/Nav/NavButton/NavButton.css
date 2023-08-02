@@ -1,0 +1,11 @@
+.nav-button {
+  padding: 5px 50px;
+  color: var(--color-cyan);
+  border: var(--color-cyan) solid 2px;
+  border-radius: 15px;
+}
+
+.nav-button:hover {
+  cursor: pointer;
+  border: var(--color-cyan) solid 3px;
+}

@@ -1,0 +1,9 @@
+.title {
+    font-size: 30px;
+    font-weight: 600;
+    padding-block: 0.25em;
+}
+
+.title>span {
+    color: var(--color-purple);
+}

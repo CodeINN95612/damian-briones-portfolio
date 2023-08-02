@@ -1,0 +1,13 @@
+.navbar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5em 5em;
+}
+
+@media (max-width: 1000px) {
+    .navbar-links {
+        flex-direction: column;
+    }
+}

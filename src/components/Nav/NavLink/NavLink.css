@@ -1,0 +1,16 @@
+.nav-link {
+  text-decoration: none;
+  color: var(--color-light);
+  font-weight: 400;
+  transition: font-size 0.3 ease;
+  transition: font-weight 0.3 ease;
+}
+
+.nav-link:hover {
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  border: none;
+  border-bottom: 1px solid var(--color-cyan);
+  cursor: pointer;
+}

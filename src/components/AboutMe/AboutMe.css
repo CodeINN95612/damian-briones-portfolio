@@ -1,0 +1,28 @@
+.about-me__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1em;
+}
+
+.about-me__container>* {
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-inline: 1.5em;
+}
+
+@media (max-width: 900px) {
+    .about-me__container {
+        flex-direction: column-reverse;
+    }
+
+    .about-me__container>* {
+        min-width: 100%;
+        flex: 1;
+        padding-inline: 0em;
+        padding-block: 2.5em;
+    }
+}

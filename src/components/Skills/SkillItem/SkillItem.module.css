@@ -1,0 +1,37 @@
+.card {
+  background-color: var(--color-light);
+  border-radius: 10px;
+  padding-inline: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+
+  font-size: 1rem;
+  color: var(--color-dark);
+}
+
+.card > h4 {
+  flex: 1;
+}
+
+.circles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.circle.filled {
+  background-color: var(--color-purple);
+}
+
+.circle.empty {
+  background-color: var(--color-dark);
+}

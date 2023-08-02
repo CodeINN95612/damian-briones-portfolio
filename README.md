@@ -2,7 +2,8 @@
 
 My personal [software engineer portfolio🔗]()  
 Written with **React** and **Typescript**, in English.  
-It contains these pages:
+Responsive!
+It contains these sections:
 
 - About me
 - Services

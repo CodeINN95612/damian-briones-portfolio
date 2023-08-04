@@ -9,8 +9,8 @@ import Skills from "./components/Skills/Skills";
 function App() {
   var aboutMeRef = useRef<HTMLElement>(null);
   var servicesRef = useRef<HTMLElement>(null);
-  var experienceRef = useRef<HTMLElement>(null);
   var skillsRef = useRef<HTMLElement>(null);
+  var experienceRef = useRef<HTMLElement>(null);
 
   const links = [
     {
@@ -22,12 +22,12 @@ function App() {
       name: "Services",
     },
     {
-      ref: experienceRef,
-      name: "Experience",
-    },
-    {
       ref: skillsRef,
       name: "Skills",
+    },
+    {
+      ref: experienceRef,
+      name: "Experience",
     },
   ];
 

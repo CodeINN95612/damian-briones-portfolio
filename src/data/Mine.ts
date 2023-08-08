@@ -99,6 +99,7 @@ export const myData: MyData = {
   ],
   contact: {
     email: "damian.briones@outlook.com",
+    phone: "+593987621334",
     github: "https://github.com/CodeINN95612",
     linkedIn: "https://www.linkedin.com/in/damián-briones-flachier-897435258/",
   },

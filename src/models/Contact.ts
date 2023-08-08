@@ -1,5 +1,6 @@
-export interface Contact {
-    email: string;
-    github: string;
-    linkedIn: string;
-}
+export type Contact = {
+  email: string;
+  phone: string;
+  github: string;
+  linkedIn: string;
+};

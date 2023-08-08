@@ -5,6 +5,7 @@ import NavBar from "./components/Nav/NavBar";
 import Services from "./components/Services/Services";
 import Experience from "./components/Experience/Experience";
 import Skills from "./components/Skills/Skills";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   var aboutMeRef = useRef<HTMLElement>(null);
@@ -39,6 +40,7 @@ function App() {
         <Services refObj={servicesRef} />
         <Skills refObj={skillsRef} />
         <Experience refObj={experienceRef} />
+        <Footer links={links} />
       </main>
     </div>
   );

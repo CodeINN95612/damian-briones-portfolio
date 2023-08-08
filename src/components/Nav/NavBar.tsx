@@ -3,9 +3,10 @@ import NavButton from "./NavButton/NavButton";
 import NavLink from "./NavLink/NavLink";
 import NavlinkGroup from "./NavLinkGroup/NavLinkGroup";
 import "./NavBar.css";
+import { Link } from "../../models/Link";
 
 export type NavBarProps = {
-  links: { ref: React.RefObject<HTMLElement>; name: string }[];
+  links: Link[];
 };
 
 function NavBar({ links }: NavBarProps) {

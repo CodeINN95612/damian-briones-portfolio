@@ -108,6 +108,13 @@ body {
 }
 
 /* Set Text decoration */
-a {
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }

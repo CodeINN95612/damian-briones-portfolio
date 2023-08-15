@@ -9,7 +9,8 @@ export const myData: MyData = {
     {
       degree: "Software Engineer",
       institution: "Universidad de las Americas",
-      year: "Graduating by 2024",
+      year: "September 2019 - Current",
+      image: "udla_logo_blanco.png",
     },
   ],
   experience: [
@@ -87,6 +88,20 @@ export const myData: MyData = {
       imgSrc: "coach.svg",
     },
   ],
+  projects: [
+    {
+      name: "CyanBot",
+      description:
+        "Discord bot for managing manga translators, their work, roles, and payment.",
+      stack: "Pyhton",
+    },
+    {
+      name: "Portfolio",
+      description: "Personal developer portfolio.",
+      url: "https://damian-briones-portfolio.vercel.app",
+      stack: "ReactJs, Typescript",
+    },
+  ],
   languages: [
     {
       name: "Spanish",
@@ -94,7 +109,7 @@ export const myData: MyData = {
     },
     {
       name: "English",
-      level: "C1",
+      level: "Advanced (C1)",
     },
   ],
   contact: {

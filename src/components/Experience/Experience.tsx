@@ -13,7 +13,7 @@ function Experience({ refObj }: ExperienceProps) {
   return (
     <Section
       refObj={refObj}
-      title="EXPERIENCE"
+      title="MY PAST"
       subtitle={
         <>
           Exp<span>erience</span>

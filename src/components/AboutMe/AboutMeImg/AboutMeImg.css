@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
+  overflow: hidden;
 }
 
 .about-me__img {
@@ -12,14 +13,6 @@
   border-radius: 15px;
   position: relative;
   padding: 1.25em;
-}
-
-@media (max-width: 300px) {
-  .about-me__img {
-    width: 200px;
-    min-height: 250px;
-    overflow: hidden;
-  }
 }
 
 .about-me__img > img {
@@ -37,5 +30,11 @@
   transform: rotate(-10deg);
   z-index: -1;
   border-radius: 15px;
-  overflow: hidden;
+}
+
+@media (max-width: 300px) {
+  .about-me__img {
+    width: 200px;
+    min-height: 250px;
+  }
 }

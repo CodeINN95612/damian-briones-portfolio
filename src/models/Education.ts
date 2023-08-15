@@ -1,7 +1,6 @@
 export interface Education {
-    degree: string;
-    institution: string;
-    year: string;
+  degree: string;
+  institution: string;
+  year: string;
+  image: string;
 }
-
-

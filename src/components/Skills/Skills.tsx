@@ -10,7 +10,7 @@ function Skills({ refObj }: SkillsProps) {
   return (
     <Section
       refObj={refObj}
-      title="SKILLS"
+      title="MY KNOWLEDGE"
       subtitle={
         <>
           <span>Sk</span>ills

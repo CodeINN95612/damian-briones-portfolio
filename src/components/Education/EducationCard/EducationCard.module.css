@@ -1,0 +1,47 @@
+.card {
+  min-width: 200px;
+  min-height: 200px;
+
+  padding: 1em;
+
+  background: var(--color-darker);
+  box-shadow: 0 8px 32px 0 black;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+}
+
+@media (min-width: 400px) {
+  .card {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.card img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.card h4 {
+  padding-block: 0.25em;
+}
+
+.degree_cyan {
+  font-size: larger;
+  font-weight: bold;
+  color: var(--color-cyan);
+}
+
+.degree_purple {
+  font-size: larger;
+  font-weight: bold;
+  color: var(--color-purple);
+}
+
+.year {
+  font-size: smaller;
+}

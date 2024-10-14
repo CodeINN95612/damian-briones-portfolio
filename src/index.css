@@ -1,22 +1,27 @@
-:root {
-  --color-light: #fefefe;
-  --color-dark: #1e1e1e;
-  --color-darker: #191919;
-  --color-purple: #7e74f1;
-  --color-cyan: #5ffbd6;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  line-height: 1.5;
-  font-weight: 400;
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-  color-scheme: light dark;
-  color: var(--color-light);
-  background-color: var(--color-dark);
+::-webkit-scrollbar-track {
+  background: #27272a; /* Zinc-800 */
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+::-webkit-scrollbar-thumb {
+  background: #52525b; /* Zinc-600 */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a; /* Zinc-500 */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #52525b #27272a; /* thumb track */
 }

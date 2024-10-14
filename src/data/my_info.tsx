@@ -163,5 +163,11 @@ export const myInfo = {
       credentialId: "E795636135DDD8FD",
       url: "https://learn.microsoft.com/api/credentials/share/en-us/DamianBriones-9572/E795636135DDD8FD?sharingId=5BCEED54F209B1C6",
     },
+    {
+      title: "ScrumStudy Scrum Fundamentals Certified",
+      date: "2024",
+      description:
+        "Certification demonstrating knowledge of Scrum fundamentals.",
+    },
   ],
 };

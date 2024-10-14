@@ -200,7 +200,7 @@ function MenuBox({ setTab }: MenuBoxProps) {
         setPosition={setPosition}
         onClick={() => setTab(<StudiesTab />)}
       >
-        STUDIES
+        EDUCATION
         <PiStudentFill className="size-6" />
       </MenuBoxItem>
       <MenuBoxItem

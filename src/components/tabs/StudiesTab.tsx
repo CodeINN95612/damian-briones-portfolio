@@ -75,14 +75,14 @@ const CertificationItem = ({
   title: string;
   date: string;
   description: string;
-  credentialId: string;
+  credentialId?: string;
   url?: string;
 }) => (
   <div className="bg-zinc-800/50 rounded-lg p-6 mb-6">
     <div className="flex justify-between items-start mb-2">
       <div>
         <h3 className="text-xl font-semibold text-zinc-100">{title}</h3>
-        <p className="text-zinc-300">{credentialId}</p>
+        {credentialId && <p className="text-zinc-300">{credentialId}</p>}
       </div>
       <span className="bg-zinc-700 text-zinc-300 px-2 py-1 rounded text-sm">
         {date}

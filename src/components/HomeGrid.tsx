@@ -269,9 +269,10 @@ function GithubBox() {
   return (
     <Box className="col-span-2 row-span-2 bg-gray-700 p-0">
       <motion.a
-        layout
         whileHover={{ y: -15, scale: 1.2 }}
         href={myInfo.contact.github}
+        target="_blank"
+        rel="noopener noreferrer"
         className="size-full flex items-center justify-center p-4"
       >
         <SiGithub className="size-10" />
@@ -286,6 +287,8 @@ function LinkedInBox() {
       <motion.a
         whileHover={{ y: -15, scale: 1.2 }}
         href={myInfo.contact.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
         className="size-full flex items-center justify-center p-4"
       >
         <SiLinkedin className="size-10" />

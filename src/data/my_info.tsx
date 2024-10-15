@@ -139,6 +139,7 @@ export const myInfo = {
         "Software Engineering Principles",
         "Artificial Intelligence",
         "Software Testing",
+        "Sistems Integration",
         "QA",
       ],
     },

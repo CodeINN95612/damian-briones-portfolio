@@ -154,6 +154,14 @@ export const myInfo = {
       githubLink: "",
       image: "",
     },
+    {
+      title: "Developer Portfolio",
+      description: "My personal developer portfolio",
+      technologies: ["React", "Tailwind CSS", "Typescript", "Framer Motion"],
+      liveLink: "https://damian-briones-portfolio.vercel.app",
+      githubLink: "https://github.com/CodeINN95612/damian-briones-portfolio",
+      image: "/projects/portfolio.png",
+    },
   ],
   certifications: [
     {

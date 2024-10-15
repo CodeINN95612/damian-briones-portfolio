@@ -1,8 +1,9 @@
 # Damián Briones Portfolio
 
 My personal [software engineer portfolio🔗]()  
-Written with **React** and **Typescript**, in English.  
-Responsive!
+Written with **React**, **Typescript**, and **Framer Motion**.  
+It is made in English only for now.  
+Responsive!  
 It contains these sections:
 
 - About me
@@ -26,15 +27,3 @@ git clone https://github.com/CodeINN95612/damian-briones-portfolio
 ```bash
 npm run dev
 ```
-
-## Folder Structure
-
-- package.json
-- README
-- LICENSE
-- tsconfig
-- src
-  - components
-  - models (types)
-  - data (data source with my information)
-  - \*.tsx

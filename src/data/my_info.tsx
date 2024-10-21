@@ -146,15 +146,6 @@ export const myInfo = {
   ],
   projects: [
     {
-      title: "E-commerce Platform",
-      description:
-        "A full-stack e-commerce solution with user authentication, product management, and payment integration.",
-      technologies: ["React", "Node.js", "Express", "MongoDB", "Stripe"],
-      liveLink: "https://myecommerceapp.com",
-      githubLink: "",
-      image: "",
-    },
-    {
       title: "Developer Portfolio",
       description: "My personal developer portfolio",
       technologies: ["React", "Tailwind CSS", "Typescript", "Framer Motion"],

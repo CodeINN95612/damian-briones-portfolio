@@ -37,7 +37,7 @@ export function ContactTab() {
     <div className="space-y-8">
       <div className="flex items-center gap-3">
         <Mail className="w-6 h-6 text-zinc-400" />
-        <h2 className="text-3xl font-bold text-zinc-50">Contact Information</h2>
+        <h2 className="text-3xl font-bold text-zinc-50">Contact Me</h2>
       </div>
 
       <div className="bg-zinc-800/50 p-6 rounded-lg space-y-6">

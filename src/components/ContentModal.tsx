@@ -24,7 +24,7 @@ export function ContentModal({ children, setTab }: ContentModalProps) {
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
         className="fixed inset-x-1 md:inset-x-24 bottom-0 h-[90%] bg-zinc-800 rounded-t-xl shadow-xl z-30 pb-5"
       >
-        <div className="h-full p-8 relative">
+        <div className="h-full pt-8 md:p-8 relative">
           <button
             onClick={() => setTab(null)}
             className="absolute top-4 right-4 p-2 hover:bg-zinc-700 rounded-full transition-colors z-40"
@@ -36,7 +36,7 @@ export function ContentModal({ children, setTab }: ContentModalProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-10 px-10 overflow-y-auto h-full pb-48"
+            className="mt-10 px-2 md:px-10 overflow-y-auto h-full pb-48"
           >
             {children}
           </motion.div>

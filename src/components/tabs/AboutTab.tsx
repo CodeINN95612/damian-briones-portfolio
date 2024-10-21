@@ -7,7 +7,7 @@ export function AboutTab() {
       <section className="space-y-5">
         <h2 className="text-4xl font-bold text-zinc-50">About Me</h2>
 
-        <div className="flex items-start gap-6 p-8">
+        <div className="flex items-start gap-6 md:p-8 flex-col md:flex-row">
           <img
             src={myInfo.about_me.image}
             alt="A photo of me"

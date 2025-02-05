@@ -10,7 +10,7 @@ export function CvButton() {
     >
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-zinc-400 to-teal-400 rounded-lg"></div>
       <motion.a
-        href="/DamianBriones_CV_2024.pdf"
+        href="/CV.pdf"
         download
         className="relative flex items-center gap-2 bg-zinc-800 font-semibold py-2 px-4 rounded-md transition-colors duration-200 m-1"
         whileHover={{

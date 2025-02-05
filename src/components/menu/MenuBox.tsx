@@ -100,6 +100,10 @@ export function MenuBox({ setTab, hideOnSmall }: MenuBoxProps) {
       </MenuBoxItem>
       <motion.div
         animate={position}
+        transition={{
+          duration: 0.05,
+          ease: "easeInOut",
+        }}
         className="absolute w-[90%] h-12 rounded-full bg-zinc-100"
       />
       <CvButton />

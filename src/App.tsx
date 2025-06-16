@@ -1,11 +1,14 @@
 import "./App.css";
 import { AnimatedGridMainBackground } from "./components/AnimatedGridMainBackground";
+import { SectionContextProvider } from "./context/SectionContextProvider";
 
 function App() {
   return (
-    <AnimatedGridMainBackground>
-      <h1>Test</h1>
-    </AnimatedGridMainBackground>
+    <SectionContextProvider>
+      <AnimatedGridMainBackground>
+        <h1>Test</h1>
+      </AnimatedGridMainBackground>
+    </SectionContextProvider>
   );
 }
 

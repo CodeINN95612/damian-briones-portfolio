@@ -1,13 +1,6 @@
 import { motion, type HTMLMotionProps } from "framer-motion";
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-  type ForwardedRef,
-} from "react";
-import { Box } from "./animated-ui/Box";
+import { useContext, useState } from "react";
+import { AnimatedBox } from "./animated-ui/AnimatedBox";
 import { myInfo } from "../assets/data";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaCode, FaLanguage, FaRedo } from "react-icons/fa";
@@ -20,9 +13,64 @@ import { PiStudentFill } from "react-icons/pi";
 import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
+import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
+import { SectionContext } from "../context/SectionContext";
 
 export const VentoGrid = () => {
+  const { setActiveSection } = useContext(SectionContext);
+
   const [key, setKey] = useState(0);
+
+  const menuItems = [
+    {
+      label: "Home",
+      icon: <IoHome />,
+      onClick: () => {
+        setActiveSection("home");
+      },
+      flipped: false,
+    },
+    {
+      label: "About",
+      icon: <TbUserScan />,
+      onClick: () => {
+        setActiveSection("about");
+      },
+      flipped: true,
+    },
+    {
+      label: "Experience",
+      icon: <MdWork />,
+      onClick: () => {
+        setActiveSection("experience");
+      },
+      flipped: false,
+    },
+    {
+      label: "Education",
+      icon: <PiStudentFill />,
+      onClick: () => {
+        setActiveSection("education");
+      },
+      flipped: true,
+    },
+    {
+      label: "Projects",
+      icon: <FaCode />,
+      onClick: () => {
+        setActiveSection("projects");
+      },
+      flipped: false,
+    },
+    {
+      label: "Contact",
+      icon: <RiContactsBook3Fill />,
+      onClick: () => {
+        setActiveSection("contact");
+      },
+      flipped: true,
+    },
+  ];
 
   return (
     <motion.section
@@ -37,7 +85,11 @@ export const VentoGrid = () => {
       <EmptyBox />
       <HeaderBox />
       <ImageBox />
-      <MenuBox hideOnSmall={false} />
+      <AnimatedMenuBox
+        hidden={false}
+        menuItems={menuItems}
+        cvButton={<CvButton />}
+      />
       <StackBox />
       <LanguagesBox />
       <ReloadBox
@@ -55,22 +107,22 @@ export const VentoGrid = () => {
 
 function EmptyBox() {
   return (
-    <Box className="col-span-4 sm:col-span-5 row-span-1 bg-transparent border-none md:hidden" />
+    <AnimatedBox className="col-span-4 sm:col-span-5 row-span-1 bg-transparent border-none md:hidden" />
   );
 }
 
 function LocationBox() {
   return (
-    <Box className="col-span-3 row-span-1 flex items-center justify-between p-2 px-3">
+    <AnimatedBox className="col-span-3 row-span-1 flex items-center justify-between p-2 px-3">
       <MapPin className="size-6 text-teal-300" />
       <p>{myInfo.contact.location}</p>
-    </Box>
+    </AnimatedBox>
   );
 }
 
 const HeaderBox = () => {
   return (
-    <Box className="col-span-6 md:col-span-5 row-span-2">
+    <AnimatedBox className="col-span-6 md:col-span-5 row-span-2">
       <h1 className=" text-4xl font-medium  mt-5 leading-tight">
         Hi, I'm {myInfo.alias}.
       </h1>
@@ -80,7 +132,7 @@ const HeaderBox = () => {
       <button className="flex items-center gap-1 text-teal-300 hover:underline">
         Contact me <FiArrowRight />
       </button>
-    </Box>
+    </AnimatedBox>
   );
 };
 
@@ -102,7 +154,7 @@ export function CvButton() {
       >
         <motion.span
           animate={{ y: [0, -2, 1, 0] }}
-          transition={{ repeat: Infinity, duration: 6 }}
+          transition={{ repeat: Infinity, duration: 4 }}
         >
           <BiDownload className="size-5" />
         </motion.span>
@@ -117,149 +169,21 @@ export function CvButton() {
   );
 }
 
-export type MenuBoxItemPosition = { top: number; opacity: number };
-export type MenuBoxProps = {
-  setTab?: (tab: React.ReactNode | null) => void;
-  hideOnSmall: boolean;
-};
-export function MenuBox({ setTab, hideOnSmall }: MenuBoxProps) {
-  const firstItemRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState<MenuBoxItemPosition>({
-    top: 0,
-    opacity: 0,
-  });
-
-  useEffect(() => {
-    if (firstItemRef.current) {
-      const OffsetTop = firstItemRef.current.offsetTop;
-      setPosition({ top: OffsetTop, opacity: 1 });
-    }
-  }, []);
-
-  const className =
-    "relative col-span-3 row-span-5 flex flex-col items-center justify-around p-4 h-full" +
-    (hideOnSmall ? "hidden" : "");
-
-  return (
-    <Box
-      onMouseLeave={() => {
-        if (!firstItemRef.current) return;
-        const { offsetTop } = firstItemRef.current;
-        const position = { top: offsetTop, opacity: 1 };
-        setPosition(position);
-      }}
-      className={className}
-    >
-      <MenuBoxItem
-        setPosition={setPosition}
-        ref={firstItemRef}
-        // onClick={() => setTab(null)}
-      >
-        <IoHome className="size-6" />
-        HOME
-      </MenuBoxItem>
-      <MenuBoxItem
-        setPosition={setPosition}
-        // onClick={() => setTab(<AboutTab />)}
-      >
-        ABOUT
-        <TbUserScan className="size-6" />
-      </MenuBoxItem>
-      <MenuBoxItem
-        setPosition={setPosition}
-        // onClick={() => setTab(<ExperienceTab />)}
-      >
-        <MdWork className="size-6" />
-        EXPERIENCE
-      </MenuBoxItem>
-      <MenuBoxItem
-        setPosition={setPosition}
-        // onClick={() => setTab(<StudiesTab />)}
-      >
-        EDUCATION
-        <PiStudentFill className="size-6" />
-      </MenuBoxItem>
-      <MenuBoxItem
-        setPosition={setPosition}
-        // onClick={() => setTab(<ProjectsTab />)}
-      >
-        <FaCode className="size-6" />
-        PROJECTS
-      </MenuBoxItem>
-      <MenuBoxItem
-        setPosition={setPosition}
-        // onClick={() => setTab(<ContactTab />)}
-      >
-        CONTACT
-        <RiContactsBook3Fill className="size-6" />
-      </MenuBoxItem>
-      <motion.div
-        animate={position}
-        transition={{
-          duration: 0.05,
-          ease: "easeInOut",
-        }}
-        className="absolute w-[90%] h-12 rounded-full bg-zinc-100"
-      />
-      <CvButton />
-    </Box>
-  );
-}
-
-type MenuBoxItemProps = {
-  children: React.ReactNode;
-  setPosition: (pos: MenuBoxItemPosition) => void;
-  onClick?: () => void;
-};
-
-const MenuBoxItem = forwardRef(function MenuBoxItem(
-  { children, setPosition, onClick }: MenuBoxItemProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
-  const internalRef = useRef<HTMLDivElement>(null);
-
-  useImperativeHandle(ref, () => internalRef.current!);
-
-  const handleMouseEnter = () => {
-    if (!internalRef.current) return;
-    setPosition({
-      top: internalRef.current.offsetTop,
-      opacity: 1,
-    });
-  };
-
-  return (
-    <motion.div
-      ref={internalRef}
-      whileHover={{ scale: 1.1 }}
-      onMouseEnter={handleMouseEnter}
-      className="relative w-full z-10 cursor-pointer p-3 px-5 uppercase text-zinc-50 mix-blend-difference"
-    >
-      <button
-        className="font-semibold flex justify-between items-center w-full"
-        // onClick={() => onClick()}
-      >
-        {children}
-      </button>
-    </motion.div>
-  );
-});
-
 const ImageBox = () => {
   return (
-    <Box className="col-span-4 row-span-4 p-1 min-w-12">
+    <AnimatedBox className="col-span-4 row-span-4 p-1 min-w-12">
       <img
         src={myInfo.image}
         alt="A photo of me"
         className="rounded-md w-full h-full"
       />
-    </Box>
+    </AnimatedBox>
   );
 };
 
 const GithubBox = () => {
   return (
-    <Box className="col-span-2 row-span-2 bg-gray-700 p-0">
+    <AnimatedBox className="col-span-2 row-span-2 bg-gray-700 p-0">
       <motion.a
         whileHover={{ y: -15, scale: 1.2 }}
         href={myInfo.contact.github}
@@ -269,13 +193,13 @@ const GithubBox = () => {
       >
         <SiGithub className="size-10" />
       </motion.a>
-    </Box>
+    </AnimatedBox>
   );
 };
 
 const LinkedInBox = () => {
   return (
-    <Box className="col-span-2 row-span-2 bg-sky-700 p-0">
+    <AnimatedBox className="col-span-2 row-span-2 bg-sky-700 p-0">
       <motion.a
         whileHover={{ y: -15, scale: 1.2 }}
         href={myInfo.contact.linkedin}
@@ -285,31 +209,31 @@ const LinkedInBox = () => {
       >
         <SiLinkedin className="size-10" />
       </motion.a>
-    </Box>
+    </AnimatedBox>
   );
 };
 
 const LanguagesBox = () => {
   return (
-    <Box className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
+    <AnimatedBox className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
       <p>English</p> <FaLanguage className="size-10 text-teal-300" />{" "}
       <p>Spanish</p>
-    </Box>
+    </AnimatedBox>
   );
 };
 
 const EmailBox = () => {
   return (
-    <Box className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
+    <AnimatedBox className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
       <MdAlternateEmail className="size-6 text-teal-300" />
-      <p>{myInfo.contact.email}</p>
-    </Box>
+      <p className="select-all">{myInfo.contact.email}</p>
+    </AnimatedBox>
   );
 };
 
 const ReloadBox = ({ onClick }: { onClick: () => void }) => {
   return (
-    <Box className="col-span-3 row-span-1 md:col-span-1 md:row-span-2 flex items-center justify-center p-0">
+    <AnimatedBox className="col-span-3 row-span-1 md:col-span-1 md:row-span-2 flex items-center justify-center p-0">
       <motion.button
         onClick={onClick}
         whileHover={{ rotate: 360, scale: 1.2 }}
@@ -319,13 +243,13 @@ const ReloadBox = ({ onClick }: { onClick: () => void }) => {
       >
         <FaRedo className="size-8 text-zinc-600" />
       </motion.button>
-    </Box>
+    </AnimatedBox>
   );
 };
 
 function StackBox() {
   return (
-    <Box className="col-span-6 md:col-span-5 row-span-2 grid grid-cols-4 gap-4">
+    <AnimatedBox className="col-span-6 md:col-span-5 row-span-2 grid grid-cols-4 gap-4">
       <div className="col-span-2  flex items-center justify-center">
         <motion.h2 whileHover={{ scale: 1.1 }} className="font-bold text-xl">
           TECK STACK
@@ -336,7 +260,7 @@ function StackBox() {
           {skill.children}
         </StackItem>
       ))}
-    </Box>
+    </AnimatedBox>
   );
 }
 

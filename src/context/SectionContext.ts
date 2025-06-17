@@ -6,7 +6,7 @@ export type Section =
   | "projects"
   | "contact"
   | "experience"
-  | "studies";
+  | "education";
 
 export type SectionContextType = {
   activeSection: Section;

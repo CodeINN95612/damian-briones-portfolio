@@ -8,6 +8,11 @@ function App() {
     <SectionContextProvider>
       <AnimatedGridMainBackground>
         <VentoGrid />
+        <div className="text-xs">
+          <p>
+            Made by <span className="italic text-teal-200">Damián Briones</span>
+          </p>
+        </div>
       </AnimatedGridMainBackground>
     </SectionContextProvider>
   );

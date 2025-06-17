@@ -61,7 +61,7 @@ export const myInfo = {
     fact: "Living in Ecuador, a country renowned for its incredible biodiversity and the Galápagos Islands, I had the unique opportunity to dive with sea turtles 🐢, marine iguanas, and hammerhead sharks 🦈. It remains one of my most cherished experiences.",
   },
   contact: {
-    email: "damian.briones@outlook.com",
+    email: "work@damianbriones.dev",
     phone: "+593 98 762 1334",
     whatsapp: "https://wa.me/593987621334",
     linkedin: "https://www.linkedin.com/in/damian-briones-flachier/",

@@ -8,7 +8,12 @@ export const SectionContextProvider = ({
 }) => {
   const [activeSection, setActiveSection] = useState<Section>("home");
   return (
-    <SectionContext.Provider value={{ activeSection, setActiveSection }}>
+    <SectionContext.Provider
+      value={{
+        activeSection,
+        setActiveSection,
+      }}
+    >
       {children}
     </SectionContext.Provider>
   );

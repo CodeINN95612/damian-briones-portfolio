@@ -1,9 +1,9 @@
 import { type HTMLMotionProps, motion, type Variants } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 
-type BoxProps = { className?: string } & HTMLMotionProps<"div">;
+export type AnimatedBoxProps = { className?: string } & HTMLMotionProps<"div">;
 
-export function Box({ className, ...rest }: BoxProps) {
+export function AnimatedBox({ className, ...rest }: AnimatedBoxProps) {
   return (
     <motion.div
       variants={boxVariants}

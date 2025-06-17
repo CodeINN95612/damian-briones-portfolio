@@ -1,9 +1,26 @@
-import { type HTMLMotionProps, motion, type Variants } from "framer-motion";
+import {
+  AnimatePresence,
+  type HTMLMotionProps,
+  motion,
+  type Variants,
+} from "framer-motion";
+import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
+import { SectionContext } from "../../context/SectionContext";
 
-export type AnimatedBoxProps = { className?: string } & HTMLMotionProps<"div">;
+export type AnimatedBoxProps = {
+  className?: string;
+  sectionAnimated?: boolean;
+} & HTMLMotionProps<"div">;
 
-export function AnimatedBox({ className, ...rest }: AnimatedBoxProps) {
+export function AnimatedBox({
+  className,
+  sectionAnimated,
+  children,
+  ...rest
+}: AnimatedBoxProps) {
+  const { activeSection } = useContext(SectionContext);
+
   return (
     <motion.div
       variants={boxVariants}
@@ -18,7 +35,23 @@ export function AnimatedBox({ className, ...rest }: AnimatedBoxProps) {
         className
       )}
       {...rest}
-    />
+    >
+      {sectionAnimated ? (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSection}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
+      ) : (
+        children
+      )}
+    </motion.div>
   );
 }
 

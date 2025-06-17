@@ -6,7 +6,6 @@ import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaCode, FaLanguage, FaRedo } from "react-icons/fa";
 import { MdAlternateEmail, MdWork } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
-import { FiArrowRight } from "react-icons/fi";
 import { IoHome } from "react-icons/io5";
 import { TbUserScan } from "react-icons/tb";
 import { PiStudentFill } from "react-icons/pi";
@@ -15,6 +14,11 @@ import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
 import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
 import { SectionContext } from "../context/SectionContext";
+import {
+  AnimatedHeaderBox,
+  type ContactOption,
+} from "./animated-ui/AnimatedHeaderBox";
+import { BsWhatsapp } from "react-icons/bs";
 
 export const VentoGrid = () => {
   const { setActiveSection } = useContext(SectionContext);
@@ -72,6 +76,15 @@ export const VentoGrid = () => {
     },
   ];
 
+  const contactOptions: ContactOption[] = [
+    {
+      label: "Mobile / WhatsApp",
+      value: myInfo.contact.phone,
+      icon: <BsWhatsapp className="size-6 text-zinc-400" />,
+      link: myInfo.contact.whatsapp,
+    },
+  ];
+
   return (
     <motion.section
       key={key}
@@ -83,7 +96,11 @@ export const VentoGrid = () => {
       className="grid grid-cols-6 gap-4 grid-flow-dense z-[5] md:grid-cols-12 md:max-w-4xl "
     >
       <EmptyBox />
-      <HeaderBox />
+      <AnimatedHeaderBox
+        alias={myInfo.alias}
+        title={myInfo.title}
+        contactOptions={contactOptions}
+      />
       <ImageBox />
       <AnimatedMenuBox
         hidden={false}
@@ -119,22 +136,6 @@ function LocationBox() {
     </AnimatedBox>
   );
 }
-
-const HeaderBox = () => {
-  return (
-    <AnimatedBox className="col-span-6 md:col-span-5 row-span-2">
-      <h1 className=" text-4xl font-medium  mt-5 leading-tight">
-        Hi, I'm {myInfo.alias}.
-      </h1>
-      <p className="text-4xl font-medium leading-tight text-zinc-400 mb-10">
-        I'm a {myInfo.title}.
-      </p>
-      <button className="flex items-center gap-1 text-teal-300 hover:underline">
-        Contact me <FiArrowRight />
-      </button>
-    </AnimatedBox>
-  );
-};
 
 export function CvButton() {
   return (

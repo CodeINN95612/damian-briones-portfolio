@@ -40,26 +40,8 @@ export const myInfo = {
       className: "bg-yellow-500 text-zinc-900",
     },
   ],
-  about_me: {
-    image: "/personal.jpeg",
-    about:
-      "Born and raised in Quito, Ecuador, I'm a tech enthusiast with a deep love for software and continuous learning. When I'm not diving into code, you'll find me having fun playing videogames or following an internet course.",
-    whatMakesMeTick:
-      "I believe in my abilities to create impactful software solutions that can make a difference in people's lives. My journey in tech started when I built my first game at 12 and became fascinated with how software could bring any idea to life.",
-    music:
-      "Always on the hunt for new artists. Currently obsessed with Ariana Grande.",
-    book: 'From sci-fi to philosophy, my bookshelf is as diverse as my code libraries. One of my favorite books is "Pet Sematary" by Stephen King.',
-    game: {
-      text: "Enjoy immersing myself in virtual worlds and sometimes some friendly competition. Current favorite:",
-      favorite: "Minecraft",
-    },
-    travel:
-      "Exploring new cultures and places whenever I can. Next destination: Belgium.",
-    countriesLivedIn: 2,
-    languagesSpoken: 2,
-    linesOfCodeWritten: "10000+",
-    fact: "Living in Ecuador, a country renowned for its incredible biodiversity and the Galápagos Islands, I had the unique opportunity to dive with sea turtles 🐢, marine iguanas, and hammerhead sharks 🦈. It remains one of my most cherished experiences.",
-  },
+  about_me:
+    "I'm a backend software developer with six years of experience, and I’m gradually moving toward fullstack work. I enjoy figuring out problems and writing innovative software. I’m open to new remote opportunities that bring a real challenge and better overall conditions. Outside of work, I write code for fun, watch more series than I care to admit, play some Minecraft, and make time for the gym.",
   contact: {
     email: "work@damianbriones.dev",
     phone: "+593 98 762 1334",

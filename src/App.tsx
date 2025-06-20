@@ -1,6 +1,6 @@
 import "./App.css";
-import { AnimatedGridMainBackground } from "./components/AnimatedGridMainBackground";
-import { VentoGrid } from "./components/VentoGrid";
+import { AnimatedGridMainBackground } from "./components/animated-ui/AnimatedGridMainBackground";
+import { VentoGrid } from "./components/animated-ui/VentoGrid";
 import { SectionContextProvider } from "./context/SectionContextProvider";
 
 function App() {

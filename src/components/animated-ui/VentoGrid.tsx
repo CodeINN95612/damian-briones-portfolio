@@ -1,7 +1,7 @@
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { useContext, useState } from "react";
-import { AnimatedBox } from "./animated-ui/AnimatedBox";
-import { myInfo } from "../assets/data";
+import { AnimatedBox } from "./AnimatedBox";
+import { myInfo } from "../../assets/data";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaCode, FaLanguage, FaRedo } from "react-icons/fa";
 import { MdAlternateEmail, MdWork } from "react-icons/md";
@@ -12,13 +12,11 @@ import { PiStudentFill } from "react-icons/pi";
 import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
-import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
-import { SectionContext } from "../context/SectionContext";
-import {
-  AnimatedHeaderBox,
-  type ContactOption,
-} from "./animated-ui/AnimatedHeaderBox";
+import { AnimatedMenuBox } from "./AnimatedMenuBox";
+import { SectionContext } from "../../context/SectionContext";
+import { AnimatedHeaderBox, type ContactOption } from "./AnimatedHeaderBox";
 import { BsWhatsapp } from "react-icons/bs";
+import { AnimatedImageAboutBox } from "./AnimatedImageAboutBox";
 
 export const VentoGrid = () => {
   const { setActiveSection } = useContext(SectionContext);
@@ -80,7 +78,7 @@ export const VentoGrid = () => {
     {
       label: "Mobile / WhatsApp",
       value: myInfo.contact.phone,
-      icon: <BsWhatsapp className="size-6 text-zinc-400" />,
+      icon: <BsWhatsapp className="size-6 text-green-500" />,
       link: myInfo.contact.whatsapp,
     },
   ];
@@ -101,7 +99,7 @@ export const VentoGrid = () => {
         title={myInfo.title}
         contactOptions={contactOptions}
       />
-      <ImageBox />
+      <AnimatedImageAboutBox />
       <AnimatedMenuBox
         hidden={false}
         menuItems={menuItems}
@@ -169,18 +167,6 @@ export function CvButton() {
     </motion.div>
   );
 }
-
-const ImageBox = () => {
-  return (
-    <AnimatedBox className="col-span-4 row-span-4 p-1 min-w-12">
-      <img
-        src={myInfo.image}
-        alt="A photo of me"
-        className="rounded-md w-full h-full"
-      />
-    </AnimatedBox>
-  );
-};
 
 const GithubBox = () => {
   return (

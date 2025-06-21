@@ -11,11 +11,13 @@ import { SectionContext } from "../../context/SectionContext";
 export type AnimatedBoxProps = {
   className?: string;
   sectionAnimated?: boolean;
+  animatedClassName?: string;
 } & HTMLMotionProps<"div">;
 
 export function AnimatedBox({
   className,
   sectionAnimated,
+  animatedClassName,
   children,
   ...rest
 }: AnimatedBoxProps) {
@@ -44,7 +46,7 @@ export function AnimatedBox({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="h-full w-full"
+            className={twMerge("h-full w-full", animatedClassName)}
           >
             {children}
           </motion.div>

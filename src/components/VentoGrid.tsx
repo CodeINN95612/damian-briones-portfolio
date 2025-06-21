@@ -1,22 +1,25 @@
-import { motion, type HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { useContext, useState } from "react";
-import { AnimatedBox } from "./AnimatedBox";
-import { myInfo } from "../../assets/data";
+import { AnimatedBox } from "./animated-ui/AnimatedBox";
+import { myInfo } from "../assets/data";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaCode, FaLanguage, FaRedo } from "react-icons/fa";
 import { MdAlternateEmail, MdWork } from "react-icons/md";
-import { twMerge } from "tailwind-merge";
 import { IoHome } from "react-icons/io5";
 import { TbUserScan } from "react-icons/tb";
 import { PiStudentFill } from "react-icons/pi";
 import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
-import { AnimatedMenuBox } from "./AnimatedMenuBox";
-import { SectionContext } from "../../context/SectionContext";
-import { AnimatedHeaderBox, type ContactOption } from "./AnimatedHeaderBox";
+import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
+import { SectionContext } from "../context/SectionContext";
+import {
+  AnimatedHeaderBox,
+  type ContactOption,
+} from "./animated-ui/AnimatedHeaderBox";
 import { BsWhatsapp } from "react-icons/bs";
-import { AnimatedImageAboutBox } from "./AnimatedImageAboutBox";
+import { AnimatedImageAboutBox } from "./animated-ui/AnimatedImageAboutBox";
+import { AnimatesStackHobbiesBox } from "./animated-ui/AnimatedStackHobbiesBox";
 
 export const VentoGrid = () => {
   const { setActiveSection } = useContext(SectionContext);
@@ -109,7 +112,10 @@ export const VentoGrid = () => {
         menuItems={menuItems}
         cvButton={<CvButton />}
       />
-      <StackBox />
+      <AnimatesStackHobbiesBox
+        stack={myInfo.skills}
+        hobbies={myInfo.about_me.hobbies}
+      />
       <LanguagesBox />
       <ReloadBox
         onClick={() => {
@@ -237,39 +243,3 @@ const ReloadBox = ({ onClick }: { onClick: () => void }) => {
     </AnimatedBox>
   );
 };
-
-function StackBox() {
-  return (
-    <AnimatedBox className="col-span-6 md:col-span-5 row-span-2 grid grid-cols-4 gap-4">
-      <div className="col-span-2  flex items-center justify-center">
-        <motion.h2 whileHover={{ scale: 1.1 }} className="font-bold text-xl">
-          TECK STACK
-        </motion.h2>
-      </div>
-      {myInfo.skills.map((skill) => (
-        <StackItem key={skill.name} className={skill.className}>
-          {skill.children}
-        </StackItem>
-      ))}
-    </AnimatedBox>
-  );
-}
-
-type StackItemProps = { className?: string } & HTMLMotionProps<"div">;
-
-function StackItem({ className, ...rest }: StackItemProps) {
-  return (
-    <motion.div
-      whileHover={{
-        scale: 1.1,
-        rotate: Math.random() > 0.5 ? 12 : -12,
-        y: -10,
-      }}
-      className={twMerge(
-        "col-span-1 rounded size-full aspect-square flex items-center justify-center bg-zinc-400",
-        className
-      )}
-      {...rest}
-    />
-  );
-}

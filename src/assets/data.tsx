@@ -1,3 +1,4 @@
+import { Book, Dumbbell, Gamepad2 } from "lucide-react";
 import { AiOutlineDotNet } from "react-icons/ai";
 import { FaDocker, FaNodeJs, FaReact } from "react-icons/fa";
 import { TbSql } from "react-icons/tb";
@@ -58,6 +59,20 @@ export const myInfo = {
       {
         label: "2",
         value: "Countries lived in",
+      },
+    ],
+    hobbies: [
+      {
+        name: "Gaming",
+        icon: <Gamepad2 className="size-6 text-zinc-400" />,
+      },
+      {
+        name: "Reading",
+        icon: <Book className="size-6 text-zinc-400" />,
+      },
+      {
+        name: "Gym",
+        icon: <Dumbbell className="size-6 text-zinc-400" />,
       },
     ],
     other:

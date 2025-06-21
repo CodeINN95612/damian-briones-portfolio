@@ -40,8 +40,29 @@ export const myInfo = {
       className: "bg-yellow-500 text-zinc-900",
     },
   ],
-  about_me:
-    "I'm a backend software developer with six years of experience, and I’m gradually moving toward fullstack work. I enjoy figuring out problems and writing innovative software. I’m open to new remote opportunities that bring a real challenge and better overall conditions. Outside of work, I write code for fun, watch more series than I care to admit, play some Minecraft, and make time for the gym.",
+  about_me: {
+    head: "I'm a backend software developer with six years of experience, and I’m gradually moving toward fullstack work. I enjoy figuring out problems and writing innovative software. I’m open to new remote opportunities.",
+    snapshot: [
+      {
+        label: "10 000 +",
+        value: "Lines of code written",
+      },
+      {
+        label: "6",
+        value: "Years of experience",
+      },
+      {
+        label: "2.5",
+        value: "Spoken languages",
+      },
+      {
+        label: "2",
+        value: "Countries lived in",
+      },
+    ],
+    other:
+      "I’m open to new remote opportunities that bring a real challenge and better overall conditions. Outside of work, I write code for fun, watch more series than I care to admit, play some Minecraft, and make time for the gym.",
+  },
   contact: {
     email: "work@damianbriones.dev",
     phone: "+593 98 762 1334",
@@ -53,7 +74,7 @@ export const myInfo = {
   experience: {
     work: [
       {
-        title: "Semi Senior Backend Developer",
+        title: "Backend Software Engineer",
         company: "Logiztik Alliance Group",
         location: "Quito, Ecuador",
         dateRange: "2023 - Current",
@@ -61,15 +82,6 @@ export const myInfo = {
           "Development and maintenance of a logistics system for the company. Refactoring of legacy software. Implementation of new features. Implementation of microservices. Team leader with scrum",
         skills: ["C#", ".NET", "SQL", "Docker", "Azure Devops"],
       },
-      //   {
-      //     title: "Lead Software Engineer",
-      //     company: "Cidesoft",
-      //     location: "Quito, Ecuador",
-      //     dateRange: "2024 - Current",
-      //     description:
-      //       "Software consulting and development. Software architecture. Devops. Deployment of applications.",
-      //     stack: ["C#", ".NET", "SQL", "Node.js", "React", "SvelteKit", "Jira"],
-      //   },
       {
         title: "Junior Software Engineer",
         company: "CloudStudio",

@@ -1,10 +1,20 @@
 import { useContext } from "react";
-import { myInfo } from "../../assets/data";
 import { SectionContext } from "../../context/SectionContext";
 import { AnimatedBox } from "./AnimatedBox";
-import { FcAbout } from "react-icons/fc";
+import { Camera } from "lucide-react";
 
-export const AnimatedImageAboutBox = () => {
+export type AnimatedImageAboutBoxProps = {
+  snapshot: {
+    label: string;
+    value: string;
+  }[];
+  imagePath: string;
+};
+
+export const AnimatedImageAboutBox = ({
+  snapshot,
+  imagePath,
+}: AnimatedImageAboutBoxProps) => {
   const { activeSection } = useContext(SectionContext);
 
   return (
@@ -12,20 +22,42 @@ export const AnimatedImageAboutBox = () => {
       className="col-span-4 row-span-4 p-0 overflow-hidden"
       sectionAnimated
     >
-      {activeSection === "about" ? (
-        <div className="p-8">
-          <h2 className="text-4xl font-medium leading-tight flex items-center gap-3">
-            <FcAbout className="size-8 text-zinc-400" /> About Me
-          </h2>
-          <p className="text-zinc-300 text-center">{myInfo.about_me}</p>
-        </div>
-      ) : (
-        <img
-          src={myInfo.image}
-          alt="A photo of me"
-          className="w-full h-full object-cover"
-        />
-      )}
+      {activeSection === "about"
+        ? renderSnapshotSection(snapshot)
+        : renderImageSection(imagePath)}
     </AnimatedBox>
+  );
+};
+
+const renderSnapshotSection = (
+  snapshot: AnimatedImageAboutBoxProps["snapshot"]
+) => {
+  return (
+    <div className="p-8 space-y-5 h-full">
+      <h3 className="text-3xl font-medium flex items-center gap-3 text-zinc-100">
+        <Camera className="size-6 text-zinc-400" /> Snapshot
+      </h3>
+      <div className="grid gap-px p-1">
+        {snapshot.map((item, index) => (
+          <div
+            key={index}
+            className="text-center p-4 hover:bg-zinc-700 transition rounded-md"
+          >
+            <div className="text-2xl font-bold text-zinc-100">{item.label}</div>
+            <div className="text-sm text-zinc-400">{item.value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const renderImageSection = (imagePath: string) => {
+  return (
+    <img
+      src={imagePath}
+      alt="A photo of me"
+      className="w-full h-full object-cover"
+    />
   );
 };

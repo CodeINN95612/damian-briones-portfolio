@@ -1,8 +1,8 @@
 import { FiArrowRight } from "react-icons/fi";
 import { AnimatedBox } from "./AnimatedBox";
-import { SectionContext } from "../../context/SectionContext";
+import { SectionContext, type Section } from "../../context/SectionContext";
 import { useContext } from "react";
-import { CopyIcon, MailIcon } from "lucide-react";
+import { CopyIcon, MailIcon, PersonStandingIcon } from "lucide-react";
 
 export type ContactOption = {
   label: string;
@@ -14,12 +14,14 @@ export type ContactOption = {
 export type AnimatedHeaderBoxProps = {
   alias: string;
   title: string;
+  about: string;
   contactOptions: ContactOption[];
 };
 
 export const AnimatedHeaderBox = ({
   alias,
   title,
+  about,
   contactOptions,
 }: AnimatedHeaderBoxProps) => {
   const { activeSection, setActiveSection } = useContext(SectionContext);
@@ -29,25 +31,35 @@ export const AnimatedHeaderBox = ({
       className="col-span-6 md:col-span-5 row-span-2 p-0"
       sectionAnimated
     >
-      {activeSection === "contact" ? (
-        renderAnimatedContactSection(contactOptions)
-      ) : (
-        <div className="p-6">
-          <h1 className=" text-4xl font-medium  mt-5 leading-tight">
-            Hi, I'm {alias}.
-          </h1>
-          <p className="text-4xl font-medium leading-tight text-zinc-400 mb-10">
-            I'm a {title}.
-          </p>
-          <button
-            className="flex items-center gap-1 text-teal-300 hover:underline"
-            onClick={() => setActiveSection("contact")}
-          >
-            Contact me <FiArrowRight />
-          </button>
-        </div>
-      )}
+      {activeSection === "contact"
+        ? renderAnimatedContactSection(contactOptions)
+        : activeSection == "about"
+        ? renderAboutMeSection(about)
+        : renderHeaderSection(alias, title, setActiveSection)}
     </AnimatedBox>
+  );
+};
+
+const renderHeaderSection = (
+  alias: string,
+  title: string,
+  setActiveSection: (section: Section) => void
+) => {
+  return (
+    <div className="p-6">
+      <h1 className=" text-4xl font-medium  mt-5 leading-tight">
+        Hi, I'm {alias}.
+      </h1>
+      <p className="text-4xl font-medium leading-tight text-zinc-400 mb-10">
+        I'm a {title}.
+      </p>
+      <button
+        className="flex items-center gap-1 text-teal-300 hover:underline"
+        onClick={() => setActiveSection("contact")}
+      >
+        Contact me <FiArrowRight />
+      </button>
+    </div>
   );
 };
 
@@ -89,6 +101,17 @@ const renderAnimatedContactSection = (contactOptions: ContactOption[]) => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+const renderAboutMeSection = (aboutText: string) => {
+  return (
+    <div className="p-8 space-y-5 text-justify">
+      <h2 className="text-4xl font-medium leading-tight flex items-center gap-3">
+        <PersonStandingIcon className="size-8 text-zinc-400" /> About Me
+      </h2>
+      <p className="text-zinc-300">{aboutText}</p>
     </div>
   );
 };

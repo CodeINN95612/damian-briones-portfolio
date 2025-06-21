@@ -97,9 +97,13 @@ export const VentoGrid = () => {
       <AnimatedHeaderBox
         alias={myInfo.alias}
         title={myInfo.title}
+        about={myInfo.about_me.head}
         contactOptions={contactOptions}
       />
-      <AnimatedImageAboutBox />
+      <AnimatedImageAboutBox
+        imagePath={myInfo.image}
+        snapshot={myInfo.about_me.snapshot}
+      />
       <AnimatedMenuBox
         hidden={false}
         menuItems={menuItems}

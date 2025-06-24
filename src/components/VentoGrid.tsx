@@ -12,7 +12,7 @@ import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
 import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
-import { SectionContext } from "../context/SectionContext";
+import { SectionContext, type Section } from "../context/SectionContext";
 import {
   AnimatedHeaderBox,
   type ContactOption,
@@ -20,9 +20,11 @@ import {
 import { BsWhatsapp } from "react-icons/bs";
 import { AnimatedImageAboutBox } from "./animated-ui/AnimatedImageAboutBox";
 import { AnimatesStackHobbiesBox } from "./animated-ui/AnimatedStackHobbiesBox";
+import { AnimatedExperienceBox } from "./animated-ui/AnimatedExperienceBox";
+import { AnimatedFreelanceBox } from "./animated-ui/AnimatedFreelanceBox";
 
 export const VentoGrid = () => {
-  const { setActiveSection } = useContext(SectionContext);
+  const { activeSection, setActiveSection } = useContext(SectionContext);
 
   const [key, setKey] = useState(0);
 
@@ -103,28 +105,15 @@ export const VentoGrid = () => {
         about={myInfo.about_me.head}
         contactOptions={contactOptions}
       />
-      <AnimatedImageAboutBox
-        imagePath={myInfo.image}
-        snapshot={myInfo.about_me.snapshot}
-      />
+      {renderImageOrExperienceBox(activeSection)}
       <AnimatedMenuBox
         hidden={false}
         menuItems={menuItems}
         cvButton={<CvButton />}
       />
-      <AnimatesStackHobbiesBox
-        stack={myInfo.skills}
-        hobbies={myInfo.about_me.hobbies}
-      />
-      <LanguagesBox />
-      <ReloadBox
-        onClick={() => {
-          setKey((p) => p + 1);
-        }}
-      />
-      <LinkedInBox />
-      <GithubBox />
-      <EmailBox />
+      {renderExperienceOrInfoBox(activeSection, setKey)}
+      {renderSocialsOrExperienceBox(activeSection)}
+      {activeSection !== "experience" ? <EmailBox /> : null}
       <LocationBox />
     </motion.section>
   );
@@ -241,5 +230,60 @@ const ReloadBox = ({ onClick }: { onClick: () => void }) => {
         <FaRedo className="size-8 text-zinc-600" />
       </motion.button>
     </AnimatedBox>
+  );
+};
+
+const renderExperienceOrInfoBox = (
+  activeSection: Section,
+  setKey: React.Dispatch<React.SetStateAction<number>>
+) => {
+  if (activeSection === "experience") {
+    return <AnimatedExperienceBox experience={myInfo.experience.work[0]} />;
+  }
+
+  return (
+    <>
+      <AnimatesStackHobbiesBox
+        stack={myInfo.skills}
+        hobbies={myInfo.about_me.hobbies}
+      />
+      <LanguagesBox />
+      <ReloadBox
+        onClick={() => {
+          setKey((p) => p + 1);
+        }}
+      />
+    </>
+  );
+};
+
+const renderImageOrExperienceBox = (activeSection: Section) => {
+  if (activeSection === "experience") {
+    return (
+      <AnimatedExperienceBox
+        className="col-span-4 row-span-3"
+        experience={myInfo.experience.work[1]}
+        sm
+      />
+    );
+  }
+  return (
+    <AnimatedImageAboutBox
+      imagePath={myInfo.image}
+      snapshot={myInfo.about_me.snapshot}
+    />
+  );
+};
+
+const renderSocialsOrExperienceBox = (activeSection: Section) => {
+  if (activeSection === "experience") {
+    return <AnimatedFreelanceBox freelanceJobs={myInfo.experience.freelance} />;
+  }
+
+  return (
+    <>
+      <LinkedInBox />
+      <GithubBox />
+    </>
   );
 };

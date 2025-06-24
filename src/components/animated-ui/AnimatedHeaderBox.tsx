@@ -2,7 +2,12 @@ import { FiArrowRight } from "react-icons/fi";
 import { AnimatedBox } from "./AnimatedBox";
 import { SectionContext, type Section } from "../../context/SectionContext";
 import { useContext } from "react";
-import { CopyIcon, MailIcon, PersonStandingIcon } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  CopyIcon,
+  MailIcon,
+  PersonStandingIcon,
+} from "lucide-react";
 
 export type ContactOption = {
   label: string;
@@ -35,6 +40,8 @@ export const AnimatedHeaderBox = ({
         ? renderAnimatedContactSection(contactOptions)
         : activeSection == "about"
         ? renderAboutMeSection(about)
+        : activeSection === "experience"
+        ? renderExperienceHeader()
         : renderHeaderSection(alias, title, setActiveSection)}
     </AnimatedBox>
   );
@@ -112,6 +119,22 @@ const renderAboutMeSection = (aboutText: string) => {
         <PersonStandingIcon className="size-8 text-zinc-400" /> About Me
       </h2>
       <p className="text-zinc-300">{aboutText}</p>
+    </div>
+  );
+};
+
+const renderExperienceHeader = () => {
+  return (
+    <div className="p-8 space-y-5">
+      <h2 className="text-4xl font-medium leading-tight flex items-center gap-3">
+        <BriefcaseBusiness className="size-8 text-zinc-400" /> Experience
+      </h2>
+      <p className="text-zinc-300">
+        I have actual hands on experience in software development, working with
+        teams of different sizes.
+        <br />
+        Here are some of my professional experiences:
+      </p>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { AiOutlineDotNet } from "react-icons/ai";
 import { FaDocker, FaNodeJs, FaReact } from "react-icons/fa";
 import { TbSql } from "react-icons/tb";
 import { VscAzure } from "react-icons/vsc";
+import type { Experience } from "../common/types";
 
 export const myInfo = {
   name: "Damián Briones",
@@ -92,10 +93,11 @@ export const myInfo = {
         title: "Backend Software Engineer",
         company: "Logiztik Alliance Group",
         location: "Quito, Ecuador",
-        dateRange: "2023 - Current",
+        dateRange: "2023 - Today",
         description:
           "Development and maintenance of a logistics system for the company. Refactoring of legacy software. Implementation of new features. Implementation of microservices. Team leader with scrum",
         skills: ["C#", ".NET", "SQL", "Docker", "Azure Devops"],
+        current: true,
       },
       {
         title: "Junior Software Engineer",
@@ -106,11 +108,11 @@ export const myInfo = {
           "Development and maintenance of a financial system for banks in the country. Refactoring of legacy software. Customer Support. Train new programmers",
         skills: ["C#", ".NET", "SQL", "Silverlight"],
       },
-    ],
+    ] satisfies Experience[],
     freelance: [
       {
         project: "Cyan-Bot",
-        client: null,
+        client: "Independent",
         description:
           "Discord bot for that managing payments and roles in a translation community",
         duration: "3 months",

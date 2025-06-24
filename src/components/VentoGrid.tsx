@@ -12,16 +12,18 @@ import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
 import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
-import { SectionContext, type Section } from "../context/SectionContext";
+import { SectionContext } from "../context/SectionContext";
 import {
   AnimatedHeaderBox,
   type ContactOption,
 } from "./animated-ui/AnimatedHeaderBox";
 import { BsWhatsapp } from "react-icons/bs";
-import { AnimatedImageAboutBox } from "./animated-ui/AnimatedImageAboutBox";
-import { AnimatesStackHobbiesBox } from "./animated-ui/AnimatedStackHobbiesBox";
+import { AnimatedSkillsHobbiesBox } from "./animated-ui/AnimatedSkillsHobbiesBox";
 import { AnimatedExperienceBox } from "./animated-ui/AnimatedExperienceBox";
 import { AnimatedFreelanceBox } from "./animated-ui/AnimatedFreelanceBox";
+import { AnimatedSnapshotBox } from "./animated-ui/AnimatedSnapshotBox";
+import { AnimatedImageBox } from "./animated-ui/AnimatedImageBox";
+import { AnimatedHobbiesBox } from "./animated-ui/AnimatedHobbiesBox";
 
 export const VentoGrid = () => {
   const { activeSection, setActiveSection } = useContext(SectionContext);
@@ -100,14 +102,22 @@ export const VentoGrid = () => {
     >
       <EmptyBox />
       <AnimatedHeaderBox contactOptions={contactOptions} />
-      {renderImageOrExperienceBox(activeSection)}
+      <ExperienceOrAboutOrImageBox />
       <AnimatedMenuBox
         hidden={false}
         menuItems={menuItems}
         cvButton={<CvButton />}
       />
-      {renderExperienceOrInfoBox(activeSection, setKey)}
-      {renderSocialsOrExperienceBox(activeSection)}
+      <ExperienceOrHobbiesOrSkillsBox />
+      {activeSection !== "experience" ? <LanguagesBox /> : null}
+      {activeSection !== "experience" ? (
+        <ReloadBox
+          onClick={() => {
+            setKey((p) => p + 1);
+          }}
+        />
+      ) : null}
+      <FreelanceOrSocialsBox />
       {activeSection !== "experience" ? <EmailBox /> : null}
       <LocationBox />
     </motion.section>
@@ -228,31 +238,23 @@ const ReloadBox = ({ onClick }: { onClick: () => void }) => {
   );
 };
 
-const renderExperienceOrInfoBox = (
-  activeSection: Section,
-  setKey: React.Dispatch<React.SetStateAction<number>>
-) => {
+const ExperienceOrHobbiesOrSkillsBox = () => {
+  const { activeSection } = useContext(SectionContext);
+
   if (activeSection === "experience") {
     return <AnimatedExperienceBox experience={myInfo.experience.work[0]} />;
   }
 
-  return (
-    <>
-      <AnimatesStackHobbiesBox
-        stack={myInfo.skills}
-        hobbies={myInfo.about_me.hobbies}
-      />
-      <LanguagesBox />
-      <ReloadBox
-        onClick={() => {
-          setKey((p) => p + 1);
-        }}
-      />
-    </>
-  );
+  if (activeSection === "about") {
+    return <AnimatedHobbiesBox />;
+  }
+
+  return <AnimatedSkillsHobbiesBox />;
 };
 
-const renderImageOrExperienceBox = (activeSection: Section) => {
+const ExperienceOrAboutOrImageBox = () => {
+  const { activeSection } = useContext(SectionContext);
+
   if (activeSection === "experience") {
     return (
       <AnimatedExperienceBox
@@ -262,15 +264,17 @@ const renderImageOrExperienceBox = (activeSection: Section) => {
       />
     );
   }
-  return (
-    <AnimatedImageAboutBox
-      imagePath={myInfo.image}
-      snapshot={myInfo.about_me.snapshot}
-    />
-  );
+
+  if (activeSection === "about") {
+    return <AnimatedSnapshotBox />;
+  }
+
+  return <AnimatedImageBox />;
 };
 
-const renderSocialsOrExperienceBox = (activeSection: Section) => {
+const FreelanceOrSocialsBox = () => {
+  const { activeSection } = useContext(SectionContext);
+
   if (activeSection === "experience") {
     return <AnimatedFreelanceBox freelanceJobs={myInfo.experience.freelance} />;
   }

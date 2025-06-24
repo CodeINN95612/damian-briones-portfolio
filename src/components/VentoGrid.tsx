@@ -99,12 +99,7 @@ export const VentoGrid = () => {
       className="grid grid-cols-6 gap-4 grid-flow-dense z-[5] md:grid-cols-12 md:max-w-4xl "
     >
       <EmptyBox />
-      <AnimatedHeaderBox
-        alias={myInfo.alias}
-        title={myInfo.title}
-        about={myInfo.about_me.head}
-        contactOptions={contactOptions}
-      />
+      <AnimatedHeaderBox contactOptions={contactOptions} />
       {renderImageOrExperienceBox(activeSection)}
       <AnimatedMenuBox
         hidden={false}

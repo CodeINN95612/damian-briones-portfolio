@@ -18,10 +18,7 @@ export const AnimatedImageAboutBox = ({
   const { activeSection } = useContext(SectionContext);
 
   return (
-    <AnimatedBox
-      className="col-span-4 row-span-4 p-0 overflow-hidden"
-      sectionAnimated
-    >
+    <AnimatedBox className="col-span-4 row-span-4 p-0 overflow-hidden">
       {activeSection === "about"
         ? renderSnapshotSection(snapshot)
         : renderImageSection(imagePath)}

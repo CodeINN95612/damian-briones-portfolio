@@ -1,31 +1,23 @@
-import {
-  AnimatePresence,
-  type HTMLMotionProps,
-  motion,
-  type Variants,
-} from "framer-motion";
-import { useContext } from "react";
+import { type HTMLMotionProps, motion, type Variants } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { SectionContext } from "../../context/SectionContext";
 
 export type AnimatedBoxProps = {
   className?: string;
-  sectionAnimated?: boolean;
-  animatedClassName?: string;
-} & HTMLMotionProps<"div">;
+  children?: React.ReactNode;
+} & Omit<HTMLMotionProps<"div">, "children">;
 
 export function AnimatedBox({
   className,
-  sectionAnimated,
-  animatedClassName,
   children,
   ...rest
 }: AnimatedBoxProps) {
-  const { activeSection } = useContext(SectionContext);
-
   return (
     <motion.div
+      key="box"
       variants={boxVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
       transition={{
         type: "spring",
         mass: 3,
@@ -38,22 +30,7 @@ export function AnimatedBox({
       )}
       {...rest}
     >
-      {sectionAnimated ? (
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className={twMerge("h-full w-full", animatedClassName)}
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
-      ) : (
-        children
-      )}
+      {children}
     </motion.div>
   );
 }
@@ -68,5 +45,10 @@ const boxVariants: Variants = {
     scale: 1,
     y: 0,
     opacity: 1,
+  },
+  exit: {
+    scale: 0.5,
+    y: -50,
+    opacity: 0,
   },
 };

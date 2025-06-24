@@ -24,10 +24,10 @@ export const AnimatedFreelanceBox = ({
           <div key={index} className="rounded-lg">
             <div className="flex justify-between">
               <h4 className="text-zinc-100">{job.project}</h4>
-              <p>-</p>
+              <p className="text-zinc-500">-</p>
               <p className="text-zinc-300">{job.client}</p>
             </div>
-            <p className="text-zinc-300 text-sm">{job.description}</p>
+            <p className="text-zinc-400 text-sm">{job.description}</p>
             <div className="mt-1 flex flex-wrap gap-1">
               {job.skills.map((skill, skillIndex) => (
                 <SkillTag key={skillIndex} skill={skill} size="xs" />

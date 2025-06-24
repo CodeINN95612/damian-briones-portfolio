@@ -22,11 +22,7 @@ export const AnimatesStackHobbiesBox = ({
 }: AnimatedStackHobbiesBoxProps) => {
   const { activeSection } = useContext(SectionContext);
   return (
-    <AnimatedBox
-      className="col-span-5 row-span-2"
-      sectionAnimated
-      animatedClassName="grid grid-cols-4 gap-4"
-    >
+    <AnimatedBox className="col-span-5 row-span-2 grid grid-cols-4 gap-4">
       {activeSection === "about" ? renderHobbies(hobbies) : renderStack(stack)}
       {/* <div className="col-span-2 flex items-center justify-center">
         <motion.h2 whileHover={{ scale: 1.1 }} className="font-bold text-xl">

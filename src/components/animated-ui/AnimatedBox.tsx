@@ -13,7 +13,6 @@ export function AnimatedBox({
 }: AnimatedBoxProps) {
   return (
     <motion.div
-      key="box"
       variants={boxVariants}
       initial="initial"
       animate="animate"

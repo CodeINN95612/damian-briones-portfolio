@@ -17,7 +17,10 @@ export const AnimatedProjectsBox = ({
     currentProject;
 
   return (
-    <AnimatedBox className="col-span-9 row-span-6 max-h-[90vh] overflow-y-auto">
+    <AnimatedBox
+      className="col-span-9 row-span-6 max-h-[90vh] overflow-y-auto"
+      key={title}
+    >
       <div className="relative">
         <div className="absolute bottom-0 right-0 text-sm text-zinc-500">
           {currentProjectId + 1} / {maxProjects}

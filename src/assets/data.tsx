@@ -154,6 +154,38 @@ export const myInfo = {
       githubLink: "https://github.com/CodeINN95612/damian-briones-portfolio",
       image: "/projects/portfolio.png",
     },
+    {
+      title: "We Like Sushi",
+      description:
+        "Blog / CMS to rate sushi restaurants with my girlfriend with Authentication. Currently in development.",
+      technologies: ["Sveltekit", "Tailwind CSS", "ShadCN", "Supabase"],
+      githubLink: "https://github.com/CodeINN95612/WeLikeSushi",
+      image: "/projects/we-like-sushi.png",
+    },
+    {
+      title: "Oxify Mod",
+      description: "Minecraft mod that adds oxifier item to the game.",
+      technologies: ["Java", "Fabric"],
+      liveLink: "https://modrinth.com/mod/oxify",
+      githubLink: "https://github.com/CodeINN95612/OxifyMod",
+      image: "/projects/oxify.png",
+    },
+    {
+      title: "Auth Enterprise",
+      description:
+        "Authentication demo for youtube series about .NET auth. Manages JWT, Users, Roles, and Permissions.",
+      technologies: [
+        ".NET",
+        "C#",
+        "Entity Framework",
+        "PostgreSQL",
+        "Docker",
+        "Vertical Slice Architecture",
+      ],
+      liveLink: "https://www.youtube.com/watch?v=rcRMXLr4f60",
+      githubLink: "https://github.com/CodeINN95612/AuthEnterprise",
+      image: "/projects/auth-enterprise.png",
+    },
   ],
   certifications: [
     {

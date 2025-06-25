@@ -23,8 +23,8 @@ export const AnimatedProjectsBox = ({
           {currentProjectId + 1} / {maxProjects}
         </div>
         <h2 className="text-4xl font-medium leading-tight flex items-center gap-3">
-          <Code className="size-8 text-zinc-400" />{" "}
-          {`Project No. ${currentProjectId + 1}`}
+          <Code className="size-8 text-zinc-400" />
+          My Personal Projects
         </h2>
         <img
           src={image}
@@ -32,7 +32,7 @@ export const AnimatedProjectsBox = ({
           className="w-full h-80 object-cover mt-4 rounded border border-zinc-700 shadow-lg"
         />
         <div className="mt-4">
-          <h3 className="text-xl font-semibold text-zinc-100 mb-2">{title}</h3>
+          <h3 className="text-2xl font-semibold text-zinc-100 mb-2">{title}</h3>
           <p className="text-zinc-300 mb-4">{description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {technologies.map((tech, index) => (

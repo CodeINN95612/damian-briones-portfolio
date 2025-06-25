@@ -16,8 +16,8 @@ export const AnimatedGridMainBackground = ({ children }: Props) => {
             transition={{
               backgroundColor: {
                 type: "spring",
-                damping: 80,
-                stiffness: 300,
+                damping: 100,
+                stiffness: 150,
               },
             }}
             className="border border-zinc-100 aspect-square"

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { AnimatedBox } from "./animated-ui/AnimatedBox";
 import { myInfo } from "../assets/data";
 import { SiGithub, SiLinkedin } from "react-icons/si";
@@ -17,6 +17,7 @@ import { AnimatedHobbiesBox } from "./animated-ui/AnimatedHobbiesBox";
 import { AnimatedEducationBox } from "./animated-ui/AnimatedEducationBox";
 import { useSectionContext } from "../hooks/useSectionContext";
 import { AnimatedRightLeftBox } from "./animated-ui/AnimatedRightLeftBox";
+import { AnimatedProjectsBox } from "./animated-ui/AnimatedProjectsBox";
 
 export const VentoGrid = () => {
   return (
@@ -47,45 +48,28 @@ const NormalOrProjectsBox = () => {
     setCurrentProjectId((prev) => (prev > 0 ? prev - 1 : maxProjectId));
   }, [maxProjectId]);
 
-  useEffect(() => {
-    if (activeSection === "projects") {
-      console.log("Current Project ID:", currentProjectId + 1);
-    }
-  }, [currentProjectId, activeSection]);
-
-  if (activeSection === "projects") {
-    return (
-      <>
-        <ProjectsBox currentProjectId={currentProjectId} />
-        <AnimatedMenuBox />
+  return (
+    <>
+      {activeSection === "projects" ? (
+        <AnimatedProjectsBox currentProjectId={currentProjectId} />
+      ) : null}
+      {activeSection !== "projects" ? <EmptyBox /> : null}
+      {activeSection !== "projects" ? <AnimatedHeaderBox /> : null}
+      {activeSection !== "projects" ? <ExperienceOrAboutOrImageBox /> : null}
+      <AnimatedMenuBox />
+      {activeSection !== "projects" ? <SecondaryInformationBox /> : null}
+      {activeSection !== "projects" ? <LanguagesBox /> : null}
+      {activeSection !== "projects" ? <FreelanceOrSocialsBox /> : null}
+      {activeSection !== "projects" ? <EmailBox /> : null}
+      {activeSection !== "projects" ? <LocationBox /> : null}
+      {activeSection !== "projects" ? <EmptyBox /> : null}
+      {activeSection === "projects" ? (
         <AnimatedRightLeftBox
           onLeftClick={setPreviousProject}
           onRightClick={setNextProject}
         />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <EmptyBox />
-      <AnimatedHeaderBox />
-      <ExperienceOrAboutOrImageBox />
-      <AnimatedMenuBox />
-      <SecondaryInformationBox />
-      <LanguagesBox />
-      <FreelanceOrSocialsBox />
-      <EmailBox />
-      <LocationBox />
+      ) : null}
     </>
-  );
-};
-
-const ProjectsBox = ({ currentProjectId }: { currentProjectId: number }) => {
-  return (
-    <AnimatedBox className="col-span-9 row-span-6">
-      <h3>Project: {currentProjectId + 1}</h3>
-    </AnimatedBox>
   );
 };
 

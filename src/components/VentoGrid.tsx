@@ -1,22 +1,13 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatedBox } from "./animated-ui/AnimatedBox";
 import { myInfo } from "../assets/data";
 import { SiGithub, SiLinkedin } from "react-icons/si";
-import { FaCode, FaLanguage, FaRedo } from "react-icons/fa";
-import { MdAlternateEmail, MdWork } from "react-icons/md";
-import { IoHome } from "react-icons/io5";
-import { TbUserScan } from "react-icons/tb";
-import { PiStudentFill } from "react-icons/pi";
-import { RiContactsBook3Fill } from "react-icons/ri";
-import { BiDownload } from "react-icons/bi";
+import { FaLanguage } from "react-icons/fa";
+import { MdAlternateEmail } from "react-icons/md";
 import { MapPin } from "lucide-react";
 import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
-import {
-  AnimatedHeaderBox,
-  type ContactOption,
-} from "./animated-ui/AnimatedHeaderBox";
-import { BsWhatsapp } from "react-icons/bs";
+import { AnimatedHeaderBox } from "./animated-ui/AnimatedHeaderBox";
 import { AnimatedSkillsHobbiesBox } from "./animated-ui/AnimatedSkillsHobbiesBox";
 import { AnimatedExperienceBox } from "./animated-ui/AnimatedExperienceBox";
 import { AnimatedFreelanceBox } from "./animated-ui/AnimatedFreelanceBox";
@@ -25,75 +16,11 @@ import { AnimatedImageBox } from "./animated-ui/AnimatedImageBox";
 import { AnimatedHobbiesBox } from "./animated-ui/AnimatedHobbiesBox";
 import { AnimatedEducationBox } from "./animated-ui/AnimatedEducationBox";
 import { useSectionContext } from "../hooks/useSectionContext";
+import { AnimatedRightLeftBox } from "./animated-ui/AnimatedRightLeftBox";
 
 export const VentoGrid = () => {
-  const { setActiveSection } = useSectionContext();
-
-  const [key, setKey] = useState(0);
-
-  const menuItems = [
-    {
-      label: "Home",
-      icon: <IoHome />,
-      onClick: () => {
-        setActiveSection("home");
-      },
-      flipped: false,
-    },
-    {
-      label: "About",
-      icon: <TbUserScan />,
-      onClick: () => {
-        setActiveSection("about");
-      },
-      flipped: true,
-    },
-    {
-      label: "Experience",
-      icon: <MdWork />,
-      onClick: () => {
-        setActiveSection("experience");
-      },
-      flipped: false,
-    },
-    {
-      label: "Education",
-      icon: <PiStudentFill />,
-      onClick: () => {
-        setActiveSection("education");
-      },
-      flipped: true,
-    },
-    {
-      label: "Projects",
-      icon: <FaCode />,
-      onClick: () => {
-        setActiveSection("projects");
-      },
-      flipped: false,
-    },
-    {
-      label: "Contact",
-      icon: <RiContactsBook3Fill />,
-      onClick: () => {
-        setActiveSection("contact");
-      },
-      flipped: true,
-    },
-  ];
-
-  const contactOptions: ContactOption[] = [
-    {
-      label: "Mobile / WhatsApp",
-      value: myInfo.contact.phone,
-      icon: <BsWhatsapp className="size-6 text-green-500" />,
-      link: myInfo.contact.whatsapp,
-    },
-  ];
-
   return (
     <motion.section
-      key={key}
       initial="initial"
       animate="animate"
       transition={{
@@ -101,25 +28,64 @@ export const VentoGrid = () => {
       }}
       className="grid grid-cols-6 gap-4 grid-flow-dense z-[5] md:grid-cols-12 md:max-w-4xl "
     >
+      <NormalOrProjectsBox />
+    </motion.section>
+  );
+};
+
+const NormalOrProjectsBox = () => {
+  const { activeSection } = useSectionContext();
+
+  const [currentProjectId, setCurrentProjectId] = useState<number>(0);
+  const maxProjectId = myInfo.projects.length - 1;
+
+  const setNextProject = useCallback(() => {
+    setCurrentProjectId((prev) => (prev < maxProjectId ? prev + 1 : 0));
+  }, [maxProjectId]);
+
+  const setPreviousProject = useCallback(() => {
+    setCurrentProjectId((prev) => (prev > 0 ? prev - 1 : maxProjectId));
+  }, [maxProjectId]);
+
+  useEffect(() => {
+    if (activeSection === "projects") {
+      console.log("Current Project ID:", currentProjectId + 1);
+    }
+  }, [currentProjectId, activeSection]);
+
+  if (activeSection === "projects") {
+    return (
+      <>
+        <ProjectsBox currentProjectId={currentProjectId} />
+        <AnimatedMenuBox />
+        <AnimatedRightLeftBox
+          onLeftClick={setPreviousProject}
+          onRightClick={setNextProject}
+        />
+      </>
+    );
+  }
+
+  return (
+    <>
       <EmptyBox />
-      <AnimatedHeaderBox contactOptions={contactOptions} />
+      <AnimatedHeaderBox />
       <ExperienceOrAboutOrImageBox />
-      <AnimatedMenuBox
-        hidden={false}
-        menuItems={menuItems}
-        cvButton={<CvButton />}
-      />
+      <AnimatedMenuBox />
       <SecondaryInformationBox />
       <LanguagesBox />
-      <ReloadBox
-        onClick={() => {
-          setKey((p) => p + 1);
-        }}
-      />
       <FreelanceOrSocialsBox />
       <EmailBox />
       <LocationBox />
-    </motion.section>
+    </>
+  );
+};
+
+const ProjectsBox = ({ currentProjectId }: { currentProjectId: number }) => {
+  return (
+    <AnimatedBox className="col-span-9 row-span-6">
+      <h3>Project: {currentProjectId + 1}</h3>
+    </AnimatedBox>
   );
 };
 
@@ -135,39 +101,6 @@ function LocationBox() {
       <MapPin className="size-6 text-teal-300" />
       <p>{myInfo.contact.location}</p>
     </AnimatedBox>
-  );
-}
-
-export function CvButton() {
-  return (
-    <motion.div
-      className="relative inline-block"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-zinc-400 to-teal-400 rounded-lg"></div>
-      <motion.a
-        href="/CV.pdf"
-        download
-        className="relative flex items-center gap-2 bg-zinc-800 font-semibold py-2 px-4 rounded-md transition-colors duration-200 m-1"
-        whileHover={{
-          boxShadow: "0px 0px 12px rgb(255,255,255)",
-        }}
-      >
-        <motion.span
-          animate={{ y: [0, -2, 1, 0] }}
-          transition={{ repeat: Infinity, duration: 4 }}
-        >
-          <BiDownload className="size-5" />
-        </motion.span>
-        <motion.span
-          animate={{ y: [0, 2, -1, 0] }}
-          transition={{ repeat: Infinity, duration: 5 }}
-        >
-          Download CV
-        </motion.span>
-      </motion.a>
-    </motion.div>
   );
 }
 
@@ -212,7 +145,7 @@ const LanguagesBox = () => {
   }
 
   return (
-    <AnimatedBox className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
+    <AnimatedBox className="col-span-5 row-span-1 flex items-center justify-between p-2 px-6">
       <p>English</p> <FaLanguage className="size-10 text-teal-300" />{" "}
       <p>Spanish</p>
     </AnimatedBox>
@@ -228,32 +161,9 @@ const EmailBox = () => {
   }
 
   return (
-    <AnimatedBox className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
+    <AnimatedBox className="col-span-5 row-span-1 flex items-center justify-between p-2 px-6">
       <MdAlternateEmail className="size-6 text-teal-300" />
       <p className="select-all">{myInfo.contact.email}</p>
-    </AnimatedBox>
-  );
-};
-
-const ReloadBox = ({ onClick }: { onClick: () => void }) => {
-  const { activeSection } = useSectionContext();
-
-  const excludedSections = ["experience", "education"];
-  if (excludedSections.includes(activeSection)) {
-    return null;
-  }
-
-  return (
-    <AnimatedBox className="col-span-3 row-span-1 md:col-span-1 md:row-span-2 flex items-center justify-center p-0">
-      <motion.button
-        onClick={onClick}
-        whileHover={{ rotate: 360, scale: 1.2 }}
-        transition={{
-          duration: 0.75,
-        }}
-      >
-        <FaRedo className="size-8 text-zinc-600" />
-      </motion.button>
     </AnimatedBox>
   );
 };

@@ -7,7 +7,7 @@ type Props = {
 export const AnimatedGridMainBackground = ({ children }: Props) => {
   return (
     <main className="relative w-screen min-h-screen flex flex-col overflow-hidden items-center justify-center gap-6 bg-zinc-900 text-zinc-50">
-      <div className="absolute inset-0 z-0 grid grid-cols-10 opacity-10 gap-px sm:grid-cols-15 md:grid-cols-20 lg:grid-cols-25">
+      <div className="absolute inset-0 z-0 grid grid-cols-4 opacity-25 sm:grid-cols-8 md:grid-cols-12 lg:grid-cols-16">
         {Array.from({ length: 500 }).map((_, index) => (
           <motion.div
             key={index}
@@ -17,10 +17,10 @@ export const AnimatedGridMainBackground = ({ children }: Props) => {
               backgroundColor: {
                 type: "spring",
                 damping: 100,
-                stiffness: 150,
+                stiffness: 200,
               },
             }}
-            className="border border-zinc-100 aspect-square"
+            className="aspect-square border border-zinc-500"
           ></motion.div>
         ))}
       </div>

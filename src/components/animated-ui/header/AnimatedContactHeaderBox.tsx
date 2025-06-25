@@ -1,21 +1,18 @@
 import { CopyIcon, MailIcon } from "lucide-react";
 import { AnimatedBox } from "../AnimatedBox";
+import { myInfo } from "../../../assets/data";
+import { BsWhatsapp } from "react-icons/bs";
 
-export type ContactOption = {
-  label: string;
-  icon: React.ReactNode;
-  value: string;
-  link: string;
-};
+export const AnimatedContactHeaderBox = () => {
+  const contactOptions = [
+    {
+      label: "Mobile / WhatsApp",
+      value: myInfo.contact.phone,
+      icon: <BsWhatsapp className="size-6 text-green-500" />,
+      link: myInfo.contact.whatsapp,
+    },
+  ];
 
-export type AnimatedContactHeaderBoxProps = {
-  contactOptions: ContactOption[];
-};
-
-//TODO: Remove contact options from props and use info
-export const AnimatedContactHeaderBox = ({
-  contactOptions,
-}: AnimatedContactHeaderBoxProps) => {
   return (
     <AnimatedBox className="col-span-5 row-span-2 p-0">
       <div className="p-8 space-y-5">

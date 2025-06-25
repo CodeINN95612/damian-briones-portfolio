@@ -5,24 +5,11 @@ import { AnimatedTitleHeaderBox } from "./header/AnimatedTitleHeaderBox";
 import { useSectionContext } from "../../hooks/useSectionContext";
 import { AnimatedEducationHeaderBox } from "./header/AnimatedEducationHeaderBox";
 
-export type ContactOption = {
-  label: string;
-  icon: React.ReactNode;
-  value: string;
-  link: string;
-};
-
-export type AnimatedHeaderBoxProps = {
-  contactOptions: ContactOption[];
-};
-
-export const AnimatedHeaderBox = ({
-  contactOptions,
-}: AnimatedHeaderBoxProps) => {
+export const AnimatedHeaderBox = () => {
   const { activeSection } = useSectionContext();
 
   if (activeSection === "contact") {
-    return <AnimatedContactHeaderBox contactOptions={contactOptions} />;
+    return <AnimatedContactHeaderBox />;
   }
 
   if (activeSection === "about") {

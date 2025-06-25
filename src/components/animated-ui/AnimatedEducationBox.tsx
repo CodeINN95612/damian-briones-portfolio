@@ -10,7 +10,7 @@ export const AnimatedEducationBox = ({
   education,
 }: AnimatedEducationBoxProps) => {
   return (
-    <AnimatedBox className="col-span-5 row-span-4 p-4">
+    <AnimatedBox className="col-span-5 row-span-4 p-6">
       <EducationItem education={education} />
     </AnimatedBox>
   );

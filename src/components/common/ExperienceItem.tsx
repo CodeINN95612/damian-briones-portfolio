@@ -1,6 +1,7 @@
 import { MapPin } from "lucide-react";
-import type { Experience } from "../../../common/types";
-import { SkillTag } from "../../ui/SkillTag";
+import type { Experience } from "../../lib/types";
+import { SkillTag } from "../ui/SkillTag";
+import { CurrentBadge } from "../ui/CurrentBadge";
 
 export type ExperienceItemProps = {
   experience: Experience;
@@ -8,11 +9,9 @@ export type ExperienceItemProps = {
 };
 
 export const ExperienceItem = ({ experience, sm }: ExperienceItemProps) => (
-  <div className="bg-zinc-800/50 rounded-lg relative">
+  <div className="rounded-lg relative">
     {experience.current ? (
-      <span className="absolute top-0 right-0 bg-teal-500 text-zinc-900 text-xs font-light px-2 py-1 rounded-full">
-        current
-      </span>
+      <CurrentBadge className="absolute top-0 right-0 bg-teal-500 text-zinc-900" />
     ) : null}
     <div>
       {sm ? (

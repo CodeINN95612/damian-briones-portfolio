@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { SectionContext } from "../../../context/SectionContext";
 import { AnimatedBox } from "../AnimatedBox";
 import { myInfo } from "../../../assets/data";
 import { FiArrowRight } from "react-icons/fi";
+import { useSectionContext } from "../../../hooks/useSectionContext";
 
 export const AnimatedTitleHeaderBox = () => {
-  const { setActiveSection } = useContext(SectionContext);
+  const { setActiveSection } = useSectionContext();
   return (
     <AnimatedBox className="col-span-5 row-span-2 p-0">
       <div className="p-6">

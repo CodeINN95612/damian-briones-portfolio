@@ -3,7 +3,7 @@ import { AiOutlineDotNet } from "react-icons/ai";
 import { FaDocker, FaNodeJs, FaReact } from "react-icons/fa";
 import { TbSql } from "react-icons/tb";
 import { VscAzure } from "react-icons/vsc";
-import type { Experience } from "../common/types";
+import type { Experience } from "../lib/types";
 
 export const myInfo = {
   name: "Damián Briones",
@@ -130,28 +130,19 @@ export const myInfo = {
   },
   studies: [
     {
-      degree: "Bachelor's Degree in Computer Science",
+      degreeTitle: "Bachelor in Software Engineering",
       institution: "Universidad de las Américas",
       location: "Quito, Ecuador",
       dateRange: "2019 - 2023",
-      description:
-        "Focused on software development, algorithms, data structures, and software engineering.",
-      achievements: [
-        "Graduated with a GPA of 3.6/4.0",
-        "Led a team project that is currently used by the university",
+      topics: [
+        "Advanced programming",
+        "Advanced software engineering principles",
+        "Web, mobile, and desktop development",
+        "Game development",
+        "Software design",
+        "Networks and Operative Systems",
       ],
-      courses: [
-        "Data Structures",
-        "Algorithms",
-        "Object-Oriented Programming",
-        "Database Systems",
-        "Software Development",
-        "Software Engineering Principles",
-        "Artificial Intelligence",
-        "Software Testing",
-        "Sistems Integration",
-        "QA",
-      ],
+      current: false,
     },
   ],
   projects: [

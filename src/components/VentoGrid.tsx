@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { AnimatedBox } from "./animated-ui/AnimatedBox";
 import { myInfo } from "../assets/data";
 import { SiGithub, SiLinkedin } from "react-icons/si";
@@ -12,7 +12,6 @@ import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 import { MapPin } from "lucide-react";
 import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
-import { SectionContext } from "../context/SectionContext";
 import {
   AnimatedHeaderBox,
   type ContactOption,
@@ -24,9 +23,11 @@ import { AnimatedFreelanceBox } from "./animated-ui/AnimatedFreelanceBox";
 import { AnimatedSnapshotBox } from "./animated-ui/AnimatedSnapshotBox";
 import { AnimatedImageBox } from "./animated-ui/AnimatedImageBox";
 import { AnimatedHobbiesBox } from "./animated-ui/AnimatedHobbiesBox";
+import { AnimatedEducationBox } from "./animated-ui/AnimatedEducationBox";
+import { useSectionContext } from "../hooks/useSectionContext";
 
 export const VentoGrid = () => {
-  const { activeSection, setActiveSection } = useContext(SectionContext);
+  const { setActiveSection } = useSectionContext();
 
   const [key, setKey] = useState(0);
 
@@ -108,17 +109,15 @@ export const VentoGrid = () => {
         menuItems={menuItems}
         cvButton={<CvButton />}
       />
-      <ExperienceOrHobbiesOrSkillsBox />
-      {activeSection !== "experience" ? <LanguagesBox /> : null}
-      {activeSection !== "experience" ? (
-        <ReloadBox
-          onClick={() => {
-            setKey((p) => p + 1);
-          }}
-        />
-      ) : null}
+      <SecondaryInformationBox />
+      <LanguagesBox />
+      <ReloadBox
+        onClick={() => {
+          setKey((p) => p + 1);
+        }}
+      />
       <FreelanceOrSocialsBox />
-      {activeSection !== "experience" ? <EmailBox /> : null}
+      <EmailBox />
       <LocationBox />
     </motion.section>
   );
@@ -205,6 +204,13 @@ const LinkedInBox = () => {
 };
 
 const LanguagesBox = () => {
+  const { activeSection } = useSectionContext();
+
+  const excludedSections = ["experience", "education"];
+  if (excludedSections.includes(activeSection)) {
+    return null;
+  }
+
   return (
     <AnimatedBox className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
       <p>English</p> <FaLanguage className="size-10 text-teal-300" />{" "}
@@ -214,6 +220,13 @@ const LanguagesBox = () => {
 };
 
 const EmailBox = () => {
+  const { activeSection } = useSectionContext();
+
+  const excludedSections = ["experience", "education"];
+  if (excludedSections.includes(activeSection)) {
+    return null;
+  }
+
   return (
     <AnimatedBox className="col-span-6 md:col-span-4 row-span-1 flex items-center justify-between p-2 px-3">
       <MdAlternateEmail className="size-6 text-teal-300" />
@@ -223,6 +236,13 @@ const EmailBox = () => {
 };
 
 const ReloadBox = ({ onClick }: { onClick: () => void }) => {
+  const { activeSection } = useSectionContext();
+
+  const excludedSections = ["experience", "education"];
+  if (excludedSections.includes(activeSection)) {
+    return null;
+  }
+
   return (
     <AnimatedBox className="col-span-3 row-span-1 md:col-span-1 md:row-span-2 flex items-center justify-center p-0">
       <motion.button
@@ -238,8 +258,8 @@ const ReloadBox = ({ onClick }: { onClick: () => void }) => {
   );
 };
 
-const ExperienceOrHobbiesOrSkillsBox = () => {
-  const { activeSection } = useContext(SectionContext);
+const SecondaryInformationBox = () => {
+  const { activeSection } = useSectionContext();
 
   if (activeSection === "experience") {
     return <AnimatedExperienceBox experience={myInfo.experience.work[0]} />;
@@ -249,11 +269,15 @@ const ExperienceOrHobbiesOrSkillsBox = () => {
     return <AnimatedHobbiesBox />;
   }
 
+  if (activeSection === "education") {
+    return <AnimatedEducationBox education={myInfo.studies[0]} />;
+  }
+
   return <AnimatedSkillsHobbiesBox />;
 };
 
 const ExperienceOrAboutOrImageBox = () => {
-  const { activeSection } = useContext(SectionContext);
+  const { activeSection } = useSectionContext();
 
   if (activeSection === "experience") {
     return (
@@ -273,7 +297,7 @@ const ExperienceOrAboutOrImageBox = () => {
 };
 
 const FreelanceOrSocialsBox = () => {
-  const { activeSection } = useContext(SectionContext);
+  const { activeSection } = useSectionContext();
 
   if (activeSection === "experience") {
     return <AnimatedFreelanceBox freelanceJobs={myInfo.experience.freelance} />;

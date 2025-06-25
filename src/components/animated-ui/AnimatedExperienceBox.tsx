@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
-import type { Experience } from "../../common/types";
+import type { Experience } from "../../lib/types";
 import { AnimatedBox } from "./AnimatedBox";
-import { ExperienceItem } from "./common/ExperienceItem";
+import { ExperienceItem } from "../common/ExperienceItem";
 
 export type AnimatedExperienceBoxProps = {
   experience: Experience;

@@ -1,95 +1,22 @@
-import { motion, MotionConfig } from "framer-motion";
+import { motion } from "framer-motion";
 import { AnimatedBox } from "./AnimatedBox";
+import { Menu } from "lucide-react";
 
 export type AnimatedHamburgerButtonProps = {
-  isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const variants = {
-  top: {
-    open: {
-      rotate: ["0deg", "0deg", "45deg"],
-      top: ["20%", "50%", "50%"],
-    },
-    closed: {
-      rotate: ["45deg", "0deg", "0deg"],
-      top: ["50%", "50%", "20%"],
-    },
-  },
-  middle: {
-    open: {
-      rotate: ["0deg", "0deg", "-45deg"],
-    },
-    closed: {
-      rotate: ["-45deg", "0deg", "0deg"],
-    },
-  },
-  bottom: {
-    open: {
-      rotate: ["0deg", "0deg", "45deg"],
-      top: ["80%", "50%", "50%"],
-      display: ["block", "none", "none"],
-    },
-    closed: {
-      rotate: ["45deg", "0deg", "0deg"],
-      top: ["50%", "50%", "80%"],
-      left: "50%",
-      display: ["none", "none", "block"],
-    },
-  },
-};
-
 export function AnimatedHamburgerButton({
-  isOpen,
   setIsOpen,
 }: AnimatedHamburgerButtonProps) {
   return (
-    <AnimatedBox>
-      <MotionConfig
-        transition={{
-          duration: 0.5,
-          ease: "easeInOut",
-        }}
+    <AnimatedBox className="p-0">
+      <motion.button
+        onClick={() => setIsOpen((pv) => !pv)}
+        className="p-2 m-auto flex items-center justify-center"
       >
-        <motion.button
-          initial={false}
-          animate={isOpen ? "open" : "closed"}
-          onClick={() => setIsOpen((pv) => !pv)}
-          className="relative size-20"
-        >
-          <motion.span
-            variants={variants.top}
-            className="absolute h-2 w-[90%] bg-zinc-100"
-            style={{
-              left: "50%",
-              top: "20%",
-              x: "-50%",
-              y: "-50%",
-            }}
-          />
-          <motion.span
-            variants={variants.middle}
-            className="absolute h-2 w-[90%] bg-zinc-100"
-            style={{
-              left: "50%",
-              top: "50%",
-              x: "-50%",
-              y: "-50%",
-            }}
-          />
-          <motion.span
-            variants={variants.bottom}
-            className="absolute h-2 w-[45%] bg-zinc-100"
-            style={{
-              left: "50%",
-              top: "80%",
-              x: "0%",
-              y: "-50%",
-            }}
-          />
-        </motion.button>
-      </MotionConfig>
+        <Menu className="size-10" />
+      </motion.button>
     </AnimatedBox>
   );
 }

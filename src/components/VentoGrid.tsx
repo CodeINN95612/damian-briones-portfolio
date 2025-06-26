@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useCallback, useState } from "react";
 import { AnimatedBox } from "./animated-ui/AnimatedBox";
 import { myInfo } from "../assets/data";
-import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaLanguage } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import { MapPin } from "lucide-react";
@@ -18,6 +17,7 @@ import { AnimatedEducationBox } from "./animated-ui/AnimatedEducationBox";
 import { useSectionContext } from "../hooks/useSectionContext";
 import { AnimatedRightLeftBox } from "./animated-ui/AnimatedRightLeftBox";
 import { AnimatedProjectsBox } from "./animated-ui/AnimatedProjectsBox";
+import { AnimatedSocialsBox } from "./animated-ui/AnimatedSocialsBox";
 
 export const VentoGrid = () => {
   return (
@@ -85,38 +85,6 @@ function LocationBox() {
     </AnimatedBox>
   );
 }
-
-const GithubBox = () => {
-  return (
-    <AnimatedBox className="col-span-2 row-span-2 bg-gray-700 p-0">
-      <motion.a
-        whileHover={{ y: -15, scale: 1.2 }}
-        href={myInfo.contact.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="size-full flex items-center justify-center p-4"
-      >
-        <SiGithub className="size-10" />
-      </motion.a>
-    </AnimatedBox>
-  );
-};
-
-const LinkedInBox = () => {
-  return (
-    <AnimatedBox className="col-span-2 row-span-2 bg-sky-700 p-0">
-      <motion.a
-        whileHover={{ y: -15, scale: 1.2 }}
-        href={myInfo.contact.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="size-full flex items-center justify-center p-4"
-      >
-        <SiLinkedin className="size-10" />
-      </motion.a>
-    </AnimatedBox>
-  );
-};
 
 const LanguagesBox = () => {
   const { activeSection } = useSectionContext();
@@ -195,10 +163,5 @@ const FreelanceOrSocialsBox = () => {
     return <AnimatedFreelanceBox freelanceJobs={myInfo.experience.freelance} />;
   }
 
-  return (
-    <>
-      <LinkedInBox />
-      <GithubBox />
-    </>
-  );
+  return <AnimatedSocialsBox />;
 };

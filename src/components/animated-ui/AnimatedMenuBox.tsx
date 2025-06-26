@@ -65,22 +65,24 @@ export const AnimatedMenuBox = () => {
   ];
 
   return (
-    <AnimatedBox className="relative col-span-3 row-span-5 flex flex-col items-center justify-around p-4 h-full">
-      {menuItems.map((item, index) => (
-        <AnimatedMenuBoxItem key={index} onClick={item.onClick}>
-          {item.flipped ? (
-            <>
-              {item.label}
-              {item.icon}
-            </>
-          ) : (
-            <>
-              {item.icon}
-              {item.label}
-            </>
-          )}
-        </AnimatedMenuBoxItem>
-      ))}
+    <AnimatedBox className="col-span-3 row-span-5 flex flex-col justify-around h-full p-4">
+      <div className="flex flex-col justify-center gap-8 flex-1">
+        {menuItems.map((item, index) => (
+          <AnimatedMenuBoxItem key={index} onClick={item.onClick}>
+            {item.flipped ? (
+              <>
+                {item.label}
+                {item.icon}
+              </>
+            ) : (
+              <>
+                {item.icon}
+                {item.label}
+              </>
+            )}
+          </AnimatedMenuBoxItem>
+        ))}
+      </div>
       <CvButton />
     </AnimatedBox>
   );

@@ -22,12 +22,10 @@ import { AnimatedProjectsBox } from "./animated-ui/AnimatedProjectsBox";
 export const VentoGrid = () => {
   return (
     <motion.section
-      initial="initial"
-      animate="animate"
       transition={{
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       }}
-      className="grid grid-cols-6 gap-4 grid-flow-dense z-[5] md:grid-cols-12 md:max-w-4xl "
+      className="hidden md:grid gap-4 grid-flow-dense grid-cols-12 max-w-4xl z-10"
     >
       <NormalOrProjectsBox />
     </motion.section>

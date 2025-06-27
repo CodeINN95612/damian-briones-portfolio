@@ -15,10 +15,11 @@ export type AnimatedMenuBoxProps = {
 };
 
 export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
-  const { setActiveSection } = useSectionContext();
+  const { activeSection, setActiveSection } = useSectionContext();
 
   const menuItems = [
     {
+      id: "home",
       label: "Home",
       icon: <IoHome />,
       onClick: () => {
@@ -28,6 +29,7 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
       flipped: false,
     },
     {
+      id: "about",
       label: "About",
       icon: <TbUserScan />,
       onClick: () => {
@@ -37,6 +39,7 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
       flipped: true,
     },
     {
+      id: "experience",
       label: "Experience",
       icon: <MdWork />,
       onClick: () => {
@@ -46,6 +49,7 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
       flipped: false,
     },
     {
+      id: "education",
       label: "Education",
       icon: <PiStudentFill />,
       onClick: () => {
@@ -55,6 +59,7 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
       flipped: true,
     },
     {
+      id: "projects",
       label: "Projects",
       icon: <FaCode />,
       onClick: () => {
@@ -64,6 +69,7 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
       flipped: false,
     },
     {
+      id: "contact",
       label: "Contact",
       icon: <RiContactsBook3Fill />,
       onClick: () => {
@@ -76,9 +82,13 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
 
   return (
     <AnimatedBox className="col-span-3 row-span-5 flex flex-col justify-around h-full p-4">
-      <div className="flex flex-col justify-center gap-8 flex-1">
+      <div className="flex flex-col justify-center gap-8 flex-1 mb-4">
         {menuItems.map((item, index) => (
-          <AnimatedMenuBoxItem key={index} onClick={item.onClick}>
+          <AnimatedMenuBoxItem
+            key={index}
+            onClick={item.onClick}
+            selected={item.id === activeSection}
+          >
             {item.flipped ? (
               <>
                 {item.label}
@@ -100,12 +110,14 @@ export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
 
 type AnimatedMenuBoxItemProps = {
   children: React.ReactNode;
+  selected: boolean;
   onClick: () => void;
 };
 
 const AnimatedMenuBoxItem = ({
   children,
   onClick,
+  selected,
 }: AnimatedMenuBoxItemProps) => {
   const [hovered, setHovered] = useState(false);
 
@@ -114,15 +126,20 @@ const AnimatedMenuBoxItem = ({
       onClick={onClick}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className="text-center w-full cursor-pointer px-4 py-3 uppercase text-zinc-50 font-semibold relative "
+      className={`text-center w-full cursor-pointer px-4 py-3 uppercase font-semibold relative transition-colors duration-150`}
     >
       <motion.span
-        animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0 }}
+        animate={{
+          opacity: hovered || selected ? 1 : 0,
+          scale: hovered || selected ? 1 : 0,
+        }}
         transition={{ duration: 0.1 }}
-        className="absolute inset-0 w-full h-full rounded-full bg-zinc-200 pointer-events-none"
+        className={`absolute inset-0 w-full h-full rounded-full pointer-events-none ${
+          selected && !hovered ? "bg-zinc-300" : "bg-zinc-200"
+        }`}
       />
       <motion.div
-        animate={{ scale: hovered ? 1.1 : 1 }}
+        animate={{ scale: hovered || selected ? 1.1 : 1 }}
         transition={{ duration: 0.1 }}
         className="h-full mix-blend-difference relative z-10 flex justify-between items-center w-full px-4"
       >

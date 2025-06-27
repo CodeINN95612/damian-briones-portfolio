@@ -8,7 +8,7 @@ import type { Experience } from "../lib/types";
 export const myInfo = {
   name: "Damián Briones",
   alias: "Damian",
-  title: "Backend Software Engineer",
+  title: "Senior Software Engineer",
   image: "/personal.jpeg",
   skills: [
     {
@@ -43,7 +43,7 @@ export const myInfo = {
     },
   ],
   about_me: {
-    head: "I'm a backend software developer with six years of experience, and I’m gradually moving toward fullstack work. I enjoy figuring out problems and writing innovative software. I’m open to new remote opportunities.",
+    head: "I'm a software developer with six years of experience, and I’m gradually moving toward fullstack work. I enjoy figuring out problems and writing innovative software. I’m open to new remote opportunities.",
     snapshot: [
       {
         label: "10 000 +",
@@ -90,13 +90,13 @@ export const myInfo = {
   experience: {
     work: [
       {
-        title: "Backend Software Engineer",
+        title: "Senior Software Engineer",
         company: "Logiztik Alliance Group",
         location: "Quito, Ecuador",
         dateRange: "2023 - Today",
         description:
-          "Development and maintenance of a logistics system for the company. Refactoring of legacy software. Implementation of new features. Implementation of microservices. Team leader with scrum",
-        skills: ["C#", ".NET", "SQL", "Docker", "Azure Devops"],
+          "Develop and maintain the company’s logistics system, refactor legacy code, and build new features and microservices. Lead the team as a Scrum master.",
+        skills: ["C#", ".NET", "SQL", "Docker", "Azure Devops", "Scrum"],
         current: true,
       },
       {
@@ -105,7 +105,7 @@ export const myInfo = {
         location: "Quto, Ecuador",
         dateRange: "2019 - 2023",
         description:
-          "Development and maintenance of a financial system for banks in the country. Refactoring of legacy software. Customer Support. Train new programmers",
+          "Developed and maintained a financial system used by banks nationwide. Refactored legacy code, provided customer support, and trained new developers.",
         skills: ["C#", ".NET", "SQL", "Silverlight"],
       },
     ] satisfies Experience[],

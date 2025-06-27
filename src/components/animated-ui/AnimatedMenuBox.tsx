@@ -10,7 +10,11 @@ import { FaCode } from "react-icons/fa";
 import { RiContactsBook3Fill } from "react-icons/ri";
 import { BiDownload } from "react-icons/bi";
 
-export const AnimatedMenuBox = () => {
+export type AnimatedMenuBoxProps = {
+  sectionChanged?: () => void;
+};
+
+export const AnimatedMenuBox = ({ sectionChanged }: AnimatedMenuBoxProps) => {
   const { setActiveSection } = useSectionContext();
 
   const menuItems = [
@@ -19,6 +23,7 @@ export const AnimatedMenuBox = () => {
       icon: <IoHome />,
       onClick: () => {
         setActiveSection("home");
+        sectionChanged?.();
       },
       flipped: false,
     },
@@ -27,6 +32,7 @@ export const AnimatedMenuBox = () => {
       icon: <TbUserScan />,
       onClick: () => {
         setActiveSection("about");
+        sectionChanged?.();
       },
       flipped: true,
     },
@@ -35,6 +41,7 @@ export const AnimatedMenuBox = () => {
       icon: <MdWork />,
       onClick: () => {
         setActiveSection("experience");
+        sectionChanged?.();
       },
       flipped: false,
     },
@@ -43,6 +50,7 @@ export const AnimatedMenuBox = () => {
       icon: <PiStudentFill />,
       onClick: () => {
         setActiveSection("education");
+        sectionChanged?.();
       },
       flipped: true,
     },
@@ -51,6 +59,7 @@ export const AnimatedMenuBox = () => {
       icon: <FaCode />,
       onClick: () => {
         setActiveSection("projects");
+        sectionChanged?.();
       },
       flipped: false,
     },
@@ -59,6 +68,7 @@ export const AnimatedMenuBox = () => {
       icon: <RiContactsBook3Fill />,
       onClick: () => {
         setActiveSection("contact");
+        sectionChanged?.();
       },
       flipped: true,
     },

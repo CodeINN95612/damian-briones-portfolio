@@ -1,10 +1,6 @@
 import { motion } from "framer-motion";
-import { useCallback, useState } from "react";
 import { AnimatedBox } from "./animated-ui/AnimatedBox";
 import { myInfo } from "../assets/data";
-import { FaLanguage } from "react-icons/fa";
-import { MdAlternateEmail } from "react-icons/md";
-import { MapPin } from "lucide-react";
 import { AnimatedMenuBox } from "./animated-ui/AnimatedMenuBox";
 import { AnimatedHeaderBox } from "./animated-ui/AnimatedHeaderBox";
 import { AnimatedSkillsHobbiesBox } from "./animated-ui/AnimatedSkillsHobbiesBox";
@@ -18,6 +14,10 @@ import { useSectionContext } from "../hooks/useSectionContext";
 import { AnimatedRightLeftBox } from "./animated-ui/AnimatedRightLeftBox";
 import { AnimatedProjectsBox } from "./animated-ui/AnimatedProjectsBox";
 import { AnimatedSocialsBox } from "./animated-ui/AnimatedSocialsBox";
+import { AnimatedEmailBox } from "./animated-ui/AnimatedEmailBox";
+import { AnimatedLocationBox } from "./animated-ui/AnimatedLocationBox";
+import { AnimatedLanguagesBox } from "./animated-ui/AnimatedLanguagesBox";
+import { useBoundedCounter } from "../hooks/useBoundedCounter";
 
 export const VentoGrid = () => {
   return (
@@ -35,37 +35,29 @@ export const VentoGrid = () => {
 const NormalOrProjectsBox = () => {
   const { activeSection } = useSectionContext();
 
-  const [currentProjectId, setCurrentProjectId] = useState<number>(0);
-  const maxProjectId = myInfo.projects.length - 1;
-
-  const setNextProject = useCallback(() => {
-    setCurrentProjectId((prev) => (prev < maxProjectId ? prev + 1 : 0));
-  }, [maxProjectId]);
-
-  const setPreviousProject = useCallback(() => {
-    setCurrentProjectId((prev) => (prev > 0 ? prev - 1 : maxProjectId));
-  }, [maxProjectId]);
+  const { value, next, previous } = useBoundedCounter(
+    0,
+    0,
+    myInfo.projects.length - 1
+  );
 
   return (
     <>
       {activeSection === "projects" ? (
-        <AnimatedProjectsBox currentProjectId={currentProjectId} />
+        <AnimatedProjectsBox currentProjectId={value} />
       ) : null}
       {activeSection !== "projects" ? <EmptyBox /> : null}
       {activeSection !== "projects" ? <AnimatedHeaderBox /> : null}
       {activeSection !== "projects" ? <ExperienceOrAboutOrImageBox /> : null}
       <AnimatedMenuBox />
       {activeSection !== "projects" ? <SecondaryInformationBox /> : null}
-      {activeSection !== "projects" ? <LanguagesBox /> : null}
+      {activeSection !== "projects" ? <AnimatedLanguagesBox /> : null}
       {activeSection !== "projects" ? <FreelanceOrSocialsBox /> : null}
-      {activeSection !== "projects" ? <EmailBox /> : null}
-      {activeSection !== "projects" ? <LocationBox /> : null}
+      {activeSection !== "projects" ? <AnimatedEmailBox /> : null}
+      {activeSection !== "projects" ? <AnimatedLocationBox /> : null}
       {activeSection !== "projects" ? <EmptyBox /> : null}
       {activeSection === "projects" ? (
-        <AnimatedRightLeftBox
-          onLeftClick={setPreviousProject}
-          onRightClick={setNextProject}
-        />
+        <AnimatedRightLeftBox onLeftClick={next} onRightClick={previous} />
       ) : null}
     </>
   );
@@ -76,47 +68,6 @@ function EmptyBox() {
     <AnimatedBox className="col-span-4 sm:col-span-5 row-span-1 bg-transparent border-none md:hidden" />
   );
 }
-
-function LocationBox() {
-  return (
-    <AnimatedBox className="col-span-3 row-span-1 flex items-center justify-between p-2 px-3">
-      <MapPin className="size-6 text-teal-300" />
-      <p>{myInfo.contact.location}</p>
-    </AnimatedBox>
-  );
-}
-
-const LanguagesBox = () => {
-  const { activeSection } = useSectionContext();
-
-  const excludedSections = ["experience", "education"];
-  if (excludedSections.includes(activeSection)) {
-    return null;
-  }
-
-  return (
-    <AnimatedBox className="col-span-5 row-span-1 flex items-center justify-between p-2 px-6">
-      <p>English</p> <FaLanguage className="size-10 text-teal-300" />{" "}
-      <p>Spanish</p>
-    </AnimatedBox>
-  );
-};
-
-const EmailBox = () => {
-  const { activeSection } = useSectionContext();
-
-  const excludedSections = ["experience", "education"];
-  if (excludedSections.includes(activeSection)) {
-    return null;
-  }
-
-  return (
-    <AnimatedBox className="col-span-5 row-span-1 flex items-center justify-between p-2 px-6">
-      <MdAlternateEmail className="size-6 text-teal-300" />
-      <p className="select-all">{myInfo.contact.email}</p>
-    </AnimatedBox>
-  );
-};
 
 const SecondaryInformationBox = () => {
   const { activeSection } = useSectionContext();

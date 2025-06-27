@@ -10,7 +10,7 @@ function App() {
       <AnimatedGridMainBackground>
         <VentoGrid />
         <MobileColumn />
-        <div className="text-xs">
+        <div className="text-xs pb-4">
           <p>
             Made by <span className="italic text-teal-200">Damián Briones</span>
           </p>

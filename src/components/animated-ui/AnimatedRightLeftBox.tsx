@@ -11,7 +11,7 @@ export const AnimatedRightLeftBox = ({
   onRightClick,
 }: AnimatedRightLeftBoxProps) => {
   return (
-    <AnimatedBox className="col-span-3 row-span-1 flex p-0 w-full">
+    <AnimatedBox className="col-span-3 row-span-1 flex p-0 py-2 w-full">
       <button
         className="flex-1 flex justify-center items-center rounded-l hover:bg-zinc-700 transition-colors cursor-pointer"
         onClick={onLeftClick}

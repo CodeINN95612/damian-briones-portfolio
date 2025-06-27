@@ -22,7 +22,7 @@ export const AnimatedFreelanceBox = ({
       <div className="mt-1 space-y-1">
         {freelanceJobs.map((job, index) => (
           <div key={index} className="rounded-lg">
-            <div className="flex justify-between">
+            <div className="flex gap-2">
               <h4 className="text-zinc-100">{job.project}</h4>
               <p className="text-zinc-500">-</p>
               <p className="text-zinc-300">{job.client}</p>

@@ -9,7 +9,7 @@ export const myInfo = {
   name: "Damián Briones",
   alias: "Damian",
   title: "Senior Software Engineer",
-  image: "/personal.jpeg",
+  image: "/personal.jpg",
   skills: [
     {
       name: ".Net",
@@ -152,7 +152,7 @@ export const myInfo = {
       technologies: ["React", "Tailwind CSS", "Typescript", "Framer Motion"],
       liveLink: "https://www.damianbriones.dev",
       githubLink: "https://github.com/CodeINN95612/damian-briones-portfolio",
-      image: "/projects/portfolio.png",
+      image: "/projects/portfolio.jpg",
     },
     {
       title: "We Like Sushi",
@@ -160,7 +160,7 @@ export const myInfo = {
         "Blog / CMS to rate sushi restaurants with my girlfriend with Authentication. Currently in development.",
       technologies: ["Sveltekit", "Tailwind CSS", "ShadCN", "Supabase"],
       githubLink: "https://github.com/CodeINN95612/WeLikeSushi",
-      image: "/projects/we-like-sushi.png",
+      image: "/projects/we-like-sushi.jpg",
     },
     {
       title: "Oxify Mod",
@@ -168,7 +168,7 @@ export const myInfo = {
       technologies: ["Java", "Fabric"],
       liveLink: "https://modrinth.com/mod/oxify",
       githubLink: "https://github.com/CodeINN95612/OxifyMod",
-      image: "/projects/oxify.png",
+      image: "/projects/oxify.jpg",
     },
     {
       title: "Auth Enterprise",
@@ -184,7 +184,7 @@ export const myInfo = {
       ],
       liveLink: "https://www.youtube.com/watch?v=rcRMXLr4f60",
       githubLink: "https://github.com/CodeINN95612/AuthEnterprise",
-      image: "/projects/auth-enterprise.png",
+      image: "/projects/auth-enterprise.jpg",
     },
   ],
   certifications: [

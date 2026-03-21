@@ -3,6 +3,8 @@ import { AnimatedBox } from "./AnimatedBox";
 import { myInfo } from "../../assets/data";
 import { twMerge } from "tailwind-merge";
 
+const rotations = myInfo.skills.map(() => (Math.random() > 0.5 ? 12 : -12));
+
 export const AnimatedSkillsBox = () => {
   return (
     <AnimatedBox className="col-span-5 row-span-2 grid grid-cols-4 gap-4">
@@ -11,8 +13,12 @@ export const AnimatedSkillsBox = () => {
           TECK STACK
         </motion.h2>
       </div>
-      {myInfo.skills.map((skill) => (
-        <SkillItem key={skill.name} className={skill.className}>
+      {myInfo.skills.map((skill, i) => (
+        <SkillItem
+          key={skill.name}
+          className={skill.className}
+          rotation={rotations[i]}
+        >
           {skill.children}
         </SkillItem>
       ))}
@@ -20,14 +26,17 @@ export const AnimatedSkillsBox = () => {
   );
 };
 
-type StackItemProps = { className?: string } & HTMLMotionProps<"div">;
+type StackItemProps = {
+  className?: string;
+  rotation: number;
+} & HTMLMotionProps<"div">;
 
-const SkillItem = ({ className, ...rest }: StackItemProps) => {
+const SkillItem = ({ className, rotation, ...rest }: StackItemProps) => {
   return (
     <motion.div
       whileHover={{
         scale: 1.1,
-        rotate: Math.random() > 0.5 ? 12 : -12,
+        rotate: rotation,
         y: -10,
       }}
       className={twMerge(

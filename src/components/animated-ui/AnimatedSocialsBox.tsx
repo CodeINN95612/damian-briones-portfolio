@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { AnimatedBox } from "./AnimatedBox";
 import { myInfo } from "../../assets/data";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 
 export const AnimatedSocialsBox = () => {
   return (
@@ -38,7 +39,7 @@ const LinkedInBox = () => {
         rel="noopener noreferrer"
         className="size-full flex items-center justify-center p-4"
       >
-        <SiLinkedin className="size-10" />
+        <FaLinkedin className="size-10" />
       </motion.a>
     </AnimatedBox>
   );

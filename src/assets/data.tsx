@@ -1,7 +1,8 @@
 import { Book, Dumbbell, Gamepad2 } from "lucide-react";
 import { AiOutlineDotNet } from "react-icons/ai";
-import { FaDocker, FaNodeJs, FaReact } from "react-icons/fa";
-import { TbSql } from "react-icons/tb";
+import { FaDocker, FaReact } from "react-icons/fa";
+import { FaAws } from "react-icons/fa6";
+import { SiVuedotjs } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import type { Experience } from "../lib/types";
 
@@ -27,9 +28,9 @@ export const myInfo = {
       className: "bg-blue-700",
     },
     {
-      name: "NodeJS",
-      children: <FaNodeJs className="size-10" />,
-      className: "bg-green-500",
+      name: "Vue",
+      children: <SiVuedotjs className="size-10" />,
+      className: "bg-emerald-500",
     },
     {
       name: "Azure",
@@ -37,9 +38,9 @@ export const myInfo = {
       className: "bg-blue-500",
     },
     {
-      name: "Sql",
-      children: <TbSql className="size-10" />,
-      className: "bg-yellow-500 text-zinc-900",
+      name: "AWS",
+      children: <FaAws className="size-10" />,
+      className: "bg-orange-400",
     },
   ],
   about_me: {

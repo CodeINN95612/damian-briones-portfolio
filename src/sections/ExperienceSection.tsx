@@ -14,9 +14,9 @@ export function ExperienceSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          03 · Experience
+          {DATA.UI_CONTENT.experience.eyebrow}
         </div>
-        <p>Click any role to expand. Most recent first.</p>
+        <p>{DATA.UI_CONTENT.experience.subtitle}</p>
       </div>
 
       <div className="timeline">

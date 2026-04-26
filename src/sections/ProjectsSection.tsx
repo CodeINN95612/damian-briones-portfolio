@@ -14,11 +14,9 @@ export function ProjectsSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          04 · Projects
+          {DATA.UI_CONTENT.projects.eyebrow}
         </div>
-        <p>
-          Side projects and explorations. Most are open for you to look into.
-        </p>
+        <p>{DATA.UI_CONTENT.projects.subtitle}</p>
       </div>
 
       <div className="projects-grid">

@@ -47,21 +47,18 @@ export function ContactSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          06 · Contact
+          {DATA.UI_CONTENT.contact.eyebrow}
         </div>
-        <p>The fastest way to reach me. Click any line to copy.</p>
+        <p>{DATA.UI_CONTENT.contact.subtitle}</p>
       </div>
 
       <div className="contact-block reveal">
         <div>
           <h3>
-            Let's <em>talk.</em>
+            {DATA.UI_CONTENT.contact.heading.split(" ").slice(0, -1).join(" ")}{" "}
+            <em>{DATA.UI_CONTENT.contact.heading.split(" ").pop()}</em>
           </h3>
-          <p className="lead">
-            Although I am not currently looking for new positions, I am happy to
-            chat about system design, hiring, business opportunities or anything
-            in between.
-          </p>
+          <p className="lead">{DATA.UI_CONTENT.contact.leadText}</p>
         </div>
         <div className="contact-list">
           {items.map((it) => (
@@ -77,7 +74,9 @@ export function ContactSection() {
               <span className="ckey">{it.key}</span>
               <span className="cval">{it.val}</span>
               <span className="ccopy">
-                {copiedKey === it.key ? "Copied ✓" : "Copy"}
+                {copiedKey === it.key
+                  ? DATA.UI_CONTENT.contact.copiedButton
+                  : DATA.UI_CONTENT.contact.copyButton}
               </span>
             </a>
           ))}

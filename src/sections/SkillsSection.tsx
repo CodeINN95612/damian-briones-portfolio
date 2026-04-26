@@ -6,12 +6,9 @@ export function SkillsSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          02 · Skills
+          {DATA.UI_CONTENT.skills.eyebrow}
         </div>
-        <p>
-          Technologies I use day-to-day or have used extensively in the past,
-          plus a few I'm currently exploring.
-        </p>
+        <p>{DATA.UI_CONTENT.skills.subtitle}</p>
       </div>
 
       <div className="skills-body">

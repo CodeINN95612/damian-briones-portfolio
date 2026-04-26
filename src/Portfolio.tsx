@@ -9,15 +9,6 @@ import { ProjectsSection } from "./sections/ProjectsSection";
 import { EducationSection } from "./sections/EducationSection";
 import { ContactSection } from "./sections/ContactSection";
 
-const NAV_ITEMS = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" },
-];
-
 export function Portfolio() {
   // Reveal on scroll
   useEffect(() => {
@@ -51,7 +42,7 @@ export function Portfolio() {
     <>
       {/* TODO: Implement navigation logic */}
       <NavBar
-        items={NAV_ITEMS}
+        items={DATA.UI_CONTENT.nav}
         activeId="about"
         onNavClick={(id) => console.log("Navigate to", id)}
       />
@@ -67,7 +58,8 @@ export function Portfolio() {
       <footer>
         <div className="foot-name">{DATA.PROFILE.name}</div>
         <div className="foot-meta">
-          {DATA.PROFILE.location} · Built 2026 · {DATA.PROFILE.contact.email}
+          {DATA.PROFILE.location} · {DATA.UI_CONTENT.footer.builtYear} ·{" "}
+          {DATA.PROFILE.contact.email}
         </div>
       </footer>
     </>

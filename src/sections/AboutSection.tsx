@@ -6,9 +6,9 @@ export function AboutSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          01 · About
+          {DATA.UI_CONTENT.about.eyebrow}
         </div>
-        <p>The short version, written for humans — not for resume parsers.</p>
+        <p>{DATA.UI_CONTENT.about.subtitle}</p>
       </div>
 
       <div className="about-body">
@@ -16,11 +16,11 @@ export function AboutSection() {
 
         <div className="about-grid">
           <div className="about-block reveal">
-            <h4>What I'm about</h4>
+            <h4>{DATA.UI_CONTENT.about.headings.about}</h4>
             <p>{DATA.PROFILE.about}</p>
           </div>
           <div className="about-block reveal">
-            <h4>Outside of work</h4>
+            <h4>{DATA.UI_CONTENT.about.headings.hobbies}</h4>
             <ul className="hobby-list">
               {DATA.HOBBIES.map((h) => (
                 <li key={h.label}>

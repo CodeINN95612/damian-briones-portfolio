@@ -28,7 +28,7 @@ export function HeroSection() {
       <div className="hero-left">
         <div className="hero-eyebrow eyebrow reveal">
           <span className="dot" />
-          Portfolio · 2026
+          {DATA.UI_CONTENT.hero.eyebrow}
         </div>
 
         <h1 className="reveal">

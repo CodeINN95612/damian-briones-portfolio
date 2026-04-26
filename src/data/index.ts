@@ -227,6 +227,76 @@ const HOBBIES = [
   { label: "Gym", note: "Keeps the head clear." },
 ];
 
+const UI_CONTENT = {
+  // Navigation
+  nav: [
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "education", label: "Education" },
+    { id: "contact", label: "Contact" },
+  ],
+
+  // Hero Section
+  hero: {
+    eyebrow: "Portfolio · 2026",
+  },
+
+  // About Section
+  about: {
+    eyebrow: "01 · About",
+    subtitle: "The short version, written for humans — not for resume parsers.",
+    headings: {
+      about: "What I'm about",
+      hobbies: "Outside of work",
+    },
+  },
+
+  // Skills Section
+  skills: {
+    eyebrow: "02 · Skills",
+    subtitle:
+      "Technologies I use day-to-day or have used extensively in the past, plus a few I'm currently exploring.",
+  },
+
+  // Experience Section
+  experience: {
+    eyebrow: "03 · Experience",
+    subtitle:
+      "My professional journey in Software Engineering. Most recent first.",
+  },
+
+  // Projects Section
+  projects: {
+    eyebrow: "04 · Projects",
+    subtitle:
+      "Side projects and explorations. Most are open for you to look into.",
+  },
+
+  // Education Section
+  education: {
+    eyebrow: "05 · Education",
+    subtitle: "Formal training. The rest came from shipping.",
+  },
+
+  // Contact Section
+  contact: {
+    eyebrow: "06 · Contact",
+    subtitle: "The fastest way to reach me. Click any line to copy.",
+    heading: "Let's talk.",
+    leadText:
+      "Although I am not currently looking for new positions, I am happy to chat about system design, hiring, business opportunities or anything in between.",
+    copyButton: "Copy",
+    copiedButton: "Copied ✓",
+  },
+
+  // Footer
+  footer: {
+    builtYear: "Built 2026",
+  },
+};
+
 export const DATA = {
   PROFILE,
   SKILL_GROUPS,
@@ -234,4 +304,5 @@ export const DATA = {
   PROJECTS,
   EDUCATION,
   HOBBIES,
+  UI_CONTENT,
 } as const;

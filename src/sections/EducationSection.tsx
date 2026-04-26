@@ -7,9 +7,9 @@ export function EducationSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          05 · Education
+          {DATA.UI_CONTENT.education.eyebrow}
         </div>
-        <p>Formal training. The rest came from shipping.</p>
+        <p>{DATA.UI_CONTENT.education.subtitle}</p>
       </div>
 
       <div className="education">

@@ -25,28 +25,14 @@
   --font-mono: "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
 
   /* Density (overridden by tweak) */
-  --section-pad-y: 120px;
-  --gap-lg: 56px;
-  --gap-md: 32px;
-  --gap-sm: 16px;
-
-  /* Layout */
-  --max-w: 1180px;
-  --content-w: 880px;
-}
-
-[data-density="compact"] {
   --section-pad-y: 80px;
   --gap-lg: 36px;
   --gap-md: 22px;
   --gap-sm: 12px;
-}
 
-[data-density="spacious"] {
-  --section-pad-y: 160px;
-  --gap-lg: 72px;
-  --gap-md: 44px;
-  --gap-sm: 20px;
+  /* Layout */
+  --max-w: 1180px;
+  --content-w: 880px;
 }
 
 * {
@@ -130,6 +116,10 @@ section {
 
 section:last-of-type {
   padding-bottom: var(--section-pad-y);
+}
+
+section:first-of-type {
+  padding-top: 0;
 }
 
 .section-head {
@@ -710,7 +700,7 @@ body[data-nav="top"] .hero {
 /* ── About ─────────────────────────────────────────────────── */
 .about-body {
   max-width: var(--content-w);
-  margin: 0 auto 0 200px;
+  margin: 0 auto;
 }
 
 @media (max-width: 720px) {
@@ -796,7 +786,8 @@ body[data-nav="top"] .hero {
 
 /* ── Skills ────────────────────────────────────────────────── */
 .skills-body {
-  margin-left: 200px;
+  max-width: var(--content-w);
+  margin: 0 auto;
 }
 @media (max-width: 720px) {
   .skills-body {
@@ -886,7 +877,8 @@ body[data-nav="top"] .hero {
 
 /* ── Experience ────────────────────────────────────────────── */
 .timeline {
-  margin-left: 200px;
+  max-width: var(--content-w);
+  margin: 0 auto;
 }
 @media (max-width: 720px) {
   .timeline {
@@ -1052,7 +1044,8 @@ body[data-nav="top"] .hero {
   border: 1px solid var(--line);
   border-radius: 4px;
   overflow: hidden;
-  margin-left: 200px;
+  max-width: var(--content-w);
+  margin: 0 auto;
 }
 
 @media (max-width: 900px) {
@@ -1204,7 +1197,8 @@ body[data-nav="top"] .hero {
 
 /* ── Education ─────────────────────────────────────────────── */
 .education {
-  margin-left: 200px;
+  max-width: var(--content-w);
+  margin: 0 auto;
 }
 @media (max-width: 720px) {
   .education {
@@ -1270,7 +1264,7 @@ body[data-nav="top"] .hero {
     ),
     var(--bg-elev);
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 48px;
   align-items: center;
 }
@@ -1363,7 +1357,7 @@ footer {
   padding: 48px;
   text-align: center;
   border-top: 1px solid var(--line);
-  margin-top: 80px;
+  margin-top: 0;
 }
 
 footer .foot-name {

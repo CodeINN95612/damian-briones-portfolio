@@ -5,11 +5,8 @@ const PROFILE = {
   title: "Senior Software Engineer",
   location: "Quito, Ecuador",
   yearsExp: 7,
-  taglines: [
+  tagline:
     "Pragmatic engineer who ships. I care about clear thinking, calm code, and building things teams can maintain after I'm gone.",
-    "Full-stack engineer with a soft spot for elegant backends and well-shaped APIs.",
-    "I build software the way I'd want to inherit it — small surfaces, clear contracts, no surprises.",
-  ],
   about:
     "Full-stack engineer across .NET and the JavaScript ecosystem, comfortable in cloud (AWS / Azure) and containerized environments. I work best on small teams that move fast and write things down.",
   currentlyExploring:
@@ -17,8 +14,8 @@ const PROFILE = {
   contact: {
     email: "work@damianbriones.dev",
     phone: "+593 98 762 1334",
-    linkedin: "linkedin.com/in/damianbriones",
-    github: "github.com/damianbriones",
+    linkedin: "linkedin.com/in/damian-briones-flachier",
+    github: "github.com/CodeINN95612",
   },
   spokenLanguages: [
     { name: "Spanish", level: "Native" },
@@ -37,7 +34,7 @@ const SKILL_GROUPS = [
   },
   {
     label: "Data",
-    items: ["SQL (Postgres, SQL Server)", "NoSQL (MongoDB, DynamoDB)"],
+    items: ["SQL (Postgres, SQL Server, MySql)", "NoSQL (MongoDB, DynamoDB)"],
   },
   {
     label: "Cloud & DevOps",
@@ -210,7 +207,7 @@ const EDUCATION = [
     period: "2015 — 2019",
     location: "Quito, Ecuador",
     notes:
-      "Capstone on custom AI chatbots for prospective students. Graduated top of class.",
+      "Capstone on custom AI chatbots for prospective students in my university.",
   },
 ];
 
@@ -219,7 +216,10 @@ const HOBBIES = [
     label: "Reading",
     note: "Would read almost every book I can get my hands on.",
   },
-  { label: "Programming", note: "Yes, even on weekends." },
+  {
+    label: "Programming",
+    note: "Yes, I enjoy it outside of work, even on weekends.",
+  },
   {
     label: "Minecraft",
     note: "Not good with color gradients, but I make a mean redstone contraption.",

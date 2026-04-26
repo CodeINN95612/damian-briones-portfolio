@@ -241,12 +241,13 @@ const UI_CONTENT = {
   // Hero Section
   hero: {
     eyebrow: "Portfolio · 2026",
+    downloadCV: "Download CV",
   },
 
   // About Section
   about: {
     eyebrow: "01 · About",
-    subtitle: "The short version, written for humans — not for resume parsers.",
+    subtitle: "The short version, written for humans.",
     headings: {
       about: "What I'm about",
       hobbies: "Outside of work",

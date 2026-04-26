@@ -4,6 +4,7 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconCheck,
+  IconDownload,
   IconMail,
 } from "@tabler/icons-react";
 
@@ -88,13 +89,20 @@ export function HeroSection() {
             )}
           </button>
           <a
+            className="contact-btn cv"
+            href="CV.pdf"
+            download="Damian-Briones-CV.pdf"
+          >
+            <IconDownload size={18} />
+            {DATA.UI_CONTENT.hero.downloadCV}
+          </a>
+          <a
             className="contact-btn"
             href={`https://${DATA.PROFILE.contact.linkedin}`}
             target="_blank"
             rel="noopener"
           >
-            <IconBrandLinkedin size={18} />
-            LinkedIn
+            <IconBrandLinkedin size={20} />
           </a>
           <a
             className="contact-btn"
@@ -102,8 +110,7 @@ export function HeroSection() {
             target="_blank"
             rel="noopener"
           >
-            <IconBrandGithub size={18} />
-            GitHub
+            <IconBrandGithub size={20} />
           </a>
         </div>
       </div>

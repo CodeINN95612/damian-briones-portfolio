@@ -274,6 +274,27 @@ section:first-of-type {
   font-size: 16px;
   letter-spacing: -0.005em;
   color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lang-btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-mute);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.lang-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-mute);
 }
 .topbar-brand .dot {
   display: inline-block;
@@ -281,9 +302,8 @@ section:first-of-type {
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
-  margin-right: 10px;
-  vertical-align: middle;
-  transform: translateY(-2px);
+  flex-shrink: 0;
+  transform: translateY(-1px);
 }
 
 .topbar-links {

@@ -1,31 +1,37 @@
 import { useState } from "react";
 import { DATA } from "../data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function ContactSection() {
+  const { t } = useLanguage();
   const profile = DATA.PROFILE;
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const items = [
     {
-      key: "Email",
+      key: "email",
+      label: t.contact.labels.email,
       val: profile.contact.email,
       copy: profile.contact.email,
       href: `mailto:${profile.contact.email}`,
     },
     {
-      key: "Phone",
+      key: "phone",
+      label: t.contact.labels.phone,
       val: profile.contact.phone,
       copy: profile.contact.phone,
       href: `tel:${profile.contact.phone.replace(/\s/g, "")}`,
     },
     {
-      key: "LinkedIn",
+      key: "linkedin",
+      label: t.contact.labels.linkedin,
       val: profile.contact.linkedin,
       copy: profile.contact.linkedin,
       href: `https://${profile.contact.linkedin}`,
     },
     {
-      key: "GitHub",
+      key: "github",
+      label: t.contact.labels.github,
       val: profile.contact.github,
       copy: profile.contact.github,
       href: `https://${profile.contact.github}`,
@@ -47,18 +53,18 @@ export function ContactSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          {DATA.UI_CONTENT.contact.eyebrow}
+          {t.contact.eyebrow}
         </div>
-        <p>{DATA.UI_CONTENT.contact.subtitle}</p>
+        <p>{t.contact.subtitle}</p>
       </div>
 
       <div className="contact-block reveal">
         <div>
           <h3>
-            {DATA.UI_CONTENT.contact.heading.split(" ").slice(0, -1).join(" ")}{" "}
-            <em>{DATA.UI_CONTENT.contact.heading.split(" ").pop()}</em>
+            {t.contact.heading.split(" ").slice(0, -1).join(" ")}{" "}
+            <em>{t.contact.heading.split(" ").pop()}</em>
           </h3>
-          <p className="lead">{DATA.UI_CONTENT.contact.leadText}</p>
+          <p className="lead">{t.contact.leadText}</p>
         </div>
         <div className="contact-list">
           {items.map((it) => (
@@ -71,12 +77,12 @@ export function ContactSection() {
               onClick={(e) => handleClick(e, it)}
               onAuxClick={() => {}}
             >
-              <span className="ckey">{it.key}</span>
+              <span className="ckey">{it.label}</span>
               <span className="cval">{it.val}</span>
               <span className="ccopy">
                 {copiedKey === it.key
-                  ? DATA.UI_CONTENT.contact.copiedButton
-                  : DATA.UI_CONTENT.contact.copyButton}
+                  ? t.contact.copiedButton
+                  : t.contact.copyButton}
               </span>
             </a>
           ))}

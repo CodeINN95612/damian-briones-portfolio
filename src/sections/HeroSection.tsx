@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DATA } from "../data";
+import { useLanguage } from "../i18n/LanguageContext";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -9,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 
 export function HeroSection() {
+  const { t } = useLanguage();
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const copy = (key: string, val: string) => {
@@ -17,58 +19,53 @@ export function HeroSection() {
     setTimeout(() => setCopiedKey(null), 1400);
   };
 
-  const lastExp = () => {
-    const len = DATA.EXPERIENCE.length;
-    return Number(DATA.EXPERIENCE[len - 1].period.split("—")[1].trim());
-  };
-
-  const yearsExp = new Date().getFullYear() - lastExp();
+  const yearsExp = DATA.PROFILE.yearsExp;
 
   return (
     <section id="top" className="hero" data-screen-label="Hero">
       <div className="hero-left">
         <div className="hero-eyebrow eyebrow reveal">
           <span className="dot" />
-          {DATA.UI_CONTENT.hero.eyebrow}
+          {t.hero.eyebrow}
         </div>
 
         <h1 className="reveal">
           {DATA.PROFILE.name.split(" ")[0]}{" "}
           <em>{DATA.PROFILE.name.split(" ").slice(1).join(" ")}</em>
         </h1>
-        <p className="hero-title reveal">{DATA.PROFILE.title}</p>
+        <p className="hero-title reveal">{t.profile.title}</p>
 
         <div className="currently reveal">
           <div style={{ flex: 1 }}>
             <div className="currently-label">
               <span className="currently-pulse" />
-              Currently focused on
+              {t.hero.currentlyFocused}
             </div>
-            <div className="currently-text">
-              {DATA.PROFILE.currentlyExploring}
-            </div>
+            <div className="currently-text">{t.profile.currentlyExploring}</div>
           </div>
         </div>
 
         <div className="hero-meta reveal">
           <div className="meta-item">
-            <div className="meta-label">Location</div>
+            <div className="meta-label">{t.hero.metaLocation}</div>
             <div className="meta-value with-icon">
               <span className="pin" />
               {DATA.PROFILE.location}
             </div>
           </div>
           <div className="meta-item">
-            <div className="meta-label">Experience</div>
-            <div className="meta-value">{yearsExp} years</div>
+            <div className="meta-label">{t.hero.metaExperience}</div>
+            <div className="meta-value">
+              {yearsExp} {t.hero.years}
+            </div>
           </div>
           <div className="meta-item">
-            <div className="meta-label">Availability</div>
-            <div className="meta-value">Open to opportunities</div>
+            <div className="meta-label">{t.hero.metaAvailability}</div>
+            <div className="meta-value">{t.hero.openToOpportunities}</div>
           </div>
           <div className="meta-item">
-            <div className="meta-label">Languages</div>
-            <div className="meta-value">EN · ES</div>
+            <div className="meta-label">{t.hero.metaLanguages}</div>
+            <div className="meta-value">{t.hero.langIndicator}</div>
           </div>
         </div>
 
@@ -79,7 +76,7 @@ export function HeroSection() {
           >
             {copiedKey === "hero-email" ? (
               <span>
-                <IconCheck /> Copied
+                <IconCheck /> {t.hero.copied}
               </span>
             ) : (
               <span>
@@ -94,7 +91,7 @@ export function HeroSection() {
             download="Damian-Briones-CV.pdf"
           >
             <IconDownload size={18} />
-            {DATA.UI_CONTENT.hero.downloadCV}
+            {t.hero.downloadCV}
           </a>
           <a
             className="contact-btn"
@@ -122,7 +119,11 @@ export function HeroSection() {
           <span className="corner bl" />
           <span className="corner br" />
           <div className="portrait-glyph">
-            <img src="personal.jpg" alt="Portrait" className="portrait-img" />
+            <img
+              src="personal.jpg"
+              alt={t.hero.portraitAlt}
+              className="portrait-img"
+            />
           </div>
         </div>
       </div>

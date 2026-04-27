@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { DATA } from "../data";
-
-const jobs = DATA.EXPERIENCE;
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function ExperienceSection() {
+  const { t } = useLanguage();
   const [showAll, setShowAll] = useState(false);
   const INITIAL = 4;
+  const jobs = DATA.EXPERIENCE;
   const visible = showAll ? jobs : jobs.slice(0, INITIAL);
   const hidden = jobs.length - INITIAL;
 
@@ -14,13 +15,14 @@ export function ExperienceSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          {DATA.UI_CONTENT.experience.eyebrow}
+          {t.experience.eyebrow}
         </div>
-        <p>{DATA.UI_CONTENT.experience.subtitle}</p>
+        <p>{t.experience.subtitle}</p>
       </div>
 
       <div className="timeline">
         {visible.map((j, i) => {
+          const te = t.experience.entries[i];
           return (
             <div key={i} className={"job reveal open"}>
               <div className="job-period">
@@ -30,15 +32,15 @@ export function ExperienceSection() {
               <div>
                 <div className="job-head">
                   <h3 className="job-role">
-                    {j.role} <span className="at">at</span>{" "}
+                    {j.role} <span className="at">{t.experience.at}</span>{" "}
                     <span className="company">{j.company}</span>
                   </h3>
                 </div>
-                <p className="job-summary">{j.summary}</p>
+                <p className="job-summary">{te.summary}</p>
                 <div className="job-detail">
                   <div className="job-detail-inner">
                     <ul className="job-bullets">
-                      {j.bullets.map((b, bi) => (
+                      {te.bullets.map((b, bi) => (
                         <li key={bi}>{b}</li>
                       ))}
                     </ul>
@@ -60,11 +62,11 @@ export function ExperienceSection() {
             <button className="show-more" onClick={() => setShowAll((s) => !s)}>
               {showAll ? (
                 <>
-                  Show less <span className="sm-chev">⌃</span>
+                  {t.experience.showLess} <span className="sm-chev">⌃</span>
                 </>
               ) : (
                 <>
-                  Show {hidden} more {hidden === 1 ? "role" : "roles"}{" "}
+                  {t.experience.showMore(hidden)}{" "}
                   <span className="sm-chev">⌄</span>
                 </>
               )}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { DATA } from "./data";
+import { DATA, NAV_IDS } from "./data";
+import { LanguageProvider, useLanguage } from "./i18n/LanguageContext";
 import { HeroSection } from "./sections/HeroSection";
 import { NavBar } from "./sections/NavBar";
 import { AboutSection } from "./sections/AboutSection";
@@ -9,9 +10,14 @@ import { ProjectsSection } from "./sections/ProjectsSection";
 import { EducationSection } from "./sections/EducationSection";
 import { ContactSection } from "./sections/ContactSection";
 
-export function Portfolio() {
-  const navIds = DATA.UI_CONTENT.nav.map((it) => it.id);
-  const [activeId, setActiveId] = useState(navIds[0]);
+function PortfolioInner() {
+  const { t } = useLanguage();
+  const [activeId, setActiveId] = useState<string>(NAV_IDS[0]);
+
+  const navItems = NAV_IDS.map((id) => ({
+    id,
+    label: t.nav[id as keyof typeof t.nav],
+  }));
 
   // Active section tracking
   useEffect(() => {
@@ -23,7 +29,7 @@ export function Portfolio() {
       },
       { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
-    navIds.forEach((id) => {
+    NAV_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
@@ -53,7 +59,6 @@ export function Portfolio() {
         .forEach((el) => obs.observe(el));
     };
     observeAll();
-    // Re-observe newly mounted nodes (e.g. from "Show more")
     const mo = new MutationObserver(() => observeAll());
     mo.observe(document.body, { childList: true, subtree: true });
     return () => {
@@ -65,7 +70,7 @@ export function Portfolio() {
   return (
     <>
       <NavBar
-        items={DATA.UI_CONTENT.nav}
+        items={navItems}
         activeId={activeId}
         onNavClick={handleNavClick}
       />
@@ -81,10 +86,18 @@ export function Portfolio() {
       <footer>
         <div className="foot-name">{DATA.PROFILE.name}</div>
         <div className="foot-meta">
-          {DATA.PROFILE.location} · {DATA.UI_CONTENT.footer.builtYear} ·{" "}
+          {DATA.PROFILE.location} · {t.footer.builtYear} ·{" "}
           {DATA.PROFILE.contact.email}
         </div>
       </footer>
     </>
+  );
+}
+
+export function Portfolio() {
+  return (
+    <LanguageProvider>
+      <PortfolioInner />
+    </LanguageProvider>
   );
 }

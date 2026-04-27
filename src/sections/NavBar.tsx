@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DATA } from "../data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 type NavBarProps = {
   items: { id: string; label: string }[];
@@ -8,12 +9,17 @@ type NavBarProps = {
 };
 
 export function NavBar({ items, activeId, onNavClick }: NavBarProps) {
+  const { t, toggle } = useLanguage();
   const [open, setOpen] = useState(false);
+
   return (
     <header className="topbar">
       <div className="topbar-brand">
         <span className="dot" />
         {DATA.PROFILE.name}
+        <button className="lang-btn" onClick={toggle} aria-label="Switch language">
+          {t.langToggle}
+        </button>
       </div>
       <div className="topbar-links">
         {items.map((it) => (
@@ -28,7 +34,7 @@ export function NavBar({ items, activeId, onNavClick }: NavBarProps) {
       </div>
       <button
         className="topbar-burger"
-        aria-label="Menu"
+        aria-label={t.navMenuAriaLabel}
         onClick={() => setOpen((o) => !o)}
       >
         <svg

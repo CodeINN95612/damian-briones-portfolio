@@ -1,28 +1,30 @@
 import { DATA } from "../data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function AboutSection() {
+  const { t } = useLanguage();
   return (
     <section id="about" data-screen-label="About">
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          {DATA.UI_CONTENT.about.eyebrow}
+          {t.about.eyebrow}
         </div>
-        <p>{DATA.UI_CONTENT.about.subtitle}</p>
+        <p>{t.about.subtitle}</p>
       </div>
 
       <div className="about-body">
-        <p className="about-quote reveal">{DATA.PROFILE.tagline}</p>
+        <p className="about-quote reveal">{t.profile.tagline}</p>
 
         <div className="about-grid">
           <div className="about-block reveal">
-            <h4>{DATA.UI_CONTENT.about.headings.about}</h4>
-            <p>{DATA.PROFILE.about}</p>
+            <h4>{t.about.aboutHeading}</h4>
+            <p>{t.profile.about}</p>
           </div>
           <div className="about-block reveal">
-            <h4>{DATA.UI_CONTENT.about.headings.hobbies}</h4>
+            <h4>{t.about.hobbiesHeading}</h4>
             <ul className="hobby-list">
-              {DATA.HOBBIES.map((h) => (
+              {t.hobbies.map((h) => (
                 <li key={h.label}>
                   <span className="hobby-name">{h.label}</span>
                   <span>{h.note}</span>

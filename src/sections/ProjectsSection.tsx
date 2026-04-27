@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { DATA } from "../data";
-
-const projects = DATA.PROJECTS;
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function ProjectsSection() {
+  const { t } = useLanguage();
   const [showAll, setShowAll] = useState(false);
   const INITIAL = 4;
+  const projects = DATA.PROJECTS;
   const visible = showAll ? projects : projects.slice(0, INITIAL);
   const hidden = projects.length - INITIAL;
 
@@ -14,49 +15,52 @@ export function ProjectsSection() {
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          {DATA.UI_CONTENT.projects.eyebrow}
+          {t.projects.eyebrow}
         </div>
-        <p>{DATA.UI_CONTENT.projects.subtitle}</p>
+        <p>{t.projects.subtitle}</p>
       </div>
 
       <div className="projects-grid">
-        {visible.map((p) => (
-          <div key={p.name} className="project-card reveal">
-            <div className="project-head">
-              <h3 className="project-name">{p.name}</h3>
-              <span className="project-arrow">↗</span>
-            </div>
-            <div className="project-role">{p.role}</div>
-            <p className="project-blurb">{p.blurb}</p>
-            <div className="project-foot">
-              <div className="project-stack">
-                {p.stack.map((s) => (
-                  <span key={s} className="stack-tag">
-                    {s}
-                  </span>
-                ))}
+        {visible.map((p, i) => {
+          const te = t.projects.entries[i];
+          return (
+            <div key={p.name} className="project-card reveal">
+              <div className="project-head">
+                <h3 className="project-name">{p.name}</h3>
+                <span className="project-arrow">↗</span>
               </div>
-              <div className="project-links">
-                {p.links.map((l) => (
-                  <a key={l.label} href={l.url} target="_blank" rel="noopener">
-                    {l.label}
-                  </a>
-                ))}
+              <div className="project-role">{te.role}</div>
+              <p className="project-blurb">{te.blurb}</p>
+              <div className="project-foot">
+                <div className="project-stack">
+                  {p.stack.map((s) => (
+                    <span key={s} className="stack-tag">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  {p.links.map((l, li) => (
+                    <a key={li} href={l.url} target="_blank" rel="noopener">
+                      {te.links[li]?.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       {hidden > 0 && (
         <div className="show-more-wrap" style={{ marginLeft: 0 }}>
           <button className="show-more" onClick={() => setShowAll((s) => !s)}>
             {showAll ? (
               <>
-                Show less <span className="sm-chev">⌃</span>
+                {t.projects.showLess} <span className="sm-chev">⌃</span>
               </>
             ) : (
               <>
-                Show {hidden} more {hidden === 1 ? "project" : "projects"}{" "}
+                {t.projects.showMore(hidden)}{" "}
                 <span className="sm-chev">⌄</span>
               </>
             )}

@@ -1,28 +1,27 @@
 import { DATA } from "../data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function SkillsSection() {
+  const { t } = useLanguage();
   return (
     <section id="skills" data-screen-label="Skills">
       <div className="section-head">
         <div className="eyebrow">
           <span className="dot" />
-          {DATA.UI_CONTENT.skills.eyebrow}
+          {t.skills.eyebrow}
         </div>
-        <p>{DATA.UI_CONTENT.skills.subtitle}</p>
+        <p>{t.skills.subtitle}</p>
       </div>
 
       <div className="skills-body">
-        {DATA.SKILL_GROUPS.map((g) => (
-          <div key={g.label} className="skill-group reveal">
-            <div className="skill-label">{g.label}</div>
+        {DATA.SKILL_GROUPS.map((g, i) => (
+          <div key={i} className="skill-group reveal">
+            <div className="skill-label">{t.skills.groups[i].label}</div>
             <div className="skill-pills">
               {g.items.map((s) => (
                 <span
                   key={s}
-                  className={
-                    "skill-pill" +
-                    (g.label === "Currently learning" ? " featured" : "")
-                  }
+                  className={"skill-pill" + (g.featured ? " featured" : "")}
                 >
                   {s}
                 </span>
@@ -32,7 +31,7 @@ export function SkillsSection() {
         ))}
 
         <div className="langs-row reveal">
-          {DATA.PROFILE.spokenLanguages.map((l) => (
+          {t.profile.spokenLanguages.map((l) => (
             <div key={l.name} className="lang-item">
               <div className="lang-name">{l.name}</div>
               <div className="lang-level">{l.level}</div>

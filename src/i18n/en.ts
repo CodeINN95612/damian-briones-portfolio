@@ -71,7 +71,7 @@ export const en: Translations = {
         summary: "Technical lead on a logistics management platform.",
         bullets: [
           "Led the extraction of many modules from a legacy monolith into standalone .NET microservices deployed via Docker on Azure.",
-          "Acted as leader for a team of engineers — ran ceremonies, cleared blockers, and kept delivery predictable.",
+          "Acted as leader for a team of engineers, running ceremonies, clearing blockers, and keeping delivery predictable.",
           "Refactored critical SQL bottlenecks, cutting report generation time by several minutes.",
         ],
       },
@@ -158,7 +158,7 @@ export const en: Translations = {
     about:
       "Full-stack engineer across .NET and the JavaScript ecosystem, comfortable in cloud (AWS / Azure) and containerized environments.",
     currentlyExploring:
-      "Pivoting into system design — distributed architectures, scalable backends, and deployment strategies.",
+      "Pivoting into system design: distributed architectures, scalable backends, and deployment strategies.",
     spokenLanguages: [
       { name: "Spanish", level: "Native" },
       { name: "English", level: "Advanced (C1)" },

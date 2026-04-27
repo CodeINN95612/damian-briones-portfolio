@@ -71,7 +71,7 @@ export const es: Translations = {
         summary: "Líder técnico en una plataforma de gestión logística.",
         bullets: [
           "Lideré la extracción de múltiples módulos de un monolito legacy a microservicios .NET independientes desplegados con Docker en Azure.",
-          "Actué como líder del equipo de ingeniería — coordiné ceremonias, resolví bloqueos y mantuve una entrega predecible.",
+          "Actué como líder del equipo de ingeniería, coordinando ceremonias, resolviendo bloqueos y manteniendo una entrega predecible.",
           "Refactoricé cuellos de botella críticos en SQL, reduciendo el tiempo de generación de reportes por varios minutos.",
         ],
       },
@@ -161,7 +161,7 @@ export const es: Translations = {
     about:
       "Ingeniero full-stack en .NET y el ecosistema JavaScript, cómodo en entornos cloud (AWS / Azure) y contenerizados.",
     currentlyExploring:
-      "Profundizando en diseño de sistemas — arquitecturas distribuidas, backends escalables y estrategias de despliegue.",
+      "Profundizando en diseño de sistemas: arquitecturas distribuidas, backends escalables y estrategias de despliegue.",
     spokenLanguages: [
       { name: "Español", level: "Nativo" },
       { name: "Inglés", level: "Avanzado (C1)" },

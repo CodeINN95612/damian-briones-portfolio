@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DATA } from "./data";
 import { HeroSection } from "./sections/HeroSection";
 import { NavBar } from "./sections/NavBar";
@@ -10,6 +10,30 @@ import { EducationSection } from "./sections/EducationSection";
 import { ContactSection } from "./sections/ContactSection";
 
 export function Portfolio() {
+  const navIds = DATA.UI_CONTENT.nav.map((it) => it.id);
+  const [activeId, setActiveId] = useState(navIds[0]);
+
+  // Active section tracking
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveId(e.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+    );
+    navIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+    return () => obs.disconnect();
+  }, []);
+
+  function handleNavClick(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
+
   // Reveal on scroll
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -40,11 +64,10 @@ export function Portfolio() {
 
   return (
     <>
-      {/* TODO: Implement navigation logic */}
       <NavBar
         items={DATA.UI_CONTENT.nav}
-        activeId="about"
-        onNavClick={(id) => console.log("Navigate to", id)}
+        activeId={activeId}
+        onNavClick={handleNavClick}
       />
       <div className="page">
         <HeroSection />

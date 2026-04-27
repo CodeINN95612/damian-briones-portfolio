@@ -1,16 +1,14 @@
-// Portfolio content. All placeholder/fictional data — easy to swap real values later.
-
 const PROFILE = {
-  name: "Damian Briones",
+  name: "Damián Briones",
   title: "Senior Software Engineer",
   location: "Quito, Ecuador",
   yearsExp: 7,
   tagline:
     "Pragmatic engineer who ships. I care about clear thinking, calm code, and building things teams can maintain after I'm gone.",
   about:
-    "Full-stack engineer across .NET and the JavaScript ecosystem, comfortable in cloud (AWS / Azure) and containerized environments. I work best on small teams that move fast and write things down.",
+    "Full-stack engineer across .NET and the JavaScript ecosystem, comfortable in cloud (AWS / Azure) and containerized environments.",
   currentlyExploring:
-    "Pivoting into system design — distributed architectures, scalable backends, and the trade-offs behind them.",
+    "Pivoting into system design — distributed architectures, scalable backends, and deployment strategies.",
   contact: {
     email: "work@damianbriones.dev",
     phone: "+593 98 762 1334",
@@ -53,149 +51,116 @@ const SKILL_GROUPS = [
 const EXPERIENCE = [
   {
     role: "Senior Software Engineer",
-    company: "Northwind Systems",
-    period: "2023 — Present",
-    location: "Remote · Quito, EC",
-    summary:
-      "Lead engineer on the platform team. Owns service architecture, mentors mid-level engineers, drives technical decisions across squads.",
+    company: "MikMak by Spins",
+    period: "Oct 2025 — Present",
+    location: "Remote (US-based)",
+    summary: "Full-stack engineer on a US-based e-commerce analytics platform.",
     bullets: [
-      "Migrated a monolithic .NET application to a service-oriented architecture on AWS, cutting deploy time by 70%.",
-      "Mentor 4 mid-level engineers; introduced ADRs and design-review rituals.",
-      "Owned the move to Docker + ECS, improving environment parity across dev/staging/prod.",
+      "Architected and shipped many microservices on AWS (ECS, Lambda, Fargate), breaking apart a monolithic analytics pipeline.",
+      "Architected new internal software using modular monolythic architecture, in AWS (ECS + Fargate) with a .NET backend and Vue frontend.",
+      "Maintained existing software in different stacks, including public-facing Node apps and .NET-based tools.",
+      "Collaborated with product and frontend teams across time zones to scope and deliver features efficiently.",
     ],
-    stack: [".NET", "AWS", "Docker", "React"],
+    stack: [
+      "Node.js",
+      "AWS",
+      "MongoDB",
+      "MySql",
+      "Docker",
+      ".NET",
+      "Vue",
+      "Cursor",
+    ],
   },
   {
-    role: "Software Engineer",
-    company: "Atlas Logistics",
-    period: "2021 — 2023",
-    location: "Hybrid · Quito, EC",
-    summary:
-      "Built and maintained the customer-facing tracking platform serving 50k+ daily shipments across LATAM.",
+    role: "Senior Software Engineer",
+    company: "Logiztik Alliance Group",
+    period: "Aug 2023 — Sep 2025",
+    location: "Quito, Ecuador",
+    summary: "Technical lead on a logistics management platform.",
     bullets: [
-      "Designed the real-time tracking API on Node.js + WebSockets handling 2M events/day.",
-      "Led the Vue → React migration of the customer dashboard.",
-      "Reduced Azure infra spend by 32% through cost auditing and right-sizing.",
+      "Led the extraction of many modules from a legacy monolith into standalone .NET microservices deployed via Docker on Azure.",
+      "Acted as leader for a team of engineers — ran ceremonies, cleared blockers, and kept delivery predictable.",
+      "Refactored critical SQL bottlenecks, cutting report generation time from X seconds to under Y.",
     ],
-    stack: ["Node.js", "Vue", "React", "Azure"],
-  },
-  {
-    role: "Full-Stack Developer",
-    company: "Cumbre Digital",
-    period: "2020 — 2021",
-    location: "Quito, EC",
-    summary:
-      "Agency work — shipped client products across fintech, retail, and education verticals.",
-    bullets: [
-      "Built 6 client products end-to-end on .NET Core + React.",
-      "Set up CI/CD pipelines for every project; standardized the agency's deployment workflow.",
-      "Worked directly with clients on scoping, estimates, and weekly demos.",
-    ],
-    stack: [".NET", "React", "Docker"],
+    stack: ["C#", ".NET", "SQL", "Docker", "Azure DevOps", "Scrum"],
   },
   {
     role: "Junior Software Engineer",
-    company: "Andina Soft",
-    period: "2019 — 2020",
-    location: "Quito, EC",
+    company: "CloudStudio",
+    period: "2019 — 2023",
+    location: "Quito, Ecuador",
     summary:
-      "First engineering role. Worked on internal tooling and a customer-facing billing portal.",
+      "Engineer on a compliance-sensitive financial platform serving banks nationwide.",
     bullets: [
-      "Shipped the company's first React-based admin panel, replacing legacy jQuery.",
-      "Wrote integration tests that caught 40+ regressions before production.",
-      "Promoted within 14 months.",
+      "Maintained and extended a .NET financial platform used by plenty of banks, handling compliance-sensitive workflows.",
+      "Refactored Silverlight-era modules to modern .NET, reducing bug reports while increasing performance and maintainability.",
+      "Onboarded and mentored several new developers, writing internal guides that are still in use today.",
     ],
-    stack: [".NET", "React", "JavaScript"],
-  },
-  {
-    role: "Software Engineering Intern",
-    company: "Quito Code Lab",
-    period: "Summer 2018",
-    location: "Quito, EC",
-    summary: "Internship building internal dashboards for a local consultancy.",
-    bullets: [
-      "Built a reporting dashboard in Vue consumed daily by the ops team.",
-      "First exposure to code review and pull-request workflows.",
-    ],
-    stack: ["Vue", "Node.js"],
-  },
-  {
-    role: "Freelance Developer",
-    company: "Self-employed",
-    period: "2017 — 2019",
-    location: "Remote",
-    summary:
-      "Side gigs while studying. Small business sites, scripts, and one e-commerce build.",
-    bullets: [
-      "Delivered 8+ small projects end-to-end, from scoping to deploy.",
-      "Learned the value of writing things down for clients who don't speak code.",
-    ],
-    stack: ["JavaScript", "Node.js", ".NET"],
+    stack: ["C#", ".NET", "SQL", "Silverlight"],
   },
 ];
 
 const PROJECTS = [
   {
-    name: "Pulse",
-    blurb:
-      "Open-source uptime monitor with regional probing. Built to teach myself distributed scheduling and time-series storage.",
+    name: "Gym Train Log",
+    blurb: "Simple, but effective workout tracking app for gym-goers.",
     role: "Solo project",
-    stack: ["Node.js", "Docker", "AWS"],
+    stack: ["Claude Code", "SqlLite", "Flutter"],
     links: [
-      { label: "GitHub", url: "https://github.com/damianbriones/pulse" },
-      { label: "Live", url: "https://pulse.example.com" },
+      { label: "Live", url: "https://codeinn95612.github.io/gym-log-train/" },
+      {
+        label: "GitHub",
+        url: "https://github.com/CodeINN95612/gym-log-train",
+      },
     ],
   },
   {
-    name: "Ledgerly",
-    blurb:
-      "A small-business invoicing tool. Tiny full-stack app, but the architecture is the lesson — clean domain, swap-anything infrastructure.",
+    name: "Developer Portfolio",
+    blurb: "My personal developer portfolio.",
     role: "Solo project",
-    stack: [".NET", "React", "Azure"],
+    stack: ["React", "Css", "TypeScript", "Claude Design"],
     links: [
-      { label: "GitHub", url: "https://github.com/damianbriones/ledgerly" },
-      { label: "Live", url: "https://ledgerly.example.com" },
+      { label: "Live", url: "https://www.damianbriones.dev" },
+      {
+        label: "GitHub",
+        url: "https://github.com/CodeINN95612/damian-briones-portfolio",
+      },
     ],
   },
   {
-    name: "MapMesh",
+    name: "Oxify Mod",
     blurb:
-      "Visualizer for system architecture diagrams as living, queryable graphs. A toy that became a hobby.",
+      "Minecraft mod that adds an oxifier item to the game. (No longer maintained)",
     role: "Solo project",
-    stack: ["Vue", "Node.js", "Docker"],
+    stack: ["Java", "Fabric"],
     links: [
-      { label: "GitHub", url: "https://github.com/damianbriones/mapmesh" },
+      { label: "Live", url: "https://modrinth.com/mod/oxify" },
+      {
+        label: "GitHub",
+        url: "https://github.com/CodeINN95612/OxifyMod",
+      },
     ],
   },
   {
-    name: "Quitogram",
+    name: "Auth Enterprise",
     blurb:
-      "Photo-journal of Quito with friends. Side project, but a real production app with auth, storage, and CDN.",
-    role: "Co-creator (2 people)",
-    stack: ["React", "Node.js", "AWS"],
-    links: [
-      { label: "GitHub", url: "https://github.com/damianbriones/quitogram" },
-      { label: "Live", url: "https://quitogram.example.com" },
-    ],
-  },
-  {
-    name: "Tinybus",
-    blurb:
-      "A self-hosted message bus for hobby projects. Tiny footprint, pluggable transports, fun to write.",
+      "Authentication demo for a YouTube series about .NET auth. Manages JWT, Users, Roles, and Permissions.",
     role: "Solo project",
-    stack: [".NET", "Docker"],
-    links: [
-      { label: "GitHub", url: "https://github.com/damianbriones/tinybus" },
+    stack: [
+      ".NET",
+      "C#",
+      "Entity Framework",
+      "PostgreSQL",
+      "Docker",
+      "Vertical Slice Architecture",
     ],
-  },
-  {
-    name: "Andes CLI",
-    blurb:
-      "Command-line scaffolding tool I wrote to bootstrap my .NET + React side projects in one command.",
-    role: "Solo project",
-    stack: ["Node.js"],
     links: [
-      { label: "GitHub", url: "https://github.com/damianbriones/andes-cli" },
+      { label: "Live", url: "https://www.youtube.com/watch?v=rcRMXLr4f60" },
+      {
+        label: "GitHub",
+        url: "https://github.com/CodeINN95612/AuthEnterprise",
+      },
     ],
   },
 ];
@@ -204,14 +169,18 @@ const EDUCATION = [
   {
     degree: "Bachelor of Software Engineering",
     school: "Universidad de las Américas (UDLA)",
-    period: "2015 — 2019",
+    period: "2019 — 2023",
     location: "Quito, Ecuador",
     notes:
-      "Capstone on custom AI chatbots for prospective students in my university.",
+      "Capstone on custom AI chatbots for prospective students at the university.",
   },
 ];
 
 const HOBBIES = [
+  {
+    label: "Gaming",
+    note: "Minecraft mostly, but open to almost anything.",
+  },
   {
     label: "Reading",
     note: "Would read almost every book I can get my hands on.",
@@ -220,11 +189,26 @@ const HOBBIES = [
     label: "Programming",
     note: "Yes, I enjoy it outside of work, even on weekends.",
   },
-  {
-    label: "Minecraft",
-    note: "Not good with color gradients, but I make a mean redstone contraption.",
-  },
   { label: "Gym", note: "Keeps the head clear." },
+];
+
+const FREELANCE = [
+  {
+    name: "Cyan-Bot",
+    client: "Independent",
+    blurb:
+      "Discord bot for managing payments and roles in a translation community.",
+    duration: "3 months",
+    stack: ["Python", "MongoDB"],
+  },
+  {
+    name: "ULI",
+    client: "Universidad de las Américas",
+    blurb:
+      "AI chatbot for customer service, customized with information about the institution.",
+    duration: "1 year",
+    stack: ["Python", "React", "C#", "SignalR", "Azure"],
+  },
 ];
 
 const UI_CONTENT = {
@@ -302,6 +286,7 @@ export const DATA = {
   PROFILE,
   SKILL_GROUPS,
   EXPERIENCE,
+  FREELANCE,
   PROJECTS,
   EDUCATION,
   HOBBIES,

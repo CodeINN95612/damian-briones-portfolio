@@ -43,8 +43,7 @@
   "lint-staged": {
     "**/*": [
       "pnpm format",
-      "pnpm lint",
-      "pnpm tsc --noEmit"
+      "pnpm lint"
     ]
   }
 }

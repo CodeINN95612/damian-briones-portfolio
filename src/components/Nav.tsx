@@ -41,9 +41,13 @@ export function Nav() {
           className="flex items-center gap-3"
           aria-label="Back to top"
         >
-          <span className="grid size-8 place-items-center border border-border bg-surface font-expanded text-sm font-bold text-text">
-            {profile.initials}
-          </span>
+          <img
+            src="/damian-light-nobg.svg"
+            alt={`${profile.name} logo`}
+            width={32}
+            height={32}
+            className="size-8 rounded-md"
+          />
           <span className="hidden font-mono text-xs uppercase tracking-[0.25em] text-text-dim sm:inline">
             Personnel file
           </span>

@@ -1,0 +1,17 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { HTMLAttributes } from "astro/types";
+import { useCurrentLanguage } from "../i18n/utils";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+  /** Path without a locale prefix, e.g. "blog" or `blog/${slug}`. */
+  to: string;
+}
+
+const { to, ...attrs } = Astro.props;
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const href = getRelativeLocaleUrl(lang, to.replace(/^\//, ""));
+---
+
+<a {href} {...attrs}><slot /></a>

@@ -1,0 +1,66 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Link from "../../components/Link.astro";
+import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
+import { defaultLanguage } from "../../i18n/lang";
+
+// Paths come from the default locale only; the i18n fallback mirrors each one
+// to /en/. Both languages share a slug, so the params are identical either way.
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ id }) =>
+    id.startsWith(`${defaultLanguage}/`),
+  );
+  return posts.map((post) => ({
+    params: { slug: post.id.slice(defaultLanguage.length + 1) },
+  }));
+}
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const { slug } = Astro.params;
+const entry = await getEntry("blog", `${lang}/${slug}`);
+
+// Every post is meant to exist in both languages — fail loudly rather than
+// silently serving the wrong one.
+if (!entry) {
+  throw new Error(`Missing "${lang}" translation for blog post "${slug}"`);
+}
+
+const { Content } = await render(entry);
+---
+
+<Layout>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <Link
+      to="blog"
+      data-astro-prefetch
+      class="text-sm text-foreground/50 transition hover:text-foreground"
+    >
+      &larr; {t("blog.back")}
+    </Link>
+
+    <article class="mt-8">
+      <time
+        datetime={entry.data.pubDate.toISOString()}
+        class="text-xs text-foreground/40"
+      >
+        {
+          entry.data.pubDate.toLocaleDateString(lang, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </time>
+      <h1 class="mt-1 text-3xl font-bold text-primary">{entry.data.title}</h1>
+
+      <div
+        class="mt-8 flex flex-col gap-4 leading-relaxed text-foreground/80 [&_h2]:mt-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_li]:ml-6 [&_li]:list-disc [&_strong]:text-foreground"
+      >
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

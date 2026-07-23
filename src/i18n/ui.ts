@@ -6,6 +6,12 @@ type i18nStrings = {
   };
   nav: {
     home: string;
+    blog: string;
+  };
+  blog: {
+    title: string;
+    description: string;
+    back: string;
   };
 };
 
@@ -16,6 +22,12 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     },
     nav: {
       home: "Inicio",
+      blog: "Blog",
+    },
+    blog: {
+      title: "Blog",
+      description: "Notas sobre lo que voy construyendo.",
+      back: "Volver al blog",
     },
   },
 
@@ -25,6 +37,12 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     },
     nav: {
       home: "Home",
+      blog: "Blog",
+    },
+    blog: {
+      title: "Blog",
+      description: "Notes on whatever I'm building.",
+      back: "Back to blog",
     },
   },
 } as const;

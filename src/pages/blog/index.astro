@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Link from "../../components/Link.astro";
+import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const posts = (
+  await getCollection("blog", ({ id }) => id.startsWith(`${lang}/`))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-3xl font-bold text-primary">{t("blog.title")}</h1>
+    <p class="mt-2 text-foreground/60">{t("blog.description")}</p>
+
+    <ul class="mt-12 flex flex-col gap-8">
+      {
+        posts.map((post) => (
+          <li>
+            <Link
+              to={`blog/${post.id.slice(lang.length + 1)}`}
+              data-astro-prefetch
+              class="group block"
+            >
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-xs text-foreground/40"
+              >
+                {post.data.pubDate.toLocaleDateString(lang, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              <h2 class="mt-1 text-lg font-semibold transition group-hover:text-primary">
+                {post.data.title}
+              </h2>
+              <p class="mt-1 text-sm text-foreground/60">
+                {post.data.description}
+              </p>
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

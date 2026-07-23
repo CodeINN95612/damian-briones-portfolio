@@ -1,0 +1,71 @@
+---
+import { getRelativeLocaleUrl, pathHasLocale } from "astro:i18n";
+import Link from "./Link.astro";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+// The page you're on, minus any locale prefix — so switching language keeps you
+// on the same page instead of dropping you at the homepage.
+const [, first, ...rest] = Astro.url.pathname.split("/");
+const path = pathHasLocale(first)
+  ? rest.join("/")
+  : [first, ...rest].join("/");
+
+const languageLinks = [
+  { code: "es", label: "ES", href: getRelativeLocaleUrl("es", path) },
+  { code: "en", label: "EN", href: getRelativeLocaleUrl("en", path) },
+] as const;
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-foreground/10 bg-background/70 backdrop-blur-md"
+>
+  <nav class="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
+    <Link to="" data-astro-prefetch class="shrink-0">
+      <div class="flex gap-1 font-bold text-lg items-center justify-center">
+        <img src="/damian-lightbg.svg" alt="" class="w-6" />
+        {t("meta.title")}
+      </div>
+    </Link>
+
+    <div class="flex items-center gap-2 text-sm">
+      {
+        languageLinks.map(({ code, label, href }, i) => (
+          <>
+            {i > 0 && <span class="text-foreground/20">|</span>}
+            <a
+              href={href}
+              data-astro-prefetch
+              aria-current={code === lang ? "true" : undefined}
+              class:list={[
+                "transition hover:text-foreground",
+                code === lang ? "text-foreground" : "text-foreground/40",
+              ]}
+            >
+              {label}
+            </a>
+          </>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center gap-5 text-sm">
+      <Link
+        to=""
+        data-astro-prefetch
+        class="text-foreground/60 transition hover:text-foreground"
+      >
+        {t("nav.home")}
+      </Link>
+      <Link
+        to="blog"
+        data-astro-prefetch
+        class="text-foreground/60 transition hover:text-foreground"
+      >
+        {t("nav.blog")}
+      </Link>
+    </div>
+  </nav>
+</header>

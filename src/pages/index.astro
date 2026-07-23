@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
 
 import {useTranslations, useCurrentLanguage} from "../i18n/utils";
 
@@ -8,8 +9,14 @@ const t = useTranslations(lang);
 ---
 
 <Layout>
-	<h2>{t("nav.home")}</h2>
-	<a href="/en" data-astro-prefetch>English</a>
-	<a href="/" data-astro-prefetch>Español</a>
-</Layout>
+	<main class="flex min-h-[calc(100dvh-3.5rem)] flex-col items-center justify-center gap-6">
+		<h2 class="text-3xl font-bold text-primary">{t("nav.home")}</h2>
+		<Link
+			to="blog"
+			data-astro-prefetch
+			class="rounded-lg border-2 border-primary bg-primary px-5 py-2 font-medium text-background transition hover:border-secondary hover:bg-secondary"
+		>
+			{t("nav.blog")}
+		</Link>
+	</main>
 </Layout>

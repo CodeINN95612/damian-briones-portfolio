@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  /* Astro's <Font> emits --font-outfit as a full stack, metric-matched fallback
+     included, ending in sans-serif. Overriding --font-sans makes it the default
+     for everything, so no font-* utility is needed on the page. */
+  --font-sans: var(--font-outfit);
+
+  --color-foreground: #0e0f10;
+  --color-background: #f5f6f7;
+  --color-primary: #6488ab;
+  --color-secondary: #76a0b5;
+  --color-accent: #d3a775;
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" width="480" height="600" role="img">
+  <rect width="480" height="600" fill="#e9ecef" />
+  <circle cx="240" cy="230" r="86" fill="#6488ab" opacity="0.35" />
+  <path d="M84 600c0-86 70-156 156-156s156 70 156 156z" fill="#6488ab" opacity="0.35" />
+  <text x="240" y="560" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#0e0f10" opacity="0.45">
+    portrait placeholder
+  </text>
+</svg>

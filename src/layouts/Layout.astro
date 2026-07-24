@@ -24,7 +24,9 @@ const t = useTranslations(lang);
 	</head>
 	<body transition:animate="fade" class="bg-background text-foreground">
 		<Nav />
-		<slot />
+		<main class="flex flex-col justify-center items-center">
+			<slot />
+		</main>
 	</body>
 </html>
 

@@ -5,10 +5,61 @@
      included, ending in sans-serif. Overriding --font-sans makes it the default
      for everything, so no font-* utility is needed on the page. */
   --font-sans: var(--font-outfit);
+  /* Same deal for font-mono. */
+  --font-mono: var(--font-jetbrains-mono);
 
   --color-foreground: #0e0f10;
   --color-background: #f5f6f7;
   --color-primary: #6488ab;
+  /* Primary darkened to 4.9:1 on the background. Use it for primary-coloured
+     text below 24px (or 19px bold) and behind small text; plain primary is
+     only 3.4:1, which is fine for large headings, icons and rings. */
+  --color-primary-ink: #4a6f93;
   --color-secondary: #76a0b5;
   --color-accent: #d3a775;
+}
+
+/* Keyboard focus is always visible: a primary ring (3.4:1, enough for a
+   non-text indicator) on anything focusable. It only appears for keyboard
+   focus, so mouse clicks stay clean. Components add their hover cues under
+   `focus-visible:` / `group-focus-visible:` on top of this; don't remove it. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+  }
+}
+
+/* Scroll reveal: add .reveal to fade + lift an element in when it enters the
+   viewport; set --i on siblings to stagger them. The observer lives in
+   Layout.astro. Scoped to `scripting: enabled` so nothing stays hidden
+   without JS, and skipped entirely for reduced motion. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Reduced motion: states still change (colour, underline, ring), they just
+   don't move or animate getting there. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }

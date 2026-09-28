@@ -20,3 +20,16 @@ export const profile = {
   /** TODO: replace with the real portrait */
   image: "/portrait-placeholder.svg",
 } as const;
+
+/**
+ * The skills list, in display order. `icon` is a key in Icon.astro and
+ * `category` a key under skills.categories in src/i18n/ui.ts.
+ */
+export const skills = [
+  { name: "AWS", icon: "aws", category: "cloud" },
+  { name: "Docker", icon: "docker", category: "containers" },
+  { name: "PostgreSQL", icon: "postgresql", category: "database" },
+  { name: ".NET", icon: "dotnet", category: "backend" },
+  { name: "Node.js", icon: "node", category: "runtime" },
+  { name: "Redis", icon: "redis", category: "cache" },
+] as const;

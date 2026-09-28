@@ -2,6 +2,7 @@
 title: "Hola mundo"
 description: "Un post de prueba para verificar que las colecciones y el enrutado por idioma funcionan."
 pubDate: 2026-07-20
+category: personal
 ---
 
 Este es contenido temporal. Sirve para comprobar que la lista de posts y la

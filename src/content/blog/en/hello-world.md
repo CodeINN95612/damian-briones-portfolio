@@ -2,6 +2,7 @@
 title: "Hello world"
 description: "A throwaway post to check that collections and per-language routing work."
 pubDate: 2026-07-20
+category: personal
 ---
 
 This is temporary content. It exists to confirm the post list and the individual

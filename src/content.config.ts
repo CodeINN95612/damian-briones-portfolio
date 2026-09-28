@@ -9,6 +9,10 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
+    /** Mostly case studies; the rest are the occasional aside. */
+    category: z
+      .enum(["case-study", "project", "research", "personal"])
+      .default("case-study"),
   }),
 });
 

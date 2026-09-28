@@ -1,0 +1,52 @@
+---
+import Icon from "./Icon.astro";
+import { skills } from "../data/profile";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<section id="skills" class="w-full scroll-mt-14 px-6 py-24">
+  <div
+    class="mx-auto grid max-w-3xl gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16"
+  >
+    <div class="reveal">
+      <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        {t("skills.title")}
+      </h2>
+      <span
+        class="mt-4 block h-0.5 w-10 rounded-full bg-accent"
+        aria-hidden="true"></span>
+    </div>
+
+    <ul class="border-t border-foreground/10">
+      {
+        skills.map(({ name, icon, category }, i) => (
+          <li
+            class="reveal group relative flex items-center gap-4 border-b border-foreground/10 py-3.5"
+            style={`--i: ${i + 1}`}
+          >
+            <span aria-hidden="true" class="w-5 font-mono text-xs text-foreground/30 tabular-nums">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span class="grid size-10 place-items-center rounded-xl border border-foreground/10 bg-background text-foreground/70 transition duration-300 group-hover:-rotate-6 group-hover:border-primary/40 group-hover:text-primary">
+              <Icon name={icon} class="size-5" />
+            </span>
+            <span class="font-medium transition-transform duration-300 group-hover:translate-x-1">
+              {name}
+            </span>
+            <span class="ml-auto text-xs text-foreground/60 transition-colors duration-300 group-hover:text-foreground/80">
+              {t(`skills.categories.${category}`)}
+            </span>
+            {/* Underline that sweeps in over the row's border on hover. */}
+            <span
+              class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100"
+              aria-hidden="true"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

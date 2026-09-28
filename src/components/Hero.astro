@@ -7,20 +7,11 @@ const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
 
 // The two contacts that don't get their own button. WhatsApp is a CTA instead,
-// and the location is the eyebrow — so nothing appears twice.
+// and the location is the eyebrow — so nothing appears twice. The visible value
+// is the accessible name; no aria-label, so what's read matches what's shown.
 const contacts = [
-  {
-    icon: "mail",
-    href: `mailto:${profile.email}`,
-    label: t("hero.email"),
-    value: profile.email,
-  },
-  {
-    icon: "linkedin",
-    href: profile.linkedin,
-    label: "LinkedIn",
-    value: profile.linkedinHandle,
-  },
+  { icon: "mail", href: `mailto:${profile.email}`, value: profile.email },
+  { icon: "linkedin", href: profile.linkedin, value: profile.linkedinHandle },
 ] as const;
 ---
 
@@ -34,7 +25,7 @@ const contacts = [
     <div class="">
       <div class="relative mx-auto w-44 sm:w-56 md:w-full md:max-w-sm">
         <div
-          class="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl border border-primary/40"
+          class="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl border border-accent/70"
           aria-hidden="true"
         >
         </div>
@@ -52,14 +43,14 @@ const contacts = [
       <p
         class="inline-flex items-center gap-1.5 rounded-full border border-foreground/10 bg-background/60 px-3 py-1 text-xs text-foreground/60 backdrop-blur-sm"
       >
-        <Icon name="pin" class="size-3.5" />
+        <Icon name="pin" class="size-3.5 text-accent" />
         {t("hero.location")}
       </p>
 
       <h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">
         {t("hero.name")}
       </h1>
-      <p class="mt-2 text-lg font-medium text-primary sm:text-xl">
+      <p class="mt-2 text-lg font-medium text-primary-ink sm:text-xl">
         {t("hero.role")}
       </p>
       <p class="mt-5 max-w-md text-pretty text-foreground/70">
@@ -70,7 +61,7 @@ const contacts = [
         <a
           href={profile.cv}
           download
-          class="inline-flex items-center gap-2 rounded-lg border-2 border-primary bg-primary px-5 py-2.5 text-sm font-medium text-background transition hover:border-secondary hover:bg-secondary"
+          class="inline-flex items-center gap-2 rounded-lg border-2 border-primary-ink bg-primary-ink px-5 py-2.5 text-sm font-medium text-background transition hover:border-foreground hover:bg-foreground"
         >
           <Icon name="download" class="size-4" />
           {t("hero.cv")}
@@ -83,6 +74,7 @@ const contacts = [
         >
           <Icon name="whatsapp" class="size-4" />
           {t("hero.whatsapp")}
+          <span class="sr-only">{t("a11y.newTab")}</span>
         </a>
       </div>
 
@@ -90,20 +82,23 @@ const contacts = [
         class="mt-8 flex w-full flex-wrap gap-x-6 gap-y-2 border-t border-foreground/10 pt-6 text-sm"
       >
         {
-          contacts.map(({ icon, href, label, value }) => (
-            <li>
-              <a
-                href={href}
-                aria-label={label}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                class="inline-flex items-center gap-2 text-foreground/60 transition hover:text-foreground"
-              >
-                <Icon name={icon} class="size-4" />
-                {value}
-              </a>
-            </li>
-          ))
+          contacts.map(({ icon, href, value }) => {
+            const external = href.startsWith("http");
+            return (
+              <li>
+                <a
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  class="inline-flex items-center gap-2 text-foreground/60 transition hover:text-foreground"
+                >
+                  <Icon name={icon} class="size-4" />
+                  {value}
+                  {external && <span class="sr-only">{t("a11y.newTab")}</span>}
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </div>

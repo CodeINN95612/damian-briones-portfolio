@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+import Icon from "./Icon.astro";
+import Link from "./Link.astro";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const posts = (
+  await getCollection("blog", ({ id }) => id.startsWith(`${lang}/`))
+)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<section id="blog" class="w-full scroll-mt-14 px-6 pb-24">
+  <div
+    class="mx-auto grid max-w-3xl gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16"
+  >
+    <div class="reveal">
+      <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        {t("blog.title")}
+      </h2>
+      <span
+        class="mt-4 block h-0.5 w-10 rounded-full bg-accent"
+        aria-hidden="true"></span>
+      <p class="mt-5 max-w-xs text-pretty text-sm text-foreground/60">
+        {t("blog.intro")}
+      </p>
+    </div>
+
+    <div>
+      {
+        posts.length > 0 ? (
+          <ul class="border-t border-foreground/10">
+            {posts.map((post, i) => (
+              <li class="reveal" style={`--i: ${i + 1}`}>
+                <Link
+                  to={`blog/${post.id.slice(lang.length + 1)}`}
+                  data-astro-prefetch
+                  class="group relative flex items-center gap-4 border-b border-foreground/10 py-4"
+                >
+                  <div class="min-w-0 flex-1">
+                    <p class="flex items-center gap-2 font-mono text-xs text-foreground/60">
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString(lang, {
+                          year: "numeric",
+                          month: "short",
+                          timeZone: "UTC",
+                        })}
+                      </time>
+                      <span aria-hidden="true">·</span>
+                      {t(`blog.categories.${post.data.category}`)}
+                    </p>
+                    <h3 class="mt-1 truncate font-medium transition-colors duration-300 group-hover:text-primary-ink group-focus-visible:text-primary-ink">
+                      {post.data.title}
+                    </h3>
+                  </div>
+                  <Icon
+                    name="arrowRight"
+                    class="size-4 text-foreground/30 transition duration-300 group-hover:translate-x-1 group-hover:text-primary group-focus-visible:translate-x-1 group-focus-visible:text-primary"
+                  />
+                  <span
+                    class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="reveal flex items-center gap-3 border-y border-dashed border-foreground/15 py-4 text-sm text-foreground/60">
+            <span class="relative flex size-2" aria-hidden="true">
+              <span class="absolute inset-0 motion-safe:animate-ping rounded-full bg-accent/60" />
+              <span class="relative size-2 rounded-full bg-accent" />
+            </span>
+            {t("blog.empty")}
+          </p>
+        )
+      }
+
+      <Link
+        to="blog"
+        data-astro-prefetch
+        class="reveal group mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground/60 transition hover:text-foreground focus-visible:text-foreground"
+        style="--i: 4"
+      >
+        {t("blog.all")}
+        <Icon
+          name="arrowRight"
+          class="size-4 transition-transform duration-300 group-hover:translate-x-1 group-focus-visible:translate-x-1"
+        />
+      </Link>
+    </div>
+  </div>
+</section>

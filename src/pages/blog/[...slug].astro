@@ -31,12 +31,12 @@ if (!entry) {
 const { Content } = await render(entry);
 ---
 
-<Layout>
-  <main class="mx-auto max-w-3xl px-6 py-16">
+<Layout title={entry.data.title}>
+  <div class="mx-auto w-full max-w-3xl px-6 py-16">
     <Link
       to="blog"
       data-astro-prefetch
-      class="text-sm text-foreground/50 transition hover:text-foreground"
+      class="text-sm text-foreground/60 transition hover:text-foreground"
     >
       &larr; {t("blog.back")}
     </Link>
@@ -44,13 +44,14 @@ const { Content } = await render(entry);
     <article class="mt-8">
       <time
         datetime={entry.data.pubDate.toISOString()}
-        class="text-xs text-foreground/40"
+        class="text-xs text-foreground/60"
       >
         {
           entry.data.pubDate.toLocaleDateString(lang, {
             year: "numeric",
             month: "long",
             day: "numeric",
+            timeZone: "UTC",
           })
         }
       </time>
@@ -62,5 +63,5 @@ const { Content } = await render(entry);
         <Content />
       </div>
     </article>
-  </main>
+  </div>
 </Layout>

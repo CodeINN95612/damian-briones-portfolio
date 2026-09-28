@@ -2,6 +2,7 @@
 title: "Palette notes"
 description: "A second test post, to confirm the list sorts by date."
 pubDate: 2026-07-22
+category: project
 ---
 
 The only reason this post exists is so the list has more than one entry and the

@@ -22,7 +22,9 @@ const languageLinks = [
 <header
   class="sticky top-0 z-50 border-b border-foreground/10 bg-background/70 backdrop-blur-md"
 >
-  <nav class="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
+  <nav
+    aria-label={t("nav.main")}
+    class="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
     <Link to="" data-astro-prefetch class="shrink-0">
       <div class="flex gap-1 font-bold text-lg items-center justify-center">
         <img src="/damian-lightbg.svg" alt="" class="w-6" />
@@ -30,18 +32,31 @@ const languageLinks = [
       </div>
     </Link>
 
-    <div class="flex items-center gap-2 text-sm">
+    <div
+      role="group"
+      aria-label={t("nav.language")}
+      class="flex items-center gap-2 text-sm"
+    >
       {
         languageLinks.map(({ code, label, href }, i) => (
           <>
-            {i > 0 && <span class="text-foreground/20">|</span>}
+            {i > 0 && (
+              <span class="text-foreground/20" aria-hidden="true">
+                |
+              </span>
+            )}
             <a
               href={href}
               data-astro-prefetch
+              lang={code}
+              hreflang={code}
+              aria-label={t(`nav.languages.${code}`)}
               aria-current={code === lang ? "true" : undefined}
               class:list={[
                 "transition hover:text-foreground",
-                code === lang ? "text-foreground" : "text-foreground/40",
+                code === lang
+                  ? "font-medium text-foreground"
+                  : "text-foreground/60",
               ]}
             >
               {label}
@@ -55,14 +70,14 @@ const languageLinks = [
       <Link
         to=""
         data-astro-prefetch
-        class="text-foreground/60 transition hover:text-foreground"
+        class="text-foreground/60 transition hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-foreground"
       >
         {t("nav.home")}
       </Link>
       <Link
         to="blog"
         data-astro-prefetch
-        class="text-foreground/60 transition hover:text-foreground"
+        class="text-foreground/60 transition hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-foreground"
       >
         {t("nav.blog")}
       </Link>

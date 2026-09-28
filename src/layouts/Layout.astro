@@ -5,8 +5,16 @@ import { Font } from "astro:assets";
 import Nav from "../components/Nav.astro";
 import "../styles/global.css";
 
+interface Props {
+  /** Page name, shown before the site name in the tab title. */
+  title?: string;
+}
+
 const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
+const title = Astro.props.title
+  ? `${Astro.props.title} · ${t("meta.title")}`
+  : t("meta.title");
 ---
 
 
@@ -19,16 +27,41 @@ const t = useTranslations(lang);
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<Font cssVariable="--font-outfit" preload />
-		<title>{t("meta.title")}</title>
+		<Font cssVariable="--font-jetbrains-mono" />
+		<title>{title}</title>
 		<ClientRouter />
 	</head>
 	<body transition:animate="fade" class="bg-background text-foreground">
+		<a
+			href="#main"
+			class="sr-only rounded-lg bg-foreground text-sm font-medium text-background focus:not-sr-only focus:px-4 focus:py-2 focus:fixed focus:top-3 focus:left-3 focus:z-60"
+		>
+			{t("a11y.skip")}
+		</a>
 		<Nav />
-		<main class="flex flex-col justify-center items-center">
+		<main id="main" tabindex="-1" class="flex flex-col justify-center items-center outline-none">
 			<slot />
 		</main>
 	</body>
 </html>
+
+<script>
+	// Reveals .reveal elements once as they scroll into view (see global.css).
+	// Re-run on every page-load because the ClientRouter swaps the DOM.
+	document.addEventListener("astro:page-load", () => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					entry.target.classList.add("is-visible");
+					observer.unobserve(entry.target);
+				}
+			},
+			{ rootMargin: "0px 0px -10% 0px" },
+		);
+		document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+	});
+</script>
 
 <style>
 	html,

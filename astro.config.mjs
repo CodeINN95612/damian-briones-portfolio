@@ -18,6 +18,17 @@ export default defineConfig({
       styles: ["normal"],
       subsets: ["latin", "latin-ext"],
     },
+    {
+      provider: fontProviders.google(),
+      name: "JetBrains Mono",
+      cssVariable: "--font-jetbrains-mono",
+      // Also variable; it tops out at 800.
+      weights: ["100 800"],
+      styles: ["normal"],
+      // Without this Astro assumes sans-serif and falls back to Arial.
+      fallbacks: ["monospace"],
+      subsets: ["latin", "latin-ext"],
+    },
   ],
 
   i18n: {

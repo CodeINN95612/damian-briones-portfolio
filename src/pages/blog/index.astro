@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Link from "../../components/Link.astro";
+import Icon from "../../components/Icon.astro";
 import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
 
 const lang = useCurrentLanguage(Astro.currentLocale);
@@ -10,42 +11,146 @@ const t = useTranslations(lang);
 const posts = (
   await getCollection("blog", ({ id }) => id.startsWith(`${lang}/`))
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Only offer categories that have posts, in the schema's order.
+const order = ["case-study", "project", "research", "personal"] as const;
+const filters = order
+  .map((category) => ({
+    category,
+    count: posts.filter((post) => post.data.category === category).length,
+  }))
+  .filter(({ count }) => count > 0);
 ---
 
-<Layout>
-  <main class="mx-auto max-w-3xl px-6 py-16">
+<Layout title={t("blog.title")}>
+  <div class="mx-auto w-full max-w-3xl px-6 py-16">
     <h1 class="text-3xl font-bold text-primary">{t("blog.title")}</h1>
     <p class="mt-2 text-foreground/60">{t("blog.description")}</p>
 
-    <ul class="mt-12 flex flex-col gap-8">
+    {
+      filters.length > 1 && (
+        <div
+          class="mt-10 flex flex-wrap gap-x-6 gap-y-2"
+          role="group"
+          aria-label={t("blog.filter")}
+          data-blog-filter
+        >
+          {[
+            { category: "all", label: t("blog.filterAll"), count: posts.length },
+            ...filters.map(({ category, count }) => ({
+              category,
+              label: t(`blog.categories.${category}`),
+              count,
+            })),
+          ].map(({ category, label, count }) => (
+            <button
+              type="button"
+              data-category={category}
+              aria-pressed={category === "all" ? "true" : "false"}
+              class="group relative py-1 text-sm text-foreground/60 transition-colors duration-300 hover:text-foreground focus-visible:text-foreground aria-pressed:font-medium aria-pressed:text-foreground"
+            >
+              {label}
+              <sup class="ml-0.5 font-mono text-[0.65rem] text-foreground/60 tabular-nums">
+                {count}
+              </sup>
+              {/* Same accent sweep as the list rows; stays drawn while active. */}
+              <span
+                class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100 group-aria-pressed:scale-x-100"
+                aria-hidden="true"
+              />
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    <ul class="mt-10 border-t border-foreground/10">
       {
         posts.map((post) => (
-          <li>
+          <li data-category={post.data.category}>
+            {/* Hover and keyboard focus share every cue: title colour, arrow
+                nudge and the accent sweep. Focus also gets a primary ring. */}
             <Link
               to={`blog/${post.id.slice(lang.length + 1)}`}
               data-astro-prefetch
-              class="group block"
+              class="group relative flex items-center gap-6 border-b border-foreground/10 py-6"
             >
-              <time
-                datetime={post.data.pubDate.toISOString()}
-                class="text-xs text-foreground/40"
-              >
-                {post.data.pubDate.toLocaleDateString(lang, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              <h2 class="mt-1 text-lg font-semibold transition group-hover:text-primary">
-                {post.data.title}
-              </h2>
-              <p class="mt-1 text-sm text-foreground/60">
-                {post.data.description}
-              </p>
+              <div class="min-w-0 flex-1">
+                <p class="flex items-center gap-2 font-mono text-xs text-foreground/60">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString(lang, {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      timeZone: "UTC",
+                    })}
+                  </time>
+                  <span aria-hidden="true">·</span>
+                  {t(`blog.categories.${post.data.category}`)}
+                </p>
+                <h2 class="mt-1.5 text-lg font-semibold transition-colors duration-300 group-hover:text-primary-ink group-focus-visible:text-primary-ink">
+                  {post.data.title}
+                </h2>
+                <p class="mt-1 text-sm text-foreground/60 transition-colors duration-300 group-hover:text-foreground/80 group-focus-visible:text-foreground/80">
+                  {post.data.description}
+                </p>
+              </div>
+              <Icon
+                name="arrowRight"
+                class="size-5 shrink-0 text-foreground/30 transition duration-300 group-hover:translate-x-1 group-hover:text-primary group-focus-visible:translate-x-1 group-focus-visible:text-primary"
+              />
+              <span
+                class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                aria-hidden="true"
+              />
             </Link>
           </li>
         ))
       }
     </ul>
-  </main>
+  </div>
 </Layout>
+
+<script>
+  // Filtering is client-side: the page is static and the list is short.
+  // The choice is mirrored in ?category= so a filtered view can be shared.
+  document.addEventListener("astro:page-load", () => {
+    const group = document.querySelector<HTMLElement>("[data-blog-filter]");
+    if (!group) return;
+
+    const buttons = [
+      ...group.querySelectorAll<HTMLButtonElement>("button[data-category]"),
+    ];
+    const posts = [
+      ...document.querySelectorAll<HTMLElement>("li[data-category]"),
+    ];
+
+    const select = (category: string) => {
+      if (!buttons.some((b) => b.dataset.category === category)) {
+        category = "all";
+      }
+      for (const button of buttons) {
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.category === category),
+        );
+      }
+      for (const post of posts) {
+        post.hidden = category !== "all" && post.dataset.category !== category;
+      }
+
+      const url = new URL(location.href);
+      if (category === "all") url.searchParams.delete("category");
+      else url.searchParams.set("category", category);
+      history.replaceState(history.state, "", url);
+    };
+
+    for (const button of buttons) {
+      button.addEventListener("click", () =>
+        select(button.dataset.category ?? "all"),
+      );
+    }
+
+    select(new URLSearchParams(location.search).get("category") ?? "all");
+  });
+</script>

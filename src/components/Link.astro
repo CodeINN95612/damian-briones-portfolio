@@ -12,6 +12,11 @@ const { to, ...attrs } = Astro.props;
 
 const lang = useCurrentLanguage(Astro.currentLocale);
 const href = getRelativeLocaleUrl(lang, to.replace(/^\//, ""));
+
+// Mark the link to the page you're on, for screen readers and for styling via
+// `aria-[current=page]:`. Trailing slashes differ between dev and build.
+const trim = (path: string) => path.replace(/\/+$/, "") || "/";
+const current = trim(href) === trim(Astro.url.pathname) ? "page" : undefined;
 ---
 
-<a {href} {...attrs}><slot /></a>
+<a {href} aria-current={current} {...attrs}><slot /></a>

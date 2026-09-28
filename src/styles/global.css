@@ -48,6 +48,18 @@
     opacity: 1;
     transform: none;
   }
+
+  /* Experience timeline: each segment draws in from the left, in order. */
+  .reveal .timeline-grow {
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(200ms + var(--i, 0) * 180ms);
+  }
+
+  .reveal.is-visible .timeline-grow {
+    scale: 1 1;
+  }
 }
 
 /* Reduced motion: states still change (colour, underline, ring), they just

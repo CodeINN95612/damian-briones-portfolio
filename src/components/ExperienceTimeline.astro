@@ -1,0 +1,83 @@
+---
+import { cn } from "../lib/utils";
+import { monthsBetween, type Job } from "../lib/experience";
+
+interface Props {
+  jobs: Job[];
+  class?: string;
+}
+
+const { jobs, class: className } = Astro.props;
+
+// The bar spans the first job's start month to the build month; each job is a
+// segment placed and sized by its months.
+const now = new Date();
+const first = jobs.at(-1)?.data.start ?? now;
+const total = monthsBetween(first, now);
+const at = (date: Date) => ((monthsBetween(first, date) - 1) / total) * 100;
+
+const segments = [...jobs].reverse().map((job) => ({
+  company: job.data.company,
+  current: job.current,
+  left: at(job.data.start),
+  width: (job.months / total) * 100,
+}));
+
+const years = [];
+for (let year = first.getUTCFullYear() + 1; year <= now.getUTCFullYear(); year++) {
+  years.push({ year, left: at(new Date(Date.UTC(year, 0, 1))) });
+}
+---
+
+{/* Decorative: the same dates and companies are in the text next to it. */}
+<div aria-hidden="true" class={cn("reveal select-none", className)}>
+  <div class="relative hidden h-5 sm:block">
+    {
+      segments.map(({ company, current, left, width }) => (
+        <span
+          class:list={[
+            "absolute bottom-1.5 truncate pr-2 font-mono text-[0.65rem]",
+            current ? "text-foreground/70" : "text-foreground/40",
+          ]}
+          style={`left: ${left}%; width: ${width}%`}
+        >
+          {company}
+        </span>
+      ))
+    }
+  </div>
+
+  <div class="relative h-2 rounded-full bg-foreground/5">
+    {
+      segments.map(({ current, left, width }, i) => (
+        <span
+          class:list={[
+            "timeline-grow absolute inset-y-0 rounded-full",
+            current ? "bg-primary" : "bg-secondary/45",
+          ]}
+          style={`left: calc(${left}% + 2px); width: calc(${width}% - 4px); --i: ${i}`}
+        >
+          {current && (
+            <span class="absolute top-1/2 -right-1 flex size-3 -translate-y-1/2">
+              <span class="absolute inset-0 rounded-full bg-accent/60 motion-safe:animate-ping" />
+              <span class="relative size-3 rounded-full border-2 border-background bg-accent" />
+            </span>
+          )}
+        </span>
+      ))
+    }
+  </div>
+
+  <div class="relative mt-2 h-4">
+    {
+      years.map(({ year, left }) => (
+        <span
+          class="absolute -translate-x-1/2 font-mono text-[0.65rem] text-foreground/40 tabular-nums"
+          style={`left: ${left}%`}
+        >
+          {year}
+        </span>
+      ))
+    }
+  </div>
+</div>

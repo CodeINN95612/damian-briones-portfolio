@@ -1,0 +1,198 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
+import Icon from "../components/Icon.astro";
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+import {
+  getJobs,
+  totalYears,
+  formatMonth,
+  formatDuration,
+} from "../lib/experience";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const posts = (
+  await getCollection("blog", ({ id }) => id.startsWith(`${lang}/`))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const jobs = await Promise.all(
+  (await getJobs(lang)).map(async (job) => ({
+    ...job,
+    Content: (await render(job.entry)).Content,
+    posts: posts.filter((post) => post.data.experience === job.slug),
+  })),
+);
+
+const stats = [
+  { value: totalYears(jobs), label: t("experience.years") },
+  { value: jobs.length, label: t("experience.companies") },
+  {
+    value: jobs.reduce((sum, job) => sum + job.posts.length, 0),
+    label: t("experience.caseStudies").toLowerCase(),
+  },
+].filter(({ value }) => value > 0);
+---
+
+<Layout title={t("experience.title")}>
+  <div class="mx-auto w-full max-w-3xl px-6 py-16">
+    <h1 class="text-3xl font-bold text-primary">{t("experience.title")}</h1>
+    <p class="mt-2 max-w-xl text-pretty text-foreground/60">
+      {t("experience.description")}
+    </p>
+
+    <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+      {
+        stats.map(({ value, label }) => (
+          <div class="flex flex-col-reverse">
+            <dt class="text-xs text-foreground/60">{label}</dt>
+            <dd class="text-3xl font-semibold tracking-tight text-primary tabular-nums">
+              {value}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <ExperienceTimeline jobs={jobs} class="mt-10" />
+
+    <ol class="mt-16 flex flex-col gap-20">
+      {
+        jobs.map((job) => (
+          <li
+            id={job.slug}
+            class="scroll-mt-24 border-t border-foreground/10 pt-10 md:grid md:grid-cols-[11rem_1fr] md:gap-10"
+          >
+            {/* Dates stay in view while you read the job next to them. */}
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 md:sticky md:top-24 md:flex-col md:self-start">
+              {job.current && (
+                <span class="inline-flex items-center gap-1.5 rounded-full border border-accent/60 px-2.5 py-0.5 text-xs font-medium md:mb-2">
+                  <span class="relative flex size-1.5" aria-hidden="true">
+                    <span class="absolute inset-0 rounded-full bg-accent/60 motion-safe:animate-ping" />
+                    <span class="relative size-1.5 rounded-full bg-accent" />
+                  </span>
+                  {t("experience.current")}
+                </span>
+              )}
+              {/* Each date stays on one line; if it ever has to wrap, it
+                  breaks between the two dates, not inside one. */}
+              <p class="font-mono text-sm tabular-nums">
+                <span class="whitespace-nowrap">
+                  {formatMonth(job.data.start, lang)} —
+                </span>{" "}
+                <span class="whitespace-nowrap">
+                  {job.data.end
+                    ? formatMonth(job.data.end, lang)
+                    : t("experience.present")}
+                </span>
+              </p>
+              <p class="text-xs text-foreground/60">
+                {formatDuration(job.months, lang)}
+                <span class="mx-1.5 md:hidden" aria-hidden="true">·</span>
+                <span class="md:mt-1 md:block">{job.data.location}</span>
+              </p>
+            </div>
+
+            <div class="mt-5 md:mt-0">
+              <h2 class="text-2xl font-semibold tracking-tight">
+                {job.data.company}
+              </h2>
+              <p class="mt-1 font-medium text-primary-ink">{job.data.role}</p>
+              <p class="mt-1 text-sm text-foreground/60">{job.data.summary}</p>
+
+              <div class="mt-5 flex flex-col gap-3 leading-relaxed text-pretty text-foreground/80">
+                <job.Content />
+              </div>
+
+              {/* Bento: with three highlights the first one gets a full row. */}
+              <h3 class="sr-only">{t("experience.highlights")}</h3>
+              <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+                {job.data.highlights.map(({ metric, label }, i) => {
+                  const wide = i === 0 && job.data.highlights.length !== 2;
+                  return (
+                    <li
+                      class:list={[
+                        "rounded-2xl border border-foreground/10 p-5",
+                        wide &&
+                          "sm:col-span-2 sm:flex sm:items-center sm:gap-6 sm:bg-primary/5",
+                      ]}
+                    >
+                      <p
+                        class:list={[
+                          "shrink-0 font-semibold tracking-tight text-primary tabular-nums",
+                          wide ? "text-4xl" : "text-3xl",
+                        ]}
+                      >
+                        {metric}
+                      </p>
+                      <p
+                        class:list={[
+                          "text-pretty text-sm text-foreground/70",
+                          wide ? "mt-2 sm:mt-0" : "mt-2",
+                        ]}
+                      >
+                        {label}
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <ul
+                class="mt-6 flex flex-wrap gap-2"
+                aria-label={t("experience.stack")}
+              >
+                {job.data.stack.map((tech) => (
+                  <li class="rounded-md border border-foreground/10 px-2 py-0.5 font-mono text-xs text-foreground/70">
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+
+              {job.posts.length > 0 && (
+                <>
+                  <h3 class="mt-10 text-sm font-medium">
+                    {t("experience.caseStudies")}
+                  </h3>
+                  <ul class="mt-3 border-t border-foreground/10">
+                    {job.posts.map((post) => (
+                      <li>
+                        <Link
+                          to={`blog/${post.id.slice(lang.length + 1)}`}
+                          data-astro-prefetch
+                          class="group relative flex items-center gap-4 border-b border-foreground/10 py-4"
+                        >
+                          <div class="min-w-0 flex-1">
+                            <p class="font-mono text-xs text-foreground/60">
+                              <time datetime={post.data.pubDate.toISOString()}>
+                                {formatMonth(post.data.pubDate, lang)}
+                              </time>
+                            </p>
+                            <h4 class="mt-1 font-medium transition-colors duration-300 group-hover:text-primary-ink group-focus-visible:text-primary-ink">
+                              {post.data.title}
+                            </h4>
+                          </div>
+                          <Icon
+                            name="arrowRight"
+                            class="size-4 text-foreground/30 transition duration-300 group-hover:translate-x-1 group-hover:text-primary group-focus-visible:translate-x-1 group-focus-visible:text-primary"
+                          />
+                          <span
+                            class="absolute inset-x-0 -bottom-px h-px origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Layout>

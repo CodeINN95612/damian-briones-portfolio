@@ -6,6 +6,7 @@ type i18nStrings = {
   };
   nav: {
     home: string;
+    experience: string;
     blog: string;
     /** Accessible names for the two nav landmarks and the ES/EN links. */
     main: string;
@@ -38,6 +39,19 @@ type i18nStrings = {
       cache: string;
     };
   };
+  experience: {
+    title: string;
+    description: string;
+    /** Stat labels next to the computed numbers (always plural). */
+    years: string;
+    companies: string;
+    current: string;
+    present: string;
+    all: string;
+    highlights: string;
+    stack: string;
+    caseStudies: string;
+  };
   blog: {
     title: string;
     description: string;
@@ -48,6 +62,8 @@ type i18nStrings = {
     empty: string;
     filter: string;
     filterAll: string;
+    /** Before the company name on a post that came out of a job. */
+    workedAt: string;
     categories: {
       "case-study": string;
       project: string;
@@ -64,6 +80,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     },
     nav: {
       home: "Inicio",
+      experience: "Experiencia",
       blog: "Blog",
       main: "Principal",
       language: "Idioma",
@@ -94,6 +111,19 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
         cache: "Caché",
       },
     },
+    experience: {
+      title: "Experiencia",
+      description:
+        "Software empresarial desde 2019: facturación, banca, salud y retail. Dónde trabajé y qué construí ahí.",
+      years: "años de experiencia",
+      companies: "empresas",
+      current: "Actual",
+      present: "hoy",
+      all: "Ver experiencia completa",
+      highlights: "Logros",
+      stack: "Tecnologías",
+      caseStudies: "Casos de estudio",
+    },
     blog: {
       title: "Blog",
       description: "Notas sobre lo que voy construyendo.",
@@ -104,6 +134,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       empty: "El primer caso de estudio está en camino.",
       filter: "Filtrar por categoría",
       filterAll: "Todos",
+      workedAt: "Trabajo realizado en",
       categories: {
         "case-study": "Caso de estudio",
         project: "Proyecto",
@@ -119,6 +150,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     },
     nav: {
       home: "Home",
+      experience: "Experience",
       blog: "Blog",
       main: "Main",
       language: "Language",
@@ -149,6 +181,19 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
         cache: "Cache",
       },
     },
+    experience: {
+      title: "Experience",
+      description:
+        "Enterprise software since 2019: billing, banking, healthcare and retail. Where I've worked and what I built there.",
+      years: "years of experience",
+      companies: "companies",
+      current: "Current",
+      present: "present",
+      all: "See full experience",
+      highlights: "Highlights",
+      stack: "Stack",
+      caseStudies: "Case studies",
+    },
     blog: {
       title: "Blog",
       description: "Notes on whatever I'm building.",
@@ -159,6 +204,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       empty: "The first case study is on its way.",
       filter: "Filter by category",
       filterAll: "All",
+      workedAt: "Work done at",
       categories: {
         "case-study": "Case study",
         project: "Project",

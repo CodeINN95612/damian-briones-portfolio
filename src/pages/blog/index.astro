@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Link from "../../components/Link.astro";
 import Icon from "../../components/Icon.astro";
 import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
+import { getJobs } from "../../lib/experience";
 
 const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -11,6 +12,10 @@ const t = useTranslations(lang);
 const posts = (
   await getCollection("blog", ({ id }) => id.startsWith(`${lang}/`))
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const companies = new Map(
+  (await getJobs(lang)).map((job) => [job.slug, job.data.company]),
+);
 
 // Only offer categories that have posts, in the schema's order.
 const order = ["case-study", "project", "research", "personal"] as const;
@@ -87,6 +92,12 @@ const filters = order
                   </time>
                   <span aria-hidden="true">·</span>
                   {t(`blog.categories.${post.data.category}`)}
+                  {post.data.experience && (
+                    <>
+                      <span aria-hidden="true">·</span>
+                      {companies.get(post.data.experience)}
+                    </>
+                  )}
                 </p>
                 <h2 class="mt-1.5 text-lg font-semibold transition-colors duration-300 group-hover:text-primary-ink group-focus-visible:text-primary-ink">
                   {post.data.title}

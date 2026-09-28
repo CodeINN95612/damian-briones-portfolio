@@ -4,19 +4,23 @@ import type { HTMLAttributes } from "astro/types";
 import { useCurrentLanguage } from "../i18n/utils";
 
 interface Props extends Omit<HTMLAttributes<"a">, "href"> {
-  /** Path without a locale prefix, e.g. "blog" or `blog/${slug}`. */
+  /** Path without a locale prefix, e.g. "blog", `blog/${slug}` or
+      "experience#andesoft". */
   to: string;
 }
 
 const { to, ...attrs } = Astro.props;
 
 const lang = useCurrentLanguage(Astro.currentLocale);
-const href = getRelativeLocaleUrl(lang, to.replace(/^\//, ""));
+const [path, hash] = to.replace(/^\//, "").split("#");
+const href = getRelativeLocaleUrl(lang, path) + (hash ? `#${hash}` : "");
 
 // Mark the link to the page you're on, for screen readers and for styling via
-// `aria-[current=page]:`. Trailing slashes differ between dev and build.
+// `aria-[current=page]:`. Links to a section (#hash) aren't the page itself.
+// Trailing slashes differ between dev and build.
 const trim = (path: string) => path.replace(/\/+$/, "") || "/";
-const current = trim(href) === trim(Astro.url.pathname) ? "page" : undefined;
+const current =
+  !hash && trim(href) === trim(Astro.url.pathname) ? "page" : undefined;
 ---
 
 <a {href} aria-current={current} {...attrs}><slot /></a>

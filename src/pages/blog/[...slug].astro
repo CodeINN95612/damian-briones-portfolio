@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Link from "../../components/Link.astro";
 import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
 import { defaultLanguage } from "../../i18n/lang";
+import { getJobs } from "../../lib/experience";
 
 // Paths come from the default locale only; the i18n fallback mirrors each one
 // to /en/. Both languages share a slug, so the params are identical either way.
@@ -29,6 +30,16 @@ if (!entry) {
 }
 
 const { Content } = await render(entry);
+
+// The job this post came out of, if any. A typo in the slug fails the build.
+const job = entry.data.experience
+  ? (await getJobs(lang)).find(({ slug }) => slug === entry.data.experience)
+  : undefined;
+if (entry.data.experience && !job) {
+  throw new Error(
+    `Blog post "${entry.id}" links to unknown experience "${entry.data.experience}"`,
+  );
+}
 ---
 
 <Layout title={entry.data.title}>
@@ -56,6 +67,20 @@ const { Content } = await render(entry);
         }
       </time>
       <h1 class="mt-1 text-3xl font-bold text-primary">{entry.data.title}</h1>
+      {
+        job && (
+          <p class="mt-3 text-sm text-foreground/60">
+            {t("blog.workedAt")}{" "}
+            <Link
+              to={`experience#${job.slug}`}
+              data-astro-prefetch
+              class="font-medium text-primary-ink underline decoration-primary/40 underline-offset-4 transition hover:decoration-primary-ink focus-visible:decoration-primary-ink"
+            >
+              {job.data.company}
+            </Link>
+          </p>
+        )
+      }
 
       <div
         class="mt-8 flex flex-col gap-4 leading-relaxed text-foreground/80 [&_h2]:mt-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_li]:ml-6 [&_li]:list-disc [&_strong]:text-foreground"

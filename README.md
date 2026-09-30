@@ -10,8 +10,9 @@ The site is meant to be clear and understated, with a distinctive identity, so
 a potential client can quickly see what I do and then find depth in how I
 approach problems.
 
-> **Status:** work in progress. The contact details, the portrait, the CV and
-> the experience entries are placeholders, and the blog posts are sample text.
+> **Status:** work in progress. The contact details, portrait and CV are real,
+> carried over from the old React portfolio on the `main` branch, and so are the
+> three jobs (MikMak, Logiztik, CloudStudio). The blog posts are sample text.
 
 ## How it's organised
 
@@ -37,7 +38,7 @@ Case studies and jobs link to each other. A post names its job in the
 
 ```text
 /
-├── public/                  Logo, background and placeholder portrait
+├── public/                  Logo, background, portrait and CV
 ├── src/
 │   ├── components/          Hero, Skills, Experience, BlogTeaser, Nav, Footer…
 │   ├── content/
@@ -67,7 +68,7 @@ title: ...
 description: ...
 pubDate: 2026-01-15
 category: case-study # case-study | project | research | personal
-experience: andesoft # optional: slug of a job
+experience: mikmak # optional: slug of a job
 ---
 ```
 
@@ -76,9 +77,9 @@ position, give one to three `highlights` (a short figure and what it means),
 and leave `end` out for the current job. The schemas are in
 `src/content.config.ts`.
 
-**Profile.** Replace the placeholders in `src/data/profile.ts` (email, phone,
-LinkedIn, GitHub) and drop the real files at `public/cv.pdf` and in place of
-`public/portrait-placeholder.svg`.
+**Profile.** Contact details (email, phone, LinkedIn, GitHub), the portrait
+(`public/personal.jpg`) and the CV (`public/cv.pdf`) are set in
+`src/data/profile.ts`.
 
 ## Accessibility
 

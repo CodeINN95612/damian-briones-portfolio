@@ -102,7 +102,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     },
     footer: {
       tagline:
-        "Software empresarial hecho con cuidado: sistemas que aguantan el uso real y se pueden mantener.",
+        "Arquitectura de software, diseño y nube para equipos empresariales.",
       available: "Abierto a nuevas oportunidades",
       explore: "Explorar",
       contact: "Contacto",
@@ -113,8 +113,8 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       name: "Damián Briones",
       role: "Ingeniero de Software Senior",
       description:
-        "Construyo productos web de punta a punta, desde el modelo de datos hasta el último píxel.",
-      location: "Ciudad, País",
+        "Ayudo a equipos a modernizar sistemas empresariales y llevarlos a la nube. Trabajo de backend y arquitectura en banca, logística y comercio.",
+      location: "Quito, Ecuador",
       cv: "Descargar CV",
       whatsapp: "WhatsApp",
       portraitAlt: "Retrato de Damián Briones",
@@ -133,7 +133,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     experience: {
       title: "Experiencia",
       description:
-        "Software empresarial desde 2019: facturación, banca, salud y retail. Dónde trabajé y qué construí ahí.",
+        "Software empresarial desde 2019: banca, logística y comercio. Dónde trabajé y qué construí ahí.",
       years: "años de experiencia",
       companies: "empresas",
       current: "Actual",
@@ -182,7 +182,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     },
     footer: {
       tagline:
-        "Enterprise software, built with care: systems that hold up under real use and stay maintainable.",
+        "Software architecture, design and cloud for enterprise teams.",
       available: "Open to new opportunities",
       explore: "Explore",
       contact: "Contact",
@@ -193,8 +193,8 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       name: "Damian Briones",
       role: "Senior Software Engineer",
       description:
-        "I build web products end to end, from the data model to the last pixel.",
-      location: "City, Country",
+        "I help teams modernize and move enterprise systems to the cloud. Backend and architecture work across banking, logistics and commerce.",
+      location: "Quito, Ecuador",
       cv: "Download CV",
       whatsapp: "WhatsApp",
       portraitAlt: "Portrait of Damian Briones",
@@ -213,7 +213,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     experience: {
       title: "Experience",
       description:
-        "Enterprise software since 2019: billing, banking, healthcare and retail. Where I've worked and what I built there.",
+        "Enterprise software since 2019: banking, logistics and commerce. Where I've worked and what I built there.",
       years: "years of experience",
       companies: "companies",
       current: "Current",

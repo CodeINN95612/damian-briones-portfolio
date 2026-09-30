@@ -13,7 +13,7 @@ const blog = defineCollection({
     category: z
       .enum(["case-study", "project", "research", "personal"])
       .default("case-study"),
-    /** Slug of the job this post came out of, e.g. "andesoft". Links the post
+    /** Slug of the job this post came out of, e.g. "mikmak". Links the post
         and the job to each other. */
     experience: z.string().optional(),
   }),

@@ -4,7 +4,7 @@ import type { ValidLanguage } from "../i18n/lang";
 export interface Job {
   entry: CollectionEntry<"experience">;
   data: CollectionEntry<"experience">["data"];
-  /** "andesoft" — the id without the locale; also the anchor on /experience. */
+  /** "mikmak" — the id without the locale; also the anchor on /experience. */
   slug: string;
   current: boolean;
   months: number;

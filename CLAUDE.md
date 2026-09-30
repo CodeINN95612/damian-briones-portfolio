@@ -11,8 +11,11 @@ Accessibility rules are in `.claude/rules/accessibility.md`.
   under `/en/`. Every UI string goes in `src/i18n/ui.ts` in both languages, and
   every blog post or job needs an `es` and an `en` file with the same slug.
 - **Contact details live in `src/data/profile.ts`.** Components read from it;
-  never hard-code an email, handle or phone number. All values are placeholders
-  for now.
+  never hard-code an email, handle or phone number.
+- **The old portfolio is the source for real content.** The `main` branch
+  (React) is checked out as a git worktree at `../Portfolio-main`. Real facts
+  are in its `src/data/index.ts`. Take the facts, not the wording: its copy
+  reads as AI-written, so rewrite it plainly.
 - **Icons are inline SVGs in `src/components/Icon.astro`.** Line icons are
   Lucide. Brand glyphs are Simple Icons and must also be added to the `solid`
   set so they render filled. No icon library.

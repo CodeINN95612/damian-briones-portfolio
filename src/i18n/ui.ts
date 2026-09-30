@@ -12,11 +12,20 @@ type i18nStrings = {
     main: string;
     language: string;
     languages: { es: string; en: string };
+    footer: string;
   };
   /** Screen-reader-only text. */
   a11y: {
     skip: string;
     newTab: string;
+  };
+  footer: {
+    tagline: string;
+    available: string;
+    explore: string;
+    contact: string;
+    rights: string;
+    built: string;
   };
   hero: {
     /** Translated because the accent drops in English. */
@@ -85,10 +94,20 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       main: "Principal",
       language: "Idioma",
       languages: { es: "Español", en: "English" },
+      footer: "Pie de página",
     },
     a11y: {
       skip: "Saltar al contenido",
       newTab: "(se abre en una pestaña nueva)",
+    },
+    footer: {
+      tagline:
+        "Software empresarial hecho con cuidado: sistemas que aguantan el uso real y se pueden mantener.",
+      available: "Abierto a nuevas oportunidades",
+      explore: "Explorar",
+      contact: "Contacto",
+      rights: "Todos los derechos reservados.",
+      built: "Hecho con Astro",
     },
     hero: {
       name: "Damián Briones",
@@ -155,10 +174,20 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       main: "Main",
       language: "Language",
       languages: { es: "Español", en: "English" },
+      footer: "Footer",
     },
     a11y: {
       skip: "Skip to content",
       newTab: "(opens in a new tab)",
+    },
+    footer: {
+      tagline:
+        "Enterprise software, built with care: systems that hold up under real use and stay maintainable.",
+      available: "Open to new opportunities",
+      explore: "Explore",
+      contact: "Contact",
+      rights: "All rights reserved.",
+      built: "Built with Astro",
     },
     hero: {
       name: "Damian Briones",

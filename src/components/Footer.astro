@@ -1,0 +1,121 @@
+---
+import Icon from "./Icon.astro";
+import Link from "./Link.astro";
+import { profile } from "../data/profile";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const pages = [
+  { to: "", label: t("nav.home") },
+  { to: "experience", label: t("nav.experience") },
+  { to: "blog", label: t("nav.blog") },
+];
+
+const contacts = [
+  { icon: "mail", href: `mailto:${profile.email}`, value: profile.email },
+  { icon: "linkedin", href: profile.linkedin, value: profile.linkedinHandle },
+  { icon: "github", href: profile.github, value: profile.githubHandle },
+  {
+    icon: "whatsapp",
+    href: `https://wa.me/${profile.phone}`,
+    value: profile.phoneDisplay,
+  },
+] as const;
+
+// Hover and focus share the same cue.
+const linkClass =
+  "text-foreground/60 transition hover:text-foreground focus-visible:text-foreground";
+---
+
+<footer class="mt-auto w-full border-t border-foreground/10">
+  <div class="mx-auto max-w-4xl px-6 pt-12 pb-8">
+    <div class="grid gap-10 sm:grid-cols-[1.6fr_1fr_1.2fr]">
+      <div>
+        <p class="flex items-center gap-2 text-lg font-bold">
+          <img src="/damian-lightbg.svg" alt="" class="w-6" />
+          {t("meta.title")}
+        </p>
+        <p class="mt-3 max-w-xs text-pretty text-sm text-foreground/60">
+          {t("footer.tagline")}
+        </p>
+        <p
+          class="mt-5 inline-flex items-center gap-1.5 rounded-full border border-accent/60 px-2.5 py-0.5 text-xs font-medium"
+        >
+          <span class="relative flex size-1.5" aria-hidden="true">
+            <span
+              class="absolute inset-0 rounded-full bg-accent/60 motion-safe:animate-ping"
+            ></span>
+            <span class="relative size-1.5 rounded-full bg-accent"></span>
+          </span>
+          {t("footer.available")}
+        </p>
+      </div>
+
+      <nav aria-label={t("nav.footer")}>
+        <h2 class="text-sm font-medium">{t("footer.explore")}</h2>
+        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+          {
+            pages.map(({ to, label }) => (
+              <li>
+                <Link
+                  {to}
+                  data-astro-prefetch
+                  class:list={[
+                    linkClass,
+                    "aria-[current=page]:font-medium aria-[current=page]:text-foreground",
+                  ]}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="text-sm font-medium">{t("footer.contact")}</h2>
+        <ul class="mt-4 flex flex-col gap-2.5 text-sm">
+          {
+            contacts.map(({ icon, href, value }) => {
+              const external = href.startsWith("http");
+              return (
+                <li>
+                  <a
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    class={`inline-flex items-center gap-2 ${linkClass}`}
+                  >
+                    <Icon name={icon} class="size-4" />
+                    {value}
+                    {external && (
+                      <span class="sr-only">{t("a11y.newTab")}</span>
+                    )}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-foreground/10 pt-6 text-xs text-foreground/60"
+    >
+      <p>
+        © {new Date().getFullYear()}
+        {t("meta.title")}. {t("footer.rights")}
+      </p>
+      <p class="inline-flex items-center gap-1.5">
+        <Icon name="pin" class="size-3.5" />
+        {t("hero.location")}
+        <span aria-hidden="true" class="text-foreground/30">·</span>
+        {t("footer.built")}
+      </p>
+    </div>
+  </div>
+</footer>

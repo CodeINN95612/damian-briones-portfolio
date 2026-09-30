@@ -15,6 +15,9 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/placeholder/",
   linkedinHandle: "/in/placeholder",
 
+  github: "https://github.com/placeholder",
+  githubHandle: "@placeholder",
+
   /** TODO: drop the real PDF at public/cv.pdf */
   cv: "/cv.pdf",
   /** TODO: replace with the real portrait */

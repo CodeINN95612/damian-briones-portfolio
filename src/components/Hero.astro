@@ -12,6 +12,7 @@ const t = useTranslations(lang);
 const contacts = [
   { icon: "mail", href: `mailto:${profile.email}`, value: profile.email },
   { icon: "linkedin", href: profile.linkedin, value: profile.linkedinHandle },
+  { icon: "github", href: profile.github, value: profile.githubHandle },
 ] as const;
 ---
 
@@ -61,7 +62,7 @@ const contacts = [
         <a
           href={profile.cv}
           download
-          class="inline-flex items-center gap-2 rounded-lg border-2 border-primary-ink bg-primary-ink px-5 py-2.5 text-sm font-medium text-background transition hover:border-foreground hover:bg-foreground"
+          class="inline-flex items-center gap-2 rounded-lg border-2 border-primary-ink bg-primary-ink px-5 py-2.5 text-sm font-medium text-background transition hover:border-foreground hover:bg-foreground focus-visible:border-foreground focus-visible:bg-foreground"
         >
           <Icon name="download" class="size-4" />
           {t("hero.cv")}
@@ -70,7 +71,7 @@ const contacts = [
           href={`https://wa.me/${profile.phone}`}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-lg border-2 border-foreground/15 px-5 py-2.5 text-sm font-medium text-foreground/80 transition hover:border-foreground/30 hover:text-foreground"
+          class="inline-flex items-center gap-2 rounded-lg border-2 border-foreground/15 px-5 py-2.5 text-sm font-medium text-foreground/80 transition hover:border-foreground/30 hover:text-foreground focus-visible:border-foreground/30 focus-visible:text-foreground"
         >
           <Icon name="whatsapp" class="size-4" />
           {t("hero.whatsapp")}
@@ -90,7 +91,7 @@ const contacts = [
                   href={href}
                   target={external ? "_blank" : undefined}
                   rel={external ? "noopener noreferrer" : undefined}
-                  class="inline-flex items-center gap-2 text-foreground/60 transition hover:text-foreground"
+                  class="inline-flex items-center gap-2 text-foreground/60 transition hover:text-foreground focus-visible:text-foreground"
                 >
                   <Icon name={icon} class="size-4" />
                   {value}

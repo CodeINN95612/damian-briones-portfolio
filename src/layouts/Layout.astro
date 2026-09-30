@@ -3,6 +3,7 @@ import {useTranslations, useCurrentLanguage} from "../i18n/utils";
 import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -31,7 +32,7 @@ const title = Astro.props.title
 		<title>{title}</title>
 		<ClientRouter />
 	</head>
-	<body transition:animate="fade" class="bg-background text-foreground">
+	<body transition:animate="fade" class="flex flex-col bg-background text-foreground">
 		<a
 			href="#main"
 			class="sr-only rounded-lg bg-foreground text-sm font-medium text-background focus:not-sr-only focus:px-4 focus:py-2 focus:fixed focus:top-3 focus:left-3 focus:z-60"
@@ -42,6 +43,7 @@ const title = Astro.props.title
 		<main id="main" tabindex="-1" class="flex flex-col justify-center items-center outline-none">
 			<slot />
 		</main>
+			<Footer />
 	</body>
 </html>
 
@@ -68,6 +70,13 @@ const title = Astro.props.title
 	body {
 		margin: 0;
 		width: 100%;
+	}
+	html {
 		height: 100%;
+	}
+	/* min-height, not height: the footer follows tall pages instead of
+	   overflowing the body, and stays at the bottom of short ones. */
+	body {
+		min-height: 100%;
 	}
 </style>

@@ -1,46 +1,99 @@
-# Astro Starter Kit: Basics
+# Portfolio
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+> I help teams modernize and move enterprise systems to the cloud.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+A place to show how I think as an engineer, through case studies and writing
+drawn from real enterprise experience, as I move toward freelance work in
+software architecture, design and cloud.
 
-## 🚀 Project Structure
+The site is meant to be clear and understated, with a distinctive identity, so
+a potential client can quickly see what I do and then find depth in how I
+approach problems.
 
-Inside of your Astro project, you'll see the following folders and files:
+> **Status:** work in progress. The contact details, the portrait, the CV and
+> the experience entries are placeholders, and the blog posts are sample text.
+
+## How it's organised
+
+| Page          | What it's for                                                                 |
+| :------------ | :---------------------------------------------------------------------------- |
+| `/`           | Who I am, what I do, skills, a short experience summary and the latest posts. |
+| `/experience` | The longer story: one card per job, with results, stack and related posts.    |
+| `/blog`       | Case studies and writing, filterable by category.                             |
+
+Case studies and jobs link to each other. A post names its job in the
+`experience` frontmatter field; leave it out for an anonymous case study.
+
+## Stack
+
+- [Astro](https://astro.build) with the `ClientRouter` for page transitions
+- [Tailwind CSS v4](https://tailwindcss.com), with the colour tokens in
+  `src/styles/global.css`
+- Outfit and JetBrains Mono through Astro's font API
+- Content collections for the blog and the experience entries
+- No UI framework: icons are inline SVGs in `src/components/Icon.astro`
+
+## Project structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/                  Logo, background and placeholder portrait
+├── src/
+│   ├── components/          Hero, Skills, Experience, BlogTeaser, Nav, Footer…
+│   ├── content/
+│   │   ├── blog/{es,en}/    One markdown file per post and language
+│   │   └── experience/{es,en}/  One markdown file per job and language
+│   ├── data/profile.ts      Contact details, asset paths and the skills list
+│   ├── i18n/                UI strings (ui.ts) and language helpers
+│   ├── layouts/Layout.astro
+│   ├── lib/                 Helpers, e.g. experience.ts
+│   ├── pages/               index, experience, blog (English is generated under /en/)
+│   └── styles/global.css
+└── astro.config.mjs
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Content
 
-## 🧞 Commands
+**Languages.** Spanish is the default and has no URL prefix; English lives under
+`/en/`. Both languages of a post or job share a slug, and the entry id is
+`${lang}/${slug}`. UI text lives in `src/i18n/ui.ts`, so every new string needs
+both languages.
 
-All commands are run from the root of the project, from a terminal:
+**Blog post.** Add `src/content/blog/{es,en}/<slug>.md`:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```md
+---
+title: ...
+description: ...
+pubDate: 2026-01-15
+category: case-study # case-study | project | research | personal
+experience: andesoft # optional: slug of a job
+---
+```
 
-## 👀 Want to learn more?
+**Job.** Add `src/content/experience/{es,en}/<slug>.md`. Keep only the latest
+position, give one to three `highlights` (a short figure and what it means),
+and leave `end` out for the current job. The schemas are in
+`src/content.config.ts`.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+**Profile.** Replace the placeholders in `src/data/profile.ts` (email, phone,
+LinkedIn, GitHub) and drop the real files at `public/cv.pdf` and in place of
+`public/portrait-placeholder.svg`.
+
+## Accessibility
+
+Keyboard use has to be as clear as mouse use. The rules, such as mirroring every
+hover cue on focus and the minimum text contrast, are in
+[`.claude/rules/accessibility.md`](.claude/rules/accessibility.md). Follow them
+when adding components.
+
+## Commands
+
+Run everything from the project root. Node 22.12 or newer is required.
+
+| Command          | Action                                      |
+| :--------------- | :------------------------------------------ |
+| `pnpm install`   | Install dependencies                        |
+| `pnpm dev`       | Start the dev server at `localhost:4321`    |
+| `pnpm build`     | Build the production site to `./dist/`      |
+| `pnpm preview`   | Preview the build locally before deploying  |

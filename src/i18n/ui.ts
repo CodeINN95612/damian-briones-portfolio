@@ -13,6 +13,8 @@ type i18nStrings = {
     language: string;
     languages: { es: string; en: string };
     footer: string;
+    /** The phone-width menu button. */
+    menu: string;
   };
   /** Screen-reader-only text. */
   a11y: {
@@ -49,6 +51,11 @@ type i18nStrings = {
     text: string;
     email: string;
   };
+  notFound: {
+    title: string;
+    text: string;
+    home: string;
+  };
   skills: {
     title: string;
     categories: {
@@ -76,6 +83,8 @@ type i18nStrings = {
   blog: {
     title: string;
     description: string;
+    /** Meta description for /blog, which needs more than the page subtitle. */
+    seo: string;
     back: string;
     /** Home-page teaser section. */
     intro: string;
@@ -107,6 +116,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       language: "Idioma",
       languages: { es: "Español", en: "English" },
       footer: "Pie de página",
+      menu: "Menú",
     },
     a11y: {
       skip: "Saltar al contenido",
@@ -153,6 +163,11 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       text: "Cuéntame. Respondo por correo o WhatsApp, en español o en inglés.",
       email: "Enviar un correo",
     },
+    notFound: {
+      title: "Página no encontrada",
+      text: "Esta dirección no existe o cambió de lugar.",
+      home: "Volver al inicio",
+    },
     skills: {
       title: "Habilidades",
       categories: {
@@ -180,6 +195,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     blog: {
       title: "Blog",
       description: "Notas sobre lo que voy construyendo.",
+      seo: "Casos de estudio de proyectos empresariales reales, más notas sobre proyectos personales e investigación. Por Damián Briones.",
       back: "Volver al blog",
       intro:
         "Casos de estudio de proyectos reales y, de vez en cuando, notas sobre proyectos personales e investigación. Lo más reciente, aquí.",
@@ -209,6 +225,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       language: "Language",
       languages: { es: "Español", en: "English" },
       footer: "Footer",
+      menu: "Menu",
     },
     a11y: {
       skip: "Skip to content",
@@ -255,6 +272,11 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       text: "Tell me about it. I reply by email or WhatsApp, in English or Spanish.",
       email: "Send an email",
     },
+    notFound: {
+      title: "Page not found",
+      text: "This address doesn't exist or has moved.",
+      home: "Back to home",
+    },
     skills: {
       title: "Skills",
       categories: {
@@ -282,6 +304,7 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
     blog: {
       title: "Blog",
       description: "Notes on whatever I'm building.",
+      seo: "Case studies from real enterprise projects, plus notes on side projects and research. By Damian Briones.",
       back: "Back to blog",
       intro:
         "Case studies from real projects, plus the occasional note on side projects and research. The latest are right here.",

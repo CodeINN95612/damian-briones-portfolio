@@ -1,22 +1,30 @@
 ---
-import { getRelativeLocaleUrl, pathHasLocale } from "astro:i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Icon from "./Icon.astro";
 import Link from "./Link.astro";
-import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+import {
+  useTranslations,
+  useCurrentLanguage,
+  getPathWithoutLocale,
+} from "../i18n/utils";
 
 const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
 
 // The page you're on, minus any locale prefix — so switching language keeps you
 // on the same page instead of dropping you at the homepage.
-const [, first, ...rest] = Astro.url.pathname.split("/");
-const path = pathHasLocale(first)
-  ? rest.join("/")
-  : [first, ...rest].join("/");
+const path = getPathWithoutLocale(Astro.url.pathname);
 
 const languageLinks = [
   { code: "es", label: "ES", href: getRelativeLocaleUrl("es", path) },
   { code: "en", label: "EN", href: getRelativeLocaleUrl("en", path) },
 ] as const;
+
+const pages = [
+  { to: "", label: t("nav.home") },
+  { to: "experience", label: t("nav.experience") },
+  { to: "blog", label: t("nav.blog") },
+];
 ---
 
 <header
@@ -24,9 +32,10 @@ const languageLinks = [
 >
   <nav
     aria-label={t("nav.main")}
-    class="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
-    <Link to="" data-astro-prefetch class="shrink-0">
-      <div class="flex gap-1 font-bold text-lg items-center justify-center">
+    class="group/nav mx-auto flex h-14 max-w-4xl items-center justify-between gap-3 px-4 sm:px-6"
+  >
+    <Link to="" data-astro-prefetch class="min-w-0 shrink-0">
+      <div class="flex items-center justify-center gap-1 text-base font-bold sm:text-lg">
         <img src="/damian-lightbg.svg" alt="" class="w-6" />
         {t("meta.title")}
       </div>
@@ -35,7 +44,7 @@ const languageLinks = [
     <div
       role="group"
       aria-label={t("nav.language")}
-      class="flex items-center gap-2 text-sm"
+      class="ml-auto flex items-center text-sm sm:ml-0"
     >
       {
         languageLinks.map(({ code, label, href }, i) => (
@@ -53,7 +62,7 @@ const languageLinks = [
               aria-label={t(`nav.languages.${code}`)}
               aria-current={code === lang ? "true" : undefined}
               class:list={[
-                "transition hover:text-foreground",
+                "px-2 py-2 transition hover:text-foreground focus-visible:text-foreground",
                 code === lang
                   ? "font-medium text-foreground"
                   : "text-foreground/60",
@@ -66,28 +75,36 @@ const languageLinks = [
       }
     </div>
 
-    <div class="flex items-center gap-5 text-sm">
-      <Link
-        to=""
-        data-astro-prefetch
-        class="text-foreground/60 transition hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-      >
-        {t("nav.home")}
-      </Link>
-      <Link
-        to="experience"
-        data-astro-prefetch
-        class="text-foreground/60 transition hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-      >
-        {t("nav.experience")}
-      </Link>
-      <Link
-        to="blog"
-        data-astro-prefetch
-        class="text-foreground/60 transition hover:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-foreground"
-      >
-        {t("nav.blog")}
-      </Link>
+    {/* Below `sm` the page links sit in a dropdown under the header. It's a
+        native popover: the button opens it without JS, and Escape or a click
+        outside closes it. From `sm` up the button is hidden and the popover is
+        laid out inline as a normal row of links. */}
+    <button
+      type="button"
+      popovertarget="site-menu"
+      aria-label={t("nav.menu")}
+      class="-mr-2 grid size-10 place-items-center rounded-lg text-foreground/70 transition hover:text-foreground focus-visible:text-foreground sm:hidden"
+    >
+      <Icon name="menu" class="group-has-[:popover-open]/nav:hidden" />
+      <Icon name="close" class="hidden group-has-[:popover-open]/nav:block" />
+    </button>
+
+    <div
+      id="site-menu"
+      popover
+      class="top-[calc(3.5rem+1px)] bottom-auto m-0 w-full overflow-visible border-0 border-b border-foreground/10 bg-background p-0 text-foreground sm:static sm:flex sm:w-auto sm:items-center sm:gap-5 sm:border-b-0 sm:bg-transparent sm:text-sm"
+    >
+      {
+        pages.map(({ to, label }) => (
+          <Link
+            {to}
+            data-astro-prefetch
+            class="block px-6 py-3.5 text-foreground/60 transition -outline-offset-2 hover:text-foreground focus-visible:text-foreground aria-[current=page]:font-medium aria-[current=page]:text-foreground sm:inline sm:p-0 sm:outline-offset-4"
+          >
+            {label}
+          </Link>
+        ))
+      }
     </div>
   </nav>
 </header>

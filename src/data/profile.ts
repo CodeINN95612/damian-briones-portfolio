@@ -1,3 +1,5 @@
+import portrait from "../assets/personal.jpg";
+
 /**
  * Contact details and asset paths. Everything here is language-agnostic —
  * translatable copy (name, role, description, labels) lives in src/i18n/ui.ts.
@@ -18,8 +20,14 @@ export const profile = {
   github: "https://github.com/CodeINN95612",
   githubHandle: "@CodeINN95612",
 
+  /** Where I'm based, for search engines. The visible text is hero.location. */
+  city: "Quito",
+  /** ISO 3166-1 alpha-2. */
+  countryCode: "EC",
+
   cv: "/cv.pdf",
-  image: "/personal.jpg",
+  /** Imported, so <Image> can resize it. Use `.src` for a plain URL. */
+  image: portrait,
 } as const;
 
 /**

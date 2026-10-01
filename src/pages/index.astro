@@ -6,9 +6,15 @@ import Skills from '../components/Skills.astro';
 import Experience from '../components/Experience.astro';
 import BlogTeaser from '../components/BlogTeaser.astro';
 import Cta from '../components/Cta.astro';
+import { useCurrentLanguage } from '../i18n/utils';
+import { personSchema, websiteSchema } from '../lib/seo';
+
+const lang = useCurrentLanguage(Astro.currentLocale);
 ---
 
-<Layout>
+<Layout
+	schema={[personSchema(lang, Astro.site!), websiteSchema(lang, Astro.site!)]}
+>
 	<Hero />
 	<Services />
 	<Skills />

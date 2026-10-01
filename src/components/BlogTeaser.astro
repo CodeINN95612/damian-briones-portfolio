@@ -16,7 +16,7 @@ const posts = (
 
 <section id="blog" class="w-full scroll-mt-14 px-6 pb-24">
   <div
-    class="mx-auto grid max-w-3xl gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16"
+    class="mx-auto grid max-w-3xl grid-cols-1 gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16"
   >
     <div class="reveal">
       <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -53,7 +53,7 @@ const posts = (
                       <span aria-hidden="true">·</span>
                       {t(`blog.categories.${post.data.category}`)}
                     </p>
-                    <h3 class="mt-1 truncate font-medium transition-colors duration-300 group-hover:text-primary-ink group-focus-visible:text-primary-ink">
+                    <h3 class="mt-1 text-pretty font-medium md:truncate transition-colors duration-300 group-hover:text-primary-ink group-focus-visible:text-primary-ink">
                       {post.data.title}
                     </h3>
                   </div>

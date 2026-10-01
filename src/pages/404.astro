@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<Layout title={t("notFound.title")} noindex>
+  <div class="mx-auto w-full max-w-3xl px-6 py-24">
+    <h1 class="text-3xl font-bold text-primary">{t("notFound.title")}</h1>
+    <p class="mt-2 text-foreground/60">{t("notFound.text")}</p>
+    <Link
+      to=""
+      class="mt-8 inline-block text-sm font-medium text-primary-ink underline decoration-primary/40 underline-offset-4 transition hover:decoration-primary-ink focus-visible:decoration-primary-ink"
+    >
+      {t("notFound.home")}
+    </Link>
+  </div>
+</Layout>

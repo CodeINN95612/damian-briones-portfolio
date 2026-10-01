@@ -5,6 +5,7 @@ import Link from "../../components/Link.astro";
 import Icon from "../../components/Icon.astro";
 import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
 import { getJobs } from "../../lib/experience";
+import { breadcrumbSchema, pageUrl } from "../../lib/seo";
 
 const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -27,7 +28,16 @@ const filters = order
   .filter(({ count }) => count > 0);
 ---
 
-<Layout title={t("blog.title")}>
+<Layout
+  title={t("blog.title")}
+  description={t("blog.seo")}
+  schema={[
+    breadcrumbSchema([
+      { name: t("nav.home"), url: pageUrl(lang) },
+      { name: t("blog.title"), url: pageUrl(lang, "blog") },
+    ]),
+  ]}
+>
   <div class="mx-auto w-full max-w-3xl px-6 py-16">
     <h1 class="text-3xl font-bold text-primary">{t("blog.title")}</h1>
     <p class="mt-2 text-foreground/60">{t("blog.description")}</p>
@@ -81,7 +91,7 @@ const filters = order
               class="group relative flex items-center gap-6 border-b border-foreground/10 py-6"
             >
               <div class="min-w-0 flex-1">
-                <p class="flex items-center gap-2 font-mono text-xs text-foreground/60">
+                <p class="font-mono text-xs text-foreground/60">
                   <time datetime={post.data.pubDate.toISOString()}>
                     {post.data.pubDate.toLocaleDateString(lang, {
                       year: "numeric",
@@ -90,11 +100,11 @@ const filters = order
                       timeZone: "UTC",
                     })}
                   </time>
-                  <span aria-hidden="true">·</span>
+                  <span aria-hidden="true" class="mx-1.5">·</span>
                   {t(`blog.categories.${post.data.category}`)}
                   {post.data.experience && (
                     <>
-                      <span aria-hidden="true">·</span>
+                      <span aria-hidden="true" class="mx-1.5">·</span>
                       {companies.get(post.data.experience)}
                     </>
                   )}

@@ -22,6 +22,8 @@ approach problems.
 | `/experience` | The longer story: one card per job, with results, stack and related posts.    |
 | `/blog`       | Case studies and writing, filterable by category.                             |
 
+Also generated: `/sitemap.xml`, `/robots.txt` and a `404` page (set to `noindex`).
+
 Case studies and jobs link to each other. A post names its job in the
 `experience` frontmatter field; leave it out for an anonymous case study.
 
@@ -38,7 +40,7 @@ Case studies and jobs link to each other. A post names its job in the
 
 ```text
 /
-├── public/                  Logo, background, portrait and CV
+├── public/                  Logo, background, CV, favicons and og-{es,en}.png (files that need a fixed URL)
 ├── src/
 │   ├── components/          Hero, Services, Skills, Experience, BlogTeaser, Cta, Nav, Footer…
 │   ├── content/
@@ -47,8 +49,9 @@ Case studies and jobs link to each other. A post names its job in the
 │   ├── data/profile.ts      Contact details, asset paths and the skills list
 │   ├── i18n/                UI strings (ui.ts) and language helpers
 │   ├── layouts/Layout.astro
-│   ├── lib/                 Helpers, e.g. experience.ts
-│   ├── pages/               index, experience, blog (English is generated under /en/)
+│   ├── lib/                 Helpers: experience.ts, seo.ts (URLs and schema.org data)
+│   ├── pages/               index, experience, blog, 404, sitemap.xml, robots.txt
+│   │                        (English is generated under /en/)
 │   └── styles/global.css
 └── astro.config.mjs
 ```
@@ -78,8 +81,26 @@ and leave `end` out for the current job. The schemas are in
 `src/content.config.ts`.
 
 **Profile.** Contact details (email, phone, LinkedIn, GitHub), the portrait
-(`public/personal.jpg`) and the CV (`public/cv.pdf`) are set in
+(`src/assets/personal.jpg`, resized by Astro) and the CV (`public/cv.pdf`) are set in
 `src/data/profile.ts`.
+
+## SEO
+
+`src/components/Seo.astro`, rendered by `Layout.astro`, writes the head tags for
+every page: description, canonical URL, `hreflang` links to the other language,
+Open Graph and Twitter cards, and JSON-LD from `src/lib/seo.ts` (a `Person` and
+`WebSite` on the home page, `BlogPosting` on posts, breadcrumbs on the rest).
+
+- Each page passes `title` and `description` to `<Layout>`. The home page
+  leaves `title` out and gets "name · role". Posts use their frontmatter
+  `title` and `description`, so write both for search results: a title under
+  about 60 characters and a description of 120 to 160.
+- `public/og-es.png` and `og-en.png` are the 1200×630 social preview images.
+  They are static, so redo them if the name, role or tagline changes.
+- Canonical URLs end in a slash, to match the sitemap. The host should redirect
+  the version without one.
+- `sitemap.xml` is written by hand (`src/pages/sitemap.xml.ts`) because
+  `@astrojs/sitemap` leaves out the English copies of the blog posts.
 
 ## Accessibility
 

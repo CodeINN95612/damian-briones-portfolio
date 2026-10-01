@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { profile } from "../data/profile";
 import { useTranslations, useCurrentLanguage } from "../i18n/utils";
@@ -30,11 +31,18 @@ const contacts = [
           aria-hidden="true"
         >
         </div>
-        <img
+        {/* Cropped to 4:5 and served at the size it is shown (176px on a phone,
+            up to 384px), at 1x and 2x. It's the first thing on screen, so it
+            loads eagerly and first. */}
+        <Image
           src={profile.image}
           alt={t("hero.portraitAlt")}
-          width="480"
-          height="600"
+          width={480}
+          height={600}
+          widths={[176, 224, 352, 384, 448, 768]}
+          sizes="(min-width: 768px) 384px, (min-width: 640px) 224px, 176px"
+          loading="eager"
+          fetchpriority="high"
           class="relative aspect-4/5 w-full rounded-3xl border border-foreground/10 bg-background object-cover"
         />
       </div>

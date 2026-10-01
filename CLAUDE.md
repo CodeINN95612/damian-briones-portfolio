@@ -26,6 +26,9 @@ Accessibility rules are in `.claude/rules/accessibility.md`.
 - **Scroll reveal:** add the `.reveal` class; `Layout.astro` adds `.is-visible`
   once the element is on screen. The page uses the `ClientRouter`, so page
   scripts must run on `astro:page-load`, not once at load.
+- **Every page needs a `description`.** Pass `title` and `description` to
+  `<Layout>`; `Seo.astro` does the rest (canonical, hreflang, Open Graph,
+  JSON-LD). See the SEO section of the README.
 - **Case studies can be anonymous.** A post's `experience` field is optional;
   leave it out when there's no job to link to.
 

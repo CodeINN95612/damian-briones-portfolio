@@ -1,3 +1,4 @@
+import { pathHasLocale } from "astro:i18n";
 import { ui } from "./ui";
 import { defaultLanguage, type ValidLanguage } from "./lang";
 
@@ -5,6 +6,13 @@ export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
   if (lang in ui) return lang as ValidLanguage;
   return defaultLanguage;
+}
+
+/** "/en/blog/x/" -> "blog/x/", "/blog/x/" -> "blog/x/", "/" -> "". Lets a page
+    build its URL in the other language. */
+export function getPathWithoutLocale(pathname: string) {
+  const [, first, ...rest] = pathname.split("/");
+  return pathHasLocale(first) ? rest.join("/") : [first, ...rest].join("/");
 }
 
 type UIStrings = (typeof ui)[ValidLanguage];

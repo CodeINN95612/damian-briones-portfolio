@@ -11,6 +11,7 @@ import {
   formatMonth,
   formatDuration,
 } from "../lib/experience";
+import { breadcrumbSchema, pageUrl } from "../lib/seo";
 
 const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -37,7 +38,16 @@ const stats = [
 ].filter(({ value }) => value > 0);
 ---
 
-<Layout title={t("experience.title")}>
+<Layout
+  title={t("experience.title")}
+  description={t("experience.description")}
+  schema={[
+    breadcrumbSchema([
+      { name: t("nav.home"), url: pageUrl(lang) },
+      { name: t("experience.title"), url: pageUrl(lang, "experience") },
+    ]),
+  ]}
+>
   <div class="mx-auto w-full max-w-3xl px-6 py-16">
     <h1 class="text-3xl font-bold text-primary">{t("experience.title")}</h1>
     <p class="mt-2 max-w-xl text-pretty text-foreground/60">

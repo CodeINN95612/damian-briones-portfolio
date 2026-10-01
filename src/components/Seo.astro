@@ -1,0 +1,108 @@
+---
+import { languages, defaultLanguage } from "../i18n/lang";
+import {
+  useTranslations,
+  useCurrentLanguage,
+  getPathWithoutLocale,
+} from "../i18n/utils";
+import { pageUrl, ogImage } from "../lib/seo";
+
+interface Props {
+  /** The full <title>, site name included. */
+  title: string;
+  description: string;
+  /** "article" for blog posts. */
+  type?: "website" | "article";
+  /** Blog posts only. */
+  publishedTime?: Date;
+  /** Keep the page out of search results (e.g. the 404). */
+  noindex?: boolean;
+  /** schema.org nodes, without @context; they are wrapped in one @graph. */
+  schema?: object[];
+}
+
+const {
+  title,
+  description,
+  type = "website",
+  publishedTime,
+  noindex = false,
+  schema = [],
+} = Astro.props;
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+const site = Astro.site!;
+
+// Same page in each language. Every page exists in both, so each one lists
+// itself and its twin; x-default is the Spanish one, which has no URL prefix.
+const path = getPathWithoutLocale(Astro.url.pathname);
+const alternates = (Object.keys(languages) as (keyof typeof languages)[]).map(
+  (code) => ({ code, href: pageUrl(code, path) }),
+);
+const canonical = pageUrl(lang, path);
+const otherLanguages = alternates.filter(({ code }) => code !== lang);
+
+const locales = { es: "es_EC", en: "en_US" } as const;
+const image = ogImage(lang, site);
+
+// "<" is escaped so a title can never close the script tag early.
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": schema,
+}).replace(/</g, "\\u003c");
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{
+  noindex ? (
+    <meta name="robots" content="noindex" />
+  ) : (
+    <>
+      <link rel="canonical" href={canonical} />
+      {alternates.map(({ code, href }) => (
+        <link rel="alternate" hreflang={code} href={href} />
+      ))}
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={alternates.find(({ code }) => code === defaultLanguage)!.href}
+      />
+    </>
+  )
+}
+<link rel="sitemap" href="/sitemap.xml" />
+
+<meta property="og:site_name" content={t("meta.title")} />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={locales[lang]} />
+{
+  otherLanguages.map(({ code }) => (
+    <meta property="og:locale:alternate" content={locales[code]} />
+  ))
+}
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+{
+  publishedTime && (
+    <meta
+      property="article:published_time"
+      content={publishedTime.toISOString()}
+    />
+  )
+}
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta name="theme-color" content="#f5f6f7" />
+
+{
+  schema.length > 0 && (
+    <script type="application/ld+json" set:html={jsonLd} is:inline />
+  )
+}

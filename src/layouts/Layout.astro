@@ -4,18 +4,30 @@ import { ClientRouter } from "astro:transitions";
 import { Font } from "astro:assets";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import Seo from "../components/Seo.astro";
 import "../styles/global.css";
 
 interface Props {
-  /** Page name, shown before the site name in the tab title. */
+  /** Page name, shown before the site name in the tab title. The home page
+      leaves it out and gets the name and role instead. */
   title?: string;
+  /** Under ~160 characters; shown in search results. Defaults to the home
+      page's description. */
+  description?: string;
+  type?: "website" | "article";
+  publishedTime?: Date;
+  noindex?: boolean;
+  /** schema.org nodes for this page (see src/lib/seo.ts). */
+  schema?: object[];
 }
+
+const { title: pageTitle, description, ...seo } = Astro.props;
 
 const lang = useCurrentLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
-const title = Astro.props.title
-  ? `${Astro.props.title} · ${t("meta.title")}`
-  : t("meta.title");
+const title = pageTitle
+  ? `${pageTitle} · ${t("meta.title")}`
+  : `${t("meta.title")} · ${t("hero.role")}`;
 ---
 
 
@@ -25,11 +37,12 @@ const title = Astro.props.title
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/damian-darkbg.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon.ico" sizes="48x48" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<Font cssVariable="--font-outfit" preload />
 		<Font cssVariable="--font-jetbrains-mono" />
-		<title>{title}</title>
+		<Seo {title} description={description ?? t("hero.description")} {...seo} />
 		<ClientRouter />
 	</head>
 	<body transition:animate="fade" class="flex flex-col bg-background text-foreground">

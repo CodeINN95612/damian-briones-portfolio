@@ -5,6 +5,7 @@ import Link from "../../components/Link.astro";
 import { useTranslations, useCurrentLanguage } from "../../i18n/utils";
 import { defaultLanguage } from "../../i18n/lang";
 import { getJobs } from "../../lib/experience";
+import { blogPostingSchema, breadcrumbSchema, pageUrl } from "../../lib/seo";
 
 // Paths come from the default locale only; the i18n fallback mirrors each one
 // to /en/. Both languages share a slug, so the params are identical either way.
@@ -40,9 +41,24 @@ if (entry.data.experience && !job) {
     `Blog post "${entry.id}" links to unknown experience "${entry.data.experience}"`,
   );
 }
+
+const url = pageUrl(lang, `blog/${slug}`);
 ---
 
-<Layout title={entry.data.title}>
+<Layout
+  title={entry.data.title}
+  description={entry.data.description}
+  type="article"
+  publishedTime={entry.data.pubDate}
+  schema={[
+    blogPostingSchema(lang, Astro.site!, { ...entry.data, url }),
+    breadcrumbSchema([
+      { name: t("nav.home"), url: pageUrl(lang) },
+      { name: t("blog.title"), url: pageUrl(lang, "blog") },
+      { name: entry.data.title, url },
+    ]),
+  ]}
+>
   <div class="mx-auto w-full max-w-3xl px-6 py-16">
     <Link
       to="blog"

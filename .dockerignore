@@ -1,0 +1,11 @@
+node_modules
+dist
+.astro
+.git
+.claude
+.agents
+.vscode
+.env
+.env.*
+Dockerfile
+.dockerignore

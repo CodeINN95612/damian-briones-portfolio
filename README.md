@@ -40,6 +40,7 @@ Case studies and jobs link to each other. A post names its job in the
 
 ```text
 /
+├── deploy/                  Dockerfile and nginx.conf for production (see Deployment)
 ├── public/                  Logo, background, CV, favicons and og-{es,en}.png (files that need a fixed URL)
 ├── src/
 │   ├── components/          Hero, Services, Skills, Experience, BlogTeaser, Cta, Nav, Footer…
@@ -119,3 +120,15 @@ Run everything from the project root. Node 22.12 or newer is required.
 | `pnpm dev`       | Start the dev server at `localhost:4321`    |
 | `pnpm build`     | Build the production site to `./dist/`      |
 | `pnpm preview`   | Preview the build locally before deploying  |
+
+## Deployment
+
+The site is fully static. `deploy/Dockerfile` builds it and serves `dist/` with
+nginx (`deploy/nginx.conf`: relative redirects, so `/experience` goes to
+`/experience/`, the 404 page, and long cache headers for `/_astro/`). It runs on
+a DigitalOcean droplet through Dokploy, which builds the image on every push to
+the deployed branch. TLS is handled by Dokploy's proxy, so nginx only listens on
+port 80. DNS is on Cloudflare.
+
+In Dokploy, choose the **Dockerfile** build type and set the Dockerfile path to
+`deploy/Dockerfile`, with the Docker context path left as `.`.

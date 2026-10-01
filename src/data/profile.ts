@@ -39,6 +39,6 @@ export const skills = [
   { name: "Docker", icon: "docker", category: "containers" },
   { name: "PostgreSQL", icon: "postgresql", category: "database" },
   { name: ".NET", icon: "dotnet", category: "backend" },
-  { name: "Node.js", icon: "node", category: "runtime" },
+  { name: "Claude & Cursor", icon: "claude", category: "ai" },
   { name: "Redis", icon: "redis", category: "cache" },
 ] as const;

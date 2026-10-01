@@ -63,7 +63,7 @@ type i18nStrings = {
       containers: string;
       database: string;
       backend: string;
-      runtime: string;
+      ai: string;
       cache: string;
     };
   };
@@ -79,6 +79,8 @@ type i18nStrings = {
     highlights: string;
     stack: string;
     caseStudies: string;
+    readMore: string;
+    readLess: string;
   };
   blog: {
     title: string;
@@ -175,14 +177,14 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
         containers: "Contenedores",
         database: "Base de datos",
         backend: "Backend",
-        runtime: "Runtime",
+        ai: "IA",
         cache: "Caché",
       },
     },
     experience: {
       title: "Experiencia",
       description:
-        "Software empresarial desde 2019: banca, logística y comercio. Dónde trabajé y qué construí ahí.",
+        "Software empresarial desde 2019: banca, logística y comercio. Empecé arreglando sistemas y terminé diseñándolos.",
       years: "años de experiencia",
       companies: "empresas",
       current: "Actual",
@@ -191,6 +193,8 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       highlights: "Logros",
       stack: "Tecnologías",
       caseStudies: "Casos de estudio",
+      readMore: "Leer más",
+      readLess: "Leer menos",
     },
     blog: {
       title: "Blog",
@@ -284,14 +288,14 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
         containers: "Containers",
         database: "Database",
         backend: "Backend",
-        runtime: "Runtime",
+        ai: "AI",
         cache: "Cache",
       },
     },
     experience: {
       title: "Experience",
       description:
-        "Enterprise software since 2019: banking, logistics and commerce. Where I've worked and what I built there.",
+        "Enterprise software since 2019: banking, logistics and commerce. I started by fixing systems and ended up designing them.",
       years: "years of experience",
       companies: "companies",
       current: "Current",
@@ -300,6 +304,8 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       highlights: "Highlights",
       stack: "Stack",
       caseStudies: "Case studies",
+      readMore: "Read more",
+      readLess: "Read less",
     },
     blog: {
       title: "Blog",

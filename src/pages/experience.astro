@@ -48,7 +48,7 @@ const stats = [
     ]),
   ]}
 >
-  <div class="mx-auto w-full max-w-3xl px-6 py-16">
+  <div class="mx-auto w-full max-w-4xl px-6 py-16">
     <h1 class="text-3xl font-bold text-primary">{t("experience.title")}</h1>
     <p class="mt-2 max-w-xl text-pretty text-foreground/60">
       {t("experience.description")}
@@ -74,12 +74,12 @@ const stats = [
         jobs.map((job) => (
           <li
             id={job.slug}
-            class="scroll-mt-24 border-t border-foreground/10 pt-10 md:grid md:grid-cols-[11rem_1fr] md:gap-10"
+            class="scroll-mt-24 border-t border-foreground/10 pt-10 lg:grid lg:grid-cols-[11rem_minmax(0,1fr)] lg:gap-10"
           >
             {/* Dates stay in view while you read the job next to them. */}
-            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 md:sticky md:top-24 md:flex-col md:self-start">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 lg:sticky lg:top-24 lg:flex-col lg:self-start">
               {job.current && (
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-accent/60 px-2.5 py-0.5 text-xs font-medium md:mb-2">
+                <span class="inline-flex items-center gap-1.5 rounded-full border border-accent/60 px-2.5 py-0.5 text-xs font-medium lg:mb-2">
                   <span class="relative flex size-1.5" aria-hidden="true">
                     <span class="absolute inset-0 rounded-full bg-accent/60 motion-safe:animate-ping" />
                     <span class="relative size-1.5 rounded-full bg-accent" />
@@ -101,20 +101,38 @@ const stats = [
               </p>
               <p class="text-xs text-foreground/60">
                 {formatDuration(job.months, lang)}
-                <span class="mx-1.5 md:hidden" aria-hidden="true">·</span>
-                <span class="md:mt-1 md:block">{job.data.location}</span>
+                <span class="mx-1.5 lg:hidden" aria-hidden="true">·</span>
+                <span class="lg:mt-1 lg:block">{job.data.location}</span>
               </p>
             </div>
 
-            <div class="mt-5 md:mt-0">
+            <div class="mt-5 lg:mt-0">
               <h2 class="text-2xl font-semibold tracking-tight">
                 {job.data.company}
               </h2>
               <p class="mt-1 font-medium text-primary-ink">{job.data.role}</p>
               <p class="mt-1 text-sm text-foreground/60">{job.data.summary}</p>
 
-              <div class="mt-5 flex flex-col gap-3 leading-relaxed text-pretty text-foreground/80">
-                <job.Content />
+              {/* Only the first two paragraphs show once JS has marked the
+                  block collapsed; without JS everything stays visible. */}
+              <div data-job-body class="mt-5 max-w-[68ch]">
+                <div
+                  id={`${job.slug}-body`}
+                  class="flex flex-col gap-4 leading-relaxed text-foreground/80 lg:text-justify lg:hyphens-auto data-[collapsed=true]:[&>p:nth-child(n+3)]:hidden"
+                >
+                  <job.Content />
+                </div>
+                <button
+                  type="button"
+                  hidden
+                  aria-expanded="false"
+                  aria-controls={`${job.slug}-body`}
+                  data-more={t("experience.readMore")}
+                  data-less={t("experience.readLess")}
+                  class="mt-4 text-sm font-medium text-primary-ink underline underline-offset-4 hover:text-foreground focus-visible:text-foreground"
+                >
+                  {t("experience.readMore")}
+                </button>
               </div>
 
               {/* Bento: with three highlights the first one gets a full row. */}
@@ -206,3 +224,35 @@ const stats = [
     </ol>
   </div>
 </Layout>
+
+<script>
+  // Long jobs start collapsed to their first two paragraphs. This runs on
+  // every page-load because the ClientRouter swaps the DOM.
+  document.addEventListener("astro:page-load", () => {
+    for (const block of document.querySelectorAll<HTMLElement>(
+      "[data-job-body]",
+    )) {
+      const body = block.firstElementChild as HTMLElement;
+      const button = block.querySelector<HTMLButtonElement>("button");
+      if (!body || !button || body.querySelectorAll(":scope > p").length <= 2)
+        continue;
+
+      const set = (collapsed: boolean) => {
+        body.dataset.collapsed = String(collapsed);
+        button.setAttribute("aria-expanded", String(!collapsed));
+        button.textContent = collapsed ? button.dataset.more! : button.dataset.less!;
+      };
+
+      set(true);
+      button.hidden = false;
+      button.addEventListener("click", () => {
+        const collapsing = body.dataset.collapsed !== "true";
+        set(collapsing);
+        // Collapsing a long text can leave the reader far below the job.
+        if (collapsing && block.getBoundingClientRect().top < 0) {
+          block.closest("li")?.scrollIntoView({ block: "start" });
+        }
+      });
+    }
+  });
+</script>

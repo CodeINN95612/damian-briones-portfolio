@@ -78,8 +78,9 @@ experience: mikmak # optional: slug of a job
 
 **Job.** Add `src/content/experience/{es,en}/<slug>.md`. Keep only the latest
 position, give one to three `highlights` (a short figure and what it means),
-and leave `end` out for the current job. The schemas are in
-`src/content.config.ts`.
+and leave `end` out for the current job. The page shows only the first two
+paragraphs of the body behind a "Read more" button, so put the key points
+there. The schemas are in `src/content.config.ts`.
 
 **Profile.** Contact details (email, phone, LinkedIn, GitHub), the portrait
 (`src/assets/personal.jpg`, resized by Astro) and the CV (`public/cv.pdf`) are set in

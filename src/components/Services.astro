@@ -1,0 +1,51 @@
+---
+import Icon from "./Icon.astro";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+// `icon` is a key in Icon.astro, `key` one under services in src/i18n/ui.ts.
+const services = [
+  { icon: "refresh", key: "modernization" },
+  { icon: "cloud", key: "cloud" },
+  { icon: "workflow", key: "architecture" },
+] as const;    
+---
+
+<section id="work" class="w-full scroll-mt-14 px-6 py-2">
+  <div class="mx-auto max-w-4xl">
+    <div class="reveal">
+      <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        {t("services.title")}
+      </h2>
+      <span
+        class="mt-4 block h-0.5 w-10 rounded-full bg-accent"
+        aria-hidden="true"></span>
+      <p class="mt-5 max-w-lg text-pretty text-foreground/70">
+        {t("services.intro")}
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 md:grid-cols-3">
+      {
+        services.map(({ icon, key }, i) => (
+          <li
+            class="reveal rounded-2xl border border-foreground/10 p-6"
+            style={`--i: ${i + 1}`}
+          >
+            <span class="grid size-10 place-items-center rounded-xl border border-foreground/10 text-primary">
+              <Icon name={icon} class="size-5" />
+            </span>
+            <h3 class="mt-5 text-lg font-semibold tracking-tight">
+              {t(`services.${key}.title`)}
+            </h3>
+            <p class="mt-2 text-pretty text-sm text-foreground/70">
+              {t(`services.${key}.text`)}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

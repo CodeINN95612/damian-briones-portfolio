@@ -18,7 +18,7 @@ approach problems.
 
 | Page          | What it's for                                                                 |
 | :------------ | :---------------------------------------------------------------------------- |
-| `/`           | Who I am, what I do, skills, a short experience summary and the latest posts. |
+| `/`           | Who I am, how I can help, skills, a short experience summary, the latest posts and a contact call to action. |
 | `/experience` | The longer story: one card per job, with results, stack and related posts.    |
 | `/blog`       | Case studies and writing, filterable by category.                             |
 
@@ -40,7 +40,7 @@ Case studies and jobs link to each other. A post names its job in the
 /
 ├── public/                  Logo, background, portrait and CV
 ├── src/
-│   ├── components/          Hero, Skills, Experience, BlogTeaser, Nav, Footer…
+│   ├── components/          Hero, Services, Skills, Experience, BlogTeaser, Cta, Nav, Footer…
 │   ├── content/
 │   │   ├── blog/{es,en}/    One markdown file per post and language
 │   │   └── experience/{es,en}/  One markdown file per job and language

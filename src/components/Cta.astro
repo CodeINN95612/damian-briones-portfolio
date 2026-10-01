@@ -1,0 +1,44 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+import { useTranslations, useCurrentLanguage } from "../i18n/utils";
+
+const lang = useCurrentLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<section id="contact" class="w-full scroll-mt-14 px-6 pb-24" aria-labelledby="cta-title">
+  <div
+    class="reveal relative mx-auto max-w-4xl overflow-hidden rounded-3xl border border-foreground/10 bg-[url('/lines-bg.svg')] bg-cover bg-center px-6 py-14 text-center sm:px-12"
+  >
+    <h2
+      id="cta-title"
+      class="mx-auto max-w-xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl"
+    >
+      {t("cta.title")}
+    </h2>
+    <p class="mx-auto mt-4 max-w-md text-pretty text-foreground/70">
+      {t("cta.text")}
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={`mailto:${profile.email}`}
+        class="inline-flex items-center gap-2 rounded-lg border-2 border-primary-ink bg-primary-ink px-5 py-2.5 text-sm font-medium text-background transition hover:border-foreground hover:bg-foreground focus-visible:border-foreground focus-visible:bg-foreground"
+      >
+        <Icon name="mail" class="size-4" />
+        {t("cta.email")}
+      </a>
+      <a
+        href={`https://wa.me/${profile.phone}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-lg border-2 border-foreground/15 bg-background/60 px-5 py-2.5 text-sm font-medium text-foreground/80 transition hover:border-foreground/30 hover:text-foreground focus-visible:border-foreground/30 focus-visible:text-foreground"
+      >
+        <Icon name="whatsapp" class="size-4" />
+        {t("hero.whatsapp")}
+        <span class="sr-only">{t("a11y.newTab")}</span>
+      </a>
+    </div>
+  </div>
+</section>

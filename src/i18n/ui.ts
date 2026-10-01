@@ -37,6 +37,18 @@ type i18nStrings = {
     whatsapp: string;
     portraitAlt: string;
   };
+  services: {
+    title: string;
+    intro: string;
+    modernization: { title: string; text: string };
+    cloud: { title: string; text: string };
+    architecture: { title: string; text: string };
+  };
+  cta: {
+    title: string;
+    text: string;
+    email: string;
+  };
   skills: {
     title: string;
     categories: {
@@ -119,6 +131,28 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       whatsapp: "WhatsApp",
       portraitAlt: "Retrato de Damián Briones",
     },
+    services: {
+      title: "Trabajemos juntos",
+      intro:
+        "Tres formas en que puedo ayudar a un equipo que mantiene software empresarial.",
+      modernization: {
+        title: "Modernización",
+        text: "Llevar un sistema heredado a una plataforma actual sin detener el negocio. He pasado servicios de .NET Framework a .NET moderno y empecé a dividir un monolito en microservicios.",
+      },
+      cloud: {
+        title: "Nube e infraestructura",
+        text: "Poner los sistemas a correr en AWS con contenedores e infraestructura como código. Trabajo con Docker, OpenTofu y Azure DevOps.",
+      },
+      architecture: {
+        title: "Arquitectura y rendimiento",
+        text: "Diseñar sistemas que se puedan mantener y encontrar por qué los lentos son lentos. He bajado consultas de minutos a milisegundos.",
+      },
+    },
+    cta: {
+      title: "¿Tienes un sistema que necesita modernizarse?",
+      text: "Cuéntame. Respondo por correo o WhatsApp, en español o en inglés.",
+      email: "Enviar un correo",
+    },
     skills: {
       title: "Habilidades",
       categories: {
@@ -198,6 +232,28 @@ export const ui: Record<ValidLanguage, i18nStrings> = {
       cv: "Download CV",
       whatsapp: "WhatsApp",
       portraitAlt: "Portrait of Damian Briones",
+    },
+    services: {
+      title: "Work with me",
+      intro:
+        "Three ways I can help a team that runs enterprise software.",
+      modernization: {
+        title: "Modernization",
+        text: "Move a legacy system to a current platform without stopping the business. I've taken services from .NET Framework to modern .NET and started splitting a monolith into microservices.",
+      },
+      cloud: {
+        title: "Cloud and infrastructure",
+        text: "Get systems running on AWS with containers and infrastructure as code. I work with Docker, OpenTofu and Azure DevOps.",
+      },
+      architecture: {
+        title: "Architecture and performance",
+        text: "Design systems that stay maintainable, and find out why the slow ones are slow. I've cut queries from minutes to milliseconds.",
+      },
+    },
+    cta: {
+      title: "Have a system that needs modernizing?",
+      text: "Tell me about it. I reply by email or WhatsApp, in English or Spanish.",
+      email: "Send an email",
     },
     skills: {
       title: "Skills",

@@ -10,7 +10,7 @@ highlights:
   - metric: "4 módulos"
     label: Pasados de las apps viejas al nuevo monolito modular, más un par de módulos nuevos. Las apps viejas estaban llenas de errores y eran difíciles de mantener.
   - metric: "< 30 s"
-    label: El límite al que someto cada consulta de EF, sobre bases de datos que son de otro equipo, sin N+1. En Logiztik arreglaba esto después. Aquí intento no escribirlo.
+    label: El límite al que someto cada consulta de EF, sin N+1. Intento no escribir consultas lentas desde el principio.
 stack:
   [
     .NET,
@@ -29,9 +29,10 @@ stack:
 
 Entré en octubre de 2025, completamente remoto para una empresa de EE. UU. desde
 Ecuador. Spins adquirió MikMak a comienzos de 2026. Desde el principio me
-pusieron en un proyecto nuevo: la nueva app principal para los empleados, que reemplaza a un par de apps viejas llenas de
-errores y difíciles de mantener. La empresa tiene más madurez en arquitectura y
-diseño que las anteriores, y desde el primer día estábamos en AWS.
+pusieron en un proyecto nuevo: la nueva app principal para los empleados, que
+reemplaza a un par de apps viejas llenas de errores y difíciles de mantener. La
+empresa se toma en serio la arquitectura y el diseño, y desde el primer día
+estábamos en AWS.
 
 La app es un monolito modular en .NET con una interfaz en Vue 3. Hay un equipo
 grande y soy parte de él. No soy el líder del equipo, pero la mayoría de las
@@ -50,8 +51,8 @@ a eventos, y ya ha migrado a cientos de clientes.
 
 No toco las bases de datos SQL directamente, hay un equipo para eso, pero uso EF.
 Eso significa asegurarme de que las consultas no pasen de 30 segundos y no tengan
-problemas N+1. Es el mismo tipo de problema que antes arreglaba en tickets, y
-ahora el trabajo es no escribirlo desde el principio.
+problemas N+1, y detectarlos en el diseño y la revisión, antes de que lleguen a
+producción.
 
 También estoy a cargo de una biblioteca de componentes compartida. Hoy cada app
 de UI tiene su propio estilo, así que los componentes se están moviendo a un solo

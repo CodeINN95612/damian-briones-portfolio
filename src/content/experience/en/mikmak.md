@@ -10,7 +10,7 @@ highlights:
   - metric: "4 modules"
     label: Moved from the old apps into the new modular monolith, plus a couple of new ones. The old apps were full of bugs and hard to maintain.
   - metric: "< 30 s"
-    label: The limit I hold every EF query to, on databases another team owns, with no N+1. At Logiztik I fixed these after the fact. Here I try not to write them.
+    label: The limit I hold every EF query to, with no N+1. I try not to write slow queries in the first place.
 stack:
   [
     .NET,
@@ -29,9 +29,9 @@ stack:
 
 I joined in October 2025, working fully remote for a US company from Ecuador.
 MikMak was acquired by Spins in early 2026. From the start they put me on a new
-project: the new main app for employees, replacing a couple of old apps that were full of bugs and hard to
-maintain. The company is more mature about architecture and design than my
-previous ones, and we were on AWS from the first day.
+project: the new main app for employees, replacing a couple of old apps that
+were full of bugs and hard to maintain. The company takes architecture and design
+seriously, and we were on AWS from the first day.
 
 The app is a .NET modular monolith with a Vue 3 UI. There's a big team and I'm
 part of it. I'm not the team lead, but most decisions about this app are mine and
@@ -48,9 +48,8 @@ main app, with a lot of asynchronous, event-driven code, and it has already
 migrated hundreds of clients.
 
 I don't touch the SQL databases directly, there's a team for that, but I use EF.
-That means making sure queries stay under 30 seconds and don't have N+1 problems.
-It's the same kind of problem I used to fix in tickets, and now the job is to not
-write it in the first place.
+That means making sure queries stay under 30 seconds and don't have N+1 problems,
+and catching those in design and review, before they reach production.
 
 I'm also in charge of a shared component library. Each UI app has its own styling
 today, so the components are moving into one npm package that every app can use.
